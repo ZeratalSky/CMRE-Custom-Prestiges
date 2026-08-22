@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CRequirementCountUpgrade id="CountUpgradeCMCommanderPrestigeRaynorAllInOneCompleteOnly">
+        <Count Link="CMCommanderPrestigeRaynorAllInOne" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementOr id="Or789532539CountUnitAlias_BarracksCompleteOnlyCountUpgradeCommanderPrestigeRaynorAirCompleteOnly">
+        <OperandArray index="2" value="CountUpgradeCMCommanderPrestigeRaynorAllInOneCompleteOnly"/>
+    </CRequirementOr>
+    <CRequirementOr id="Or96167438CountUnitAlias_FactoryCompleteOnlyCountUpgradeCommanderPrestigeRaynorAirCompleteOnly">
+        <OperandArray index="2" value="CountUpgradeCMCommanderPrestigeRaynorAllInOneCompleteOnly"/>
+    </CRequirementOr>
+</Catalog>
+

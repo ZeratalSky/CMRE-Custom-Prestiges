@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CBehaviorBuff id="CMRaynorAllInOneHyperionRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <BehaviorFlags index="Permanent" value="1"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Units"/>
+        <Modification>
+            <VitalRegenArray index="Life" value="6"/>
+        </Modification>
+    </CBehaviorBuff>
+</Catalog>
+

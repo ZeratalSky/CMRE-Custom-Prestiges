@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CValidatorPlayerRequirement id="CMCommanderPrestigeRaynorAllInOne">
+        <WhichPlayer Value="Creator"/>
+        <Find value="1"/>
+        <UnitSelectionNotRequired value="1"/>
+        <Value value="CMCommanderPrestigeRaynorAllInOne"/>
+    </CValidatorPlayerRequirement>
+</Catalog>
+

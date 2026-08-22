@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="PlayerPrestige">
+        <Instances Id="CMCommanderPrestigeRaynorAllInOne">
+            <GameLink GameLink="CMCommanderPrestigeRaynorAllInOne">
+                <Field Id="Necessary - Primary Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CMCommanderPrestigeRaynorAllInOneButton">
+                <Field Id="Necessary - Icon"/>
+            </GameLink>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="RaynorBio1">
+                <Field Id="Addition - Upgrade Supplements"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="RaynorBio2">
+                <Field Id="Addition - Upgrade Supplements" Index="1"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="RaynorBio3ArmorLevel1">
+                <Field Id="Addition - Upgrade Supplements" Index="2"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="RaynorBio3ArmorLevel2">
+                <Field Id="Addition - Upgrade Supplements" Index="3"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="RaynorBio3ArmorLevel3">
+                <Field Id="Addition - Upgrade Supplements" Index="4"/>
+            </User>
+            <User Type="PlayerCommanders" Instance="TerranRaynor">
+                <Field Id="Necessary - Commander"/>
+            </User>
+        </Instances>
+    </CUser>
+</Catalog>
+

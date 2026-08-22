@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectRemoveBehavior id="CMRaynorAllInOneRemoveHyperionTimedLife">
+        <ValidatorArray value="CMCommanderPrestigeRaynorAllInOne"/>
+        <BehaviorLink value="HyperionVoidCoopTimedLife"/>
+    </CEffectRemoveBehavior>
+    <CEffectApplyBehavior id="CMRaynorAllInOneApplyHyperionRegen">
+        <ValidatorArray value="CMCommanderPrestigeRaynorAllInOne"/>
+        <Behavior value="CMRaynorAllInOneHyperionRegen"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="HyperionVoidCoopSpawnSet">
+        <EffectArray index="2" value="CMRaynorAllInOneRemoveHyperionTimedLife"/>
+        <EffectArray index="3" value="CMRaynorAllInOneApplyHyperionRegen"/>
+    </CEffectSet>
+</Catalog>
+

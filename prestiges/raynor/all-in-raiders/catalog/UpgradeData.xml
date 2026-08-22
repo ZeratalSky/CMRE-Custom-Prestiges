@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUpgrade id="CMCommanderPrestigeRaynorAllInOne" parent="CommanderPrestige">
+        <EffectArray Reference="Unit,Marine,LifeMax" Value="45"/>
+        <EffectArray Reference="Unit,Marine,LifeStart" Value="45"/>
+        <EffectArray Reference="Unit,Medic,LifeMax" Value="60"/>
+        <EffectArray Reference="Unit,Medic,LifeStart" Value="60"/>
+        <EffectArray Reference="Unit,Marauder,LifeMax" Value="125"/>
+        <EffectArray Reference="Unit,Marauder,LifeStart" Value="125"/>
+        <EffectArray Reference="Unit,Firebat,LifeMax" Value="100"/>
+        <EffectArray Reference="Unit,Firebat,LifeStart" Value="100"/>
+        <EffectArray Operation="Set" Reference="Button,HaveShieldWall,AlertTooltip" Value="Button/Tooltip/CombatPrestigeRayonrCombatShieldUpgrade"/>
+        <EffectArray Operation="Set" Reference="Button,HaveShieldWall,Tooltip" Value="Button/Tooltip/CombatPrestigeRayonrCombatShieldUpgrade"/>
+        <EffectArray Operation="Set" Reference="Button,ResearchShieldWall,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeRaynorCombatShieldResearchUpgrade"/>
+        <EffectArray Operation="Set" Reference="Button,ResearchShieldWall,Tooltip" Value="Button/Tooltip/CommanderPrestigeRaynorCombatShieldResearchUpgrade"/>
+        <EffectArray Operation="Set" Reference="Button,JuggernautPlating,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeRaynorJuggernautPlatingUpgrade"/>
+        <EffectArray Operation="Set" Reference="Button,JuggernautPlating,Tooltip" Value="Button/Tooltip/CommanderPrestigeRaynorJuggernautPlatingUpgrade"/>
+        <EffectArray Operation="Set" Reference="Button,ResearchJuggernautPlating,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeRaynorJuggernautPlatingResearchUpgrade"/>
+        <EffectArray Operation="Set" Reference="Button,ResearchJuggernautPlating,Tooltip" Value="Button/Tooltip/CommanderPrestigeRaynorJuggernautPlatingResearchUpgrade"/>
+        <EffectArray Reference="Behavior,VehicleAfterburners,Modification.AttackSpeedMultiplier" Value="1"/>
+        <EffectArray Operation="Subtract" Reference="Abil,VehicleAfterburners,Cost[0].Cooldown.TimeUse" Value="30.000000"/>
+        <EffectArray Reference="Effect,CommanderPrestigeRaynorAirTriggerAdd,Chance" Value="1"/>
+        <EffectArray Reference="Effect,CommanderPrestigeRaynorAirTriggerRemove,Chance" Value="1"/>
+        <EffectArray Operation="Subtract" Reference="Unit,VikingAssault,CostResource[Vespene]" Value="18"/>
+        <EffectArray Operation="Subtract" Reference="Unit,VikingFighter,CostResource[Vespene]" Value="18"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Banshee,CostResource[Vespene]" Value="24"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Battlecruiser,CostResource[Vespene]" Value="72"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Starport,CostResource[Vespene]" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Unit,StarportFlying,CostResource[Vespene]" Value="100"/>
+        <EffectArray Operation="Set" Reference="Abil,VoidCoopSummonHyperion,Cost[0].Cooldown.TimeUse" Value="86400"/>
+        <EffectArray Operation="Set" Reference="Abil,HyperionAdvancedPDD,Cost[0].Charge.CountMax" Value="9999"/>
+        <EffectArray Operation="Set" Reference="Abil,HyperionAdvancedPDD,Cost[0].Charge.TimeStart" Value="60"/>
+        <EffectArray Operation="Set" Reference="Abil,HyperionAdvancedPDD,Cost[0].Charge.TimeUse" Value="60"/>
+    </CUpgrade>
+</Catalog>
+

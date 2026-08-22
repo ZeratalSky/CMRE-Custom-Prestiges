@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CButton id="CMCommanderPrestigeRaynorAllInOneButton" parent="CommanderPrestigeRaynorStarport">
+        <Name value="Button/Name/CMCommanderPrestigeRaynorAllInOneButton"/>
+        <Tooltip value="Button/Tooltip/CMCommanderPrestigeRaynorAllInOneButton"/>
+        <EditorCategories value="Race:Terran"/>
+    </CButton>
+</Catalog>
+
