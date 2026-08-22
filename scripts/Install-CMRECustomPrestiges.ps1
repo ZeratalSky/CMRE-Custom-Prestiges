@@ -137,10 +137,38 @@ function Test-EntryDeclaration {
 $ResolvedStarCraftIIPath = Resolve-StarCraftIIPath -RequestedPath $StarCraftIIPath
 $TargetMod = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_Core_Triggers.SC2Mod'
 $GameDataDirectory = Join-Path $TargetMod 'Base.SC2Data\GameData'
+$StateFile = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_CustomPrestiges.state.json'
+$RecordFile = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_自制威望安装记录.txt'
+$CacheRoot = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_CustomPrestiges.installed'
 $ManifestFiles = @(Get-ChildItem -LiteralPath (Join-Path $RepositoryRoot 'prestiges') -Filter 'prestige.json' -File -Recurse | Sort-Object FullName)
 
 if ($ManifestFiles.Count -eq 0) {
-    throw '仓库中没有找到任何 prestige.json 威望模块。'
+    Write-Host 'prestiges 目录中没有威望模块；将自动卸载以前由本工具安装的全部威望。' -ForegroundColor Yellow
+}
+
+$CurrentModuleIds = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::OrdinalIgnoreCase)
+foreach ($manifestFile in $ManifestFiles) {
+    $candidateManifest = Get-Content -LiteralPath $manifestFile.FullName -Raw | ConvertFrom-Json
+    if ([string]::IsNullOrWhiteSpace($candidateManifest.id) -or ($candidateManifest.id -notmatch '^[A-Za-z0-9_.-]+$')) {
+        throw "模块 ID 为空或含有不安全字符：$($manifestFile.FullName)"
+    }
+    if (-not $CurrentModuleIds.Add([string]$candidateManifest.id)) {
+        throw "检测到重复的模块 ID：$($candidateManifest.id)"
+    }
+}
+
+if (Test-Path -LiteralPath $StateFile -PathType Leaf) {
+    $previousState = Get-Content -LiteralPath $StateFile -Raw | ConvertFrom-Json
+    $staleModuleIds = @(
+        @($previousState.modules) |
+            Where-Object { -not $CurrentModuleIds.Contains([string]$_.id) } |
+            ForEach-Object { [string]$_.id }
+    )
+    if ($staleModuleIds.Count -gt 0) {
+        Write-Host "检测到已从 prestiges 目录移除的威望，准备自动卸载：$($staleModuleIds -join '、')" -ForegroundColor Yellow
+        $uninstallScript = Join-Path $PSScriptRoot 'Uninstall-CMRECustomPrestiges.ps1'
+        & $uninstallScript -StarCraftIIPath $ResolvedStarCraftIIPath -ModuleId $staleModuleIds -SkipBackup:$SkipBackup -Confirm:$false -WhatIf:$WhatIfPreference
+    }
 }
 
 $timestamp = Get-Date -Format 'yyyyMMdd-HHmmss'
@@ -242,22 +270,56 @@ foreach ($manifestFile in $ManifestFiles) {
         }
     }
 
-    $InstalledModules += [ordered]@{ id = $manifest.id; version = $manifest.version }
+    $moduleCache = Join-Path $CacheRoot $manifest.id
+    if ($PSCmdlet.ShouldProcess($moduleCache, "保存模块 $($manifest.id) 的卸载快照")) {
+        if (Test-Path -LiteralPath $moduleCache) {
+            Remove-Item -LiteralPath $moduleCache -Recurse -Force
+        }
+        New-Item -ItemType Directory -Path $moduleCache -Force | Out-Null
+        foreach ($sourceItem in @(Get-ChildItem -LiteralPath $moduleRoot)) {
+            Copy-Item -LiteralPath $sourceItem.FullName -Destination $moduleCache -Recurse -Force
+        }
+    }
+
+    $relativeModulePath = $moduleRoot.Substring($RepositoryRoot.Length).TrimStart('\')
+    $InstalledModules += [ordered]@{
+        id = $manifest.id
+        nameZhCN = $manifest.name.zhCN
+        version = $manifest.version
+        sourcePath = $relativeModulePath
+        cacheDirectory = $manifest.id
+    }
     Write-Host "已安装：$($manifest.name.zhCN) ($($manifest.id)) v$($manifest.version)" -ForegroundColor Green
 }
 
 $state = [ordered]@{
-    schemaVersion = 1
+    schemaVersion = 2
     installedAt = (Get-Date).ToString('o')
     repositoryRoot = $RepositoryRoot
     backupPath = $(if ($SkipBackup) { $null } else { $BackupRoot })
     modules = $InstalledModules
 }
-$stateFile = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_CustomPrestiges.state.json'
-if ($PSCmdlet.ShouldProcess($stateFile, '写入安装状态')) {
-    [System.IO.File]::WriteAllText($stateFile, ($state | ConvertTo-Json -Depth 8), $Utf8NoBom)
+if ($PSCmdlet.ShouldProcess($StateFile, '写入安装状态')) {
+    [System.IO.File]::WriteAllText($StateFile, ($state | ConvertTo-Json -Depth 8), $Utf8NoBom)
 }
 
-Write-Host "完成：共处理 $($InstalledModules.Count) 个威望模块。" -ForegroundColor Cyan
-if (-not $SkipBackup) { Write-Host "备份目录：$BackupRoot" }
+$recordLines = New-Object 'System.Collections.Generic.List[string]'
+[void]$recordLines.Add('CMRE 自制威望安装记录')
+[void]$recordLines.Add("更新时间：$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss'))")
+[void]$recordLines.Add("来源目录：$(Join-Path $RepositoryRoot 'prestiges')")
+[void]$recordLines.Add("当前数量：$($InstalledModules.Count)")
+[void]$recordLines.Add('')
+[void]$recordLines.Add('序号 | 指挥官/威望 | 中文名称 | 模块 ID | 版本')
+[void]$recordLines.Add('-----|-------------|----------|---------|-----')
+$recordIndex = 1
+foreach ($installedModule in $InstalledModules) {
+    [void]$recordLines.Add("$recordIndex | $($installedModule.sourcePath) | $($installedModule.nameZhCN) | $($installedModule.id) | $($installedModule.version)")
+    $recordIndex++
+}
+if ($PSCmdlet.ShouldProcess($RecordFile, '写入中文安装记录')) {
+    [System.IO.File]::WriteAllLines($RecordFile, $recordLines, $Utf8NoBom)
+}
 
+Write-Host "同步完成：目录中共有 $($InstalledModules.Count) 个威望模块，CMRE 已与目录保持一致。" -ForegroundColor Cyan
+Write-Host "安装记录：$RecordFile" -ForegroundColor Cyan
+if (-not $SkipBackup) { Write-Host "备份目录：$BackupRoot" }

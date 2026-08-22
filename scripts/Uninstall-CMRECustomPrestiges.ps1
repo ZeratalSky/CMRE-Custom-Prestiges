@@ -4,7 +4,10 @@ param(
     [string]$StarCraftIIPath,
 
     [Parameter(Mandatory = $false)]
-    [switch]$SkipBackup
+    [switch]$SkipBackup,
+
+    [Parameter(Mandatory = $false)]
+    [string[]]$ModuleId
 )
 
 $ErrorActionPreference = 'Stop'
@@ -13,6 +16,9 @@ $RepositoryRoot = Split-Path -Parent $PSScriptRoot
 $ResolvedStarCraftIIPath = [System.IO.Path]::GetFullPath($StarCraftIIPath)
 $TargetMod = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_Core_Triggers.SC2Mod'
 $GameDataDirectory = Join-Path $TargetMod 'Base.SC2Data\GameData'
+$StateFile = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_CustomPrestiges.state.json'
+$RecordFile = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_自制威望安装记录.txt'
+$CacheRoot = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_CustomPrestiges.installed'
 
 if (-not (Test-Path -LiteralPath $TargetMod -PathType Container)) {
     throw '找不到 CMRE_Core_Triggers.SC2Mod。请确认 -StarCraftIIPath 指向《星际争霸 II》根目录。'
@@ -79,10 +85,58 @@ function Backup-TargetFile {
     [void]$BackedUp.Add($TargetFile)
 }
 
-$ManifestFiles = @(Get-ChildItem -LiteralPath (Join-Path $RepositoryRoot 'prestiges') -Filter 'prestige.json' -File -Recurse | Sort-Object FullName)
-foreach ($manifestFile in $ManifestFiles) {
-    $moduleRoot = Split-Path -Parent $manifestFile.FullName
-    $manifest = Get-Content -LiteralPath $manifestFile.FullName -Raw | ConvertFrom-Json
+$PreviousState = $null
+if (Test-Path -LiteralPath $StateFile -PathType Leaf) {
+    $PreviousState = Get-Content -LiteralPath $StateFile -Raw | ConvertFrom-Json
+}
+
+$RepositoryManifestFiles = @(Get-ChildItem -LiteralPath (Join-Path $RepositoryRoot 'prestiges') -Filter 'prestige.json' -File -Recurse | Sort-Object FullName)
+$ManifestRecords = @()
+$RequestedModuleIds = @()
+
+if (@($ModuleId).Count -gt 0) {
+    $RequestedModuleIds = @($ModuleId | Select-Object -Unique)
+}
+elseif (($null -ne $PreviousState) -and (@($PreviousState.modules).Count -gt 0)) {
+    $RequestedModuleIds = @($PreviousState.modules | ForEach-Object { [string]$_.id })
+}
+else {
+    foreach ($repositoryManifestFile in $RepositoryManifestFiles) {
+        $ManifestRecords += [ordered]@{ path = $repositoryManifestFile.FullName; fromCache = $false }
+    }
+}
+
+foreach ($requestedModuleId in $RequestedModuleIds) {
+    if ([string]::IsNullOrWhiteSpace($requestedModuleId) -or ($requestedModuleId -notmatch '^[A-Za-z0-9_.-]+$')) {
+        throw "模块 ID 为空或含有不安全字符：$requestedModuleId"
+    }
+
+    $cachedManifestPath = Join-Path (Join-Path $CacheRoot $requestedModuleId) 'prestige.json'
+    if (Test-Path -LiteralPath $cachedManifestPath -PathType Leaf) {
+        $ManifestRecords += [ordered]@{ path = $cachedManifestPath; fromCache = $true }
+        continue
+    }
+
+    $fallbackManifestPath = $null
+    foreach ($repositoryManifestFile in $RepositoryManifestFiles) {
+        $repositoryManifest = Get-Content -LiteralPath $repositoryManifestFile.FullName -Raw | ConvertFrom-Json
+        if ([string]$repositoryManifest.id -eq $requestedModuleId) {
+            $fallbackManifestPath = $repositoryManifestFile.FullName
+            break
+        }
+    }
+    if ($null -ne $fallbackManifestPath) {
+        $ManifestRecords += [ordered]@{ path = $fallbackManifestPath; fromCache = $false }
+    }
+    else {
+        Write-Warning "找不到模块 $requestedModuleId 的卸载快照，无法安全自动卸载。请从备份恢复或重新放回该模块后再同步。"
+    }
+}
+
+$UninstalledModuleIds = @()
+foreach ($manifestRecord in $ManifestRecords) {
+    $moduleRoot = Split-Path -Parent $manifestRecord.path
+    $manifest = Get-Content -LiteralPath $manifestRecord.path -Raw | ConvertFrom-Json
 
     foreach ($catalogDefinition in @($manifest.catalog)) {
         $sourceFile = Join-Path $moduleRoot (Join-Path 'catalog' $catalogDefinition.file)
@@ -139,14 +193,66 @@ foreach ($manifestFile in $ManifestFiles) {
         }
     }
 
+    $UninstalledModuleIds += [string]$manifest.id
     Write-Host "已卸载：$($manifest.name.zhCN) ($($manifest.id))" -ForegroundColor Yellow
 }
 
-$stateFile = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_CustomPrestiges.state.json'
-if ((Test-Path -LiteralPath $stateFile -PathType Leaf) -and $PSCmdlet.ShouldProcess($stateFile, '移除安装状态')) {
-    Remove-Item -LiteralPath $stateFile -Force
+foreach ($uninstalledModuleId in $UninstalledModuleIds) {
+    $moduleCache = Join-Path $CacheRoot $uninstalledModuleId
+    if ((Test-Path -LiteralPath $moduleCache) -and $PSCmdlet.ShouldProcess($moduleCache, "移除模块 $uninstalledModuleId 的卸载快照")) {
+        Remove-Item -LiteralPath $moduleCache -Recurse -Force
+    }
 }
 
-Write-Host '卸载完成。' -ForegroundColor Cyan
-if (-not $SkipBackup) { Write-Host "卸载前备份：$BackupRoot" }
+$RemainingModules = @()
+if ($null -ne $PreviousState) {
+    $RemainingModules = @($PreviousState.modules | Where-Object { $UninstalledModuleIds -notcontains [string]$_.id })
+}
 
+if ($RemainingModules.Count -gt 0) {
+    $updatedState = [ordered]@{
+        schemaVersion = 2
+        installedAt = $PreviousState.installedAt
+        synchronizedAt = (Get-Date).ToString('o')
+        repositoryRoot = $PreviousState.repositoryRoot
+        backupPath = $(if ($SkipBackup) { $PreviousState.backupPath } else { $BackupRoot })
+        modules = $RemainingModules
+    }
+    if ($PSCmdlet.ShouldProcess($StateFile, '更新安装状态')) {
+        [System.IO.File]::WriteAllText($StateFile, ($updatedState | ConvertTo-Json -Depth 8), $Utf8NoBom)
+    }
+
+    $recordLines = New-Object 'System.Collections.Generic.List[string]'
+    [void]$recordLines.Add('CMRE 自制威望安装记录')
+    [void]$recordLines.Add("更新时间：$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss'))")
+    [void]$recordLines.Add("当前数量：$($RemainingModules.Count)")
+    [void]$recordLines.Add('')
+    [void]$recordLines.Add('序号 | 指挥官/威望 | 中文名称 | 模块 ID | 版本')
+    [void]$recordLines.Add('-----|-------------|----------|---------|-----')
+    $recordIndex = 1
+    foreach ($remainingModule in $RemainingModules) {
+        $sourcePath = $(if ([string]::IsNullOrWhiteSpace($remainingModule.sourcePath)) { '未知目录' } else { $remainingModule.sourcePath })
+        $nameZhCN = $(if ([string]::IsNullOrWhiteSpace($remainingModule.nameZhCN)) { $remainingModule.id } else { $remainingModule.nameZhCN })
+        [void]$recordLines.Add("$recordIndex | $sourcePath | $nameZhCN | $($remainingModule.id) | $($remainingModule.version)")
+        $recordIndex++
+    }
+    if ($PSCmdlet.ShouldProcess($RecordFile, '更新中文安装记录')) {
+        [System.IO.File]::WriteAllLines($RecordFile, $recordLines, $Utf8NoBom)
+    }
+}
+else {
+    if ((Test-Path -LiteralPath $StateFile -PathType Leaf) -and $PSCmdlet.ShouldProcess($StateFile, '移除安装状态')) {
+        Remove-Item -LiteralPath $StateFile -Force
+    }
+    if ((Test-Path -LiteralPath $RecordFile -PathType Leaf) -and $PSCmdlet.ShouldProcess($RecordFile, '移除中文安装记录')) {
+        Remove-Item -LiteralPath $RecordFile -Force
+    }
+    if ((Test-Path -LiteralPath $CacheRoot -PathType Container) -and
+        (@(Get-ChildItem -LiteralPath $CacheRoot -Force).Count -eq 0) -and
+        $PSCmdlet.ShouldProcess($CacheRoot, '移除空的卸载快照目录')) {
+        Remove-Item -LiteralPath $CacheRoot -Force
+    }
+}
+
+Write-Host "卸载完成：共处理 $($UninstalledModuleIds.Count) 个威望模块。" -ForegroundColor Cyan
+if (-not $SkipBackup) { Write-Host "卸载前备份：$BackupRoot" }
