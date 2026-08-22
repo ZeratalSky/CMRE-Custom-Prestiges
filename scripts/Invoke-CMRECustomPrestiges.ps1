@@ -1,7 +1,7 @@
 ﻿[CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('Install', 'Uninstall')]
+    [ValidateSet('Install', 'Uninstall', 'OpenTestMap', 'InstallAndLaunch')]
     [string]$Action
 )
 
@@ -12,13 +12,61 @@ $ModsDirectoryName = Split-Path -Leaf $ModsDirectory
 $StarCraftIIPath = Split-Path -Parent $ModsDirectory
 $TriggerMod = Join-Path $StarCraftIIPath 'Mods\CMRE\CMRE_Core_Triggers.SC2Mod'
 
+function Start-CMRELauncher {
+    $LauncherMap = Join-Path $StarCraftIIPath 'Maps\CMRE\Launcher.SC2Map'
+    if (-not (Test-Path -LiteralPath $LauncherMap)) {
+        throw "没有找到 CMRE 启动器地图：$LauncherMap。请重新安装完整的 CMRE Maps 文件夹。"
+    }
+
+    $SwitcherCandidates = @(
+        (Join-Path $StarCraftIIPath 'Support64\SC2Switcher_x64.exe'),
+        (Join-Path $StarCraftIIPath 'Support\SC2Switcher.exe')
+    )
+    $SwitcherPath = @($SwitcherCandidates | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf } | Select-Object -First 1)
+    if ($SwitcherPath.Count -eq 0) {
+        throw '没有找到《星际争霸 II》本地启动程序 SC2Switcher。请在战网客户端中扫描和修复游戏。'
+    }
+
+    $OptionalLocalDependencies = @(
+        (Join-Path $StarCraftIIPath 'Mods\CM_ArtPack\CM_ArtPack_Base.SC2Mod'),
+        (Join-Path $StarCraftIIPath 'Mods\CM\CM_Core_Extra.SC2Mod')
+    )
+    $MissingDependencies = @($OptionalLocalDependencies | Where-Object { -not (Test-Path -LiteralPath $_) })
+    if ($MissingDependencies.Count -gt 0) {
+        Write-Host ''
+        Write-Host '[提示] 检测到 CMRE 完全本地运行所需的部分外部依赖尚未安装：' -ForegroundColor Yellow
+        foreach ($MissingDependency in $MissingDependencies) {
+            Write-Host "  - $MissingDependency" -ForegroundColor DarkYellow
+        }
+        Write-Host '启动器仍会继续打开；如果地图报告缺少依赖，请按 CMRE 仓库说明补齐这些文件。' -ForegroundColor Yellow
+    }
+
+    Write-Host "CMRE 启动器：$LauncherMap" -ForegroundColor Gray
+    Write-Host "游戏启动程序：$($SwitcherPath[0])" -ForegroundColor Gray
+    if ($env:CMCP_NO_LAUNCH -eq '1') {
+        Write-Host '[测试模式] 路径检查通过，未实际启动游戏。' -ForegroundColor DarkYellow
+        return
+    }
+
+    Start-Process -FilePath $SwitcherPath[0] -WorkingDirectory $StarCraftIIPath -ArgumentList @('-run', "`"$LauncherMap`"")
+    Write-Host ''
+    Write-Host '[成功] 已启动本地 CMRE 启动器。' -ForegroundColor Green
+    Write-Host '进入后可以继续选择指挥官、威望、突变因子和具体合作地图。' -ForegroundColor Cyan
+}
+
 try {
     Write-Host '========================================' -ForegroundColor DarkCyan
     if ($Action -eq 'Install') {
         Write-Host '       CMRE 自制威望一键安装器' -ForegroundColor Cyan
     }
-    else {
+    elseif ($Action -eq 'InstallAndLaunch') {
+        Write-Host '       CMRE 威望同步与游戏启动器' -ForegroundColor Cyan
+    }
+    elseif ($Action -eq 'Uninstall') {
         Write-Host '       CMRE 自制威望一键卸载器' -ForegroundColor Cyan
+    }
+    else {
+        Write-Host '       CMRE 本地测试地图启动器' -ForegroundColor Cyan
     }
     Write-Host '========================================' -ForegroundColor DarkCyan
     Write-Host ''
@@ -31,7 +79,7 @@ try {
     }
 
     Write-Host "游戏目录：$StarCraftIIPath" -ForegroundColor Gray
-    if ($Action -eq 'Install') {
+    if ($Action -in @('Install', 'InstallAndLaunch')) {
         Write-Host '正在检查并同步 prestiges 目录，请稍候……' -ForegroundColor Gray
         Write-Host ''
         $CoreScript = Join-Path $PSScriptRoot 'Install-CMRECustomPrestiges.ps1'
@@ -42,8 +90,13 @@ try {
         Write-Host ''
         Write-Host '[成功] 自制威望已经与 prestiges 目录同步完成。' -ForegroundColor Green
         Write-Host "安装记录：$(Join-Path $StarCraftIIPath 'Mods\CMRE\CMRE_自制威望安装记录.txt')" -ForegroundColor Cyan
+        if ($Action -eq 'InstallAndLaunch') {
+            Write-Host ''
+            Write-Host '正在打开本地 CMRE 启动器……' -ForegroundColor Gray
+            Start-CMRELauncher
+        }
     }
-    else {
+    elseif ($Action -eq 'Uninstall') {
         Write-Host '正在卸载本工具记录的全部自制威望，请稍候……' -ForegroundColor Gray
         Write-Host ''
         $CoreScript = Join-Path $PSScriptRoot 'Uninstall-CMRECustomPrestiges.ps1'
@@ -53,6 +106,35 @@ try {
         & $CoreScript -StarCraftIIPath $StarCraftIIPath -Confirm:$false
         Write-Host ''
         Write-Host '[成功] 本工具记录的自制威望已经卸载。' -ForegroundColor Green
+    }
+    else {
+        $TestMap = Join-Path $StarCraftIIPath 'Maps\CMRE\TestMap.SC2Map'
+        if (-not (Test-Path -LiteralPath $TestMap)) {
+            throw "没有找到 CMRE 测试地图：$TestMap。请重新安装完整的 CMRE Maps 文件夹。"
+        }
+
+        $EditorCandidates = @(
+            (Join-Path $StarCraftIIPath 'StarCraft II Editor_x64.exe'),
+            (Join-Path $StarCraftIIPath 'StarCraft II Editor.exe'),
+            (Join-Path $StarCraftIIPath 'Support64\SC2Editor_x64.exe'),
+            (Join-Path $StarCraftIIPath 'Support\SC2Editor.exe')
+        )
+        $EditorPath = @($EditorCandidates | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf } | Select-Object -First 1)
+        if ($EditorPath.Count -eq 0) {
+            throw '没有找到《星际争霸 II》编辑器。请在战网客户端中安装或修复游戏编辑器。'
+        }
+
+        Write-Host "测试地图：$TestMap" -ForegroundColor Gray
+        Write-Host "游戏编辑器：$($EditorPath[0])" -ForegroundColor Gray
+        if ($env:CMCP_NO_LAUNCH -eq '1') {
+            Write-Host '[测试模式] 路径检查通过，未实际启动编辑器。' -ForegroundColor DarkYellow
+        }
+        else {
+            Start-Process -FilePath $EditorPath[0] -ArgumentList @("`"$TestMap`"")
+            Write-Host ''
+            Write-Host '[成功] 已打开本地 CMRE 测试地图。' -ForegroundColor Green
+            Write-Host '地图加载完成后，在编辑器顶部选择“文件 → 测试文档（Test Document）”。' -ForegroundColor Cyan
+        }
     }
 
     exit 0
