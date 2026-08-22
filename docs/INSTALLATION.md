@@ -103,6 +103,7 @@ D:\Game\StarCraft II
    │  └─ CMRE_Core_Triggers.SC2Mod
    └─ CMRE-Custom-Prestiges-main
       ├─ 安装自制威望.bat
+      ├─ 安装并启动CMRE.bat
       ├─ 卸载自制威望.bat
       ├─ scripts
       │  ├─ Install-CMRECustomPrestiges.ps1
@@ -114,16 +115,17 @@ D:\Game\StarCraft II
       └─ README.md
 ```
 
-## 六、安装自制威望
+## 六、安装并启动 CMRE
 
 1. 打开解压后的 `CMRE-Custom-Prestiges-main` 文件夹。
-2. 双击 `安装自制威望.bat`。
+2. 双击 `安装并启动CMRE.bat`。
 3. 等待黑色窗口完成检查和安装，不要在执行过程中关闭窗口。
-4. 看到绿色的安装信息以及“自制威望已经与 prestiges 目录同步完成”后，按任意键关闭窗口。
+4. 看到绿色的安装信息以及“自制威望已经与 prestiges 目录同步完成”后，工具会自动打开本地 CMRE 启动器。
+5. 在 CMRE 启动器里选择指挥官、威望、突变因子和具体合作地图，然后开始游戏。
 
 不需要手工输入游戏路径。BAT 会检查自己的父目录是否为 `Mods`，再检查同级的 `CMRE\CMRE_Core_Triggers.SC2Mod`；任一位置不正确都会停止，不会向猜测的路径写入数据。
 
-BAT 内部会调用仓库自带的 PowerShell 核心脚本，但普通玩家不需要打开 PowerShell，也不需要复制命令。
+BAT 内部会调用仓库自带的 PowerShell 核心脚本，但普通玩家不需要打开 PowerShell，也不需要复制命令。启动阶段使用游戏自带的 `Support64\SC2Switcher_x64.exe`（旧安装会自动改用 32 位版本）加载 `Maps\CMRE\Launcher.SC2Map`，不会进入战网大厅发布版。
 
 安装器会自动完成以下工作：
 
@@ -133,8 +135,13 @@ BAT 内部会调用仓库自带的 PowerShell 核心脚本，但普通玩家不�
 4. 备份即将修改的 CMRE 文件。
 5. 安装或更新当前目录中的威望数据与文本。
 6. 保存卸载快照和中文安装记录。
+7. 使用本地 CMRE 启动器地图进入游戏。
 
 看到“CMRE 已与目录保持一致”即表示脚本执行完成。
+
+如果只想安装或更新威望，不想立即打开游戏，可以双击 `安装自制威望.bat`。如果要在编辑器中检查测试地图，可以双击 `打开本地CMRE测试地图.bat`。
+
+联合启动器会检查 CMRE 完全本地运行常用的 `CM_ArtPack` 和 `CM_Core_Extra`。缺少时只会显示提示并继续启动；如果随后出现依赖错误，请按 CMRE 核心仓库的外部依赖说明补齐文件。
 
 ## 七、检查是否安装成功
 
@@ -160,7 +167,7 @@ D:\Game\StarCraft II\Mods\CMRE\CMRE_CustomPrestiges.installed
 
 请不要手工删除卸载快照，否则已经移出仓库的旧威望可能无法被安全清理。
 
-随后可以使用 CMRE 自带的启动地图或测试地图检查指挥官选择界面：
+`安装并启动CMRE.bat` 会直接使用 CMRE 启动地图检查指挥官选择界面；也可以手工在编辑器中打开测试地图：
 
 ```text
 D:\Game\StarCraft II\Maps\CMRE\Launcher.SC2Map
@@ -215,6 +222,12 @@ D:\Game\StarCraft II\Maps\CMRE\TestMap.SC2Map
 ### 双击 BAT 后窗口提示路径错误
 
 不要单独复制 BAT。确认完整仓库文件夹直接位于 `<游戏根目录>\Mods`，并且 CMRE 位于同一个 `Mods` 下的 `CMRE` 文件夹中。
+
+### 同步成功，但游戏没有启动
+
+- 检查游戏目录中是否存在 `Support64\SC2Switcher_x64.exe` 或 `Support\SC2Switcher.exe`。
+- 在战网客户端中对《星际争霸 II》执行“扫描和修复”，然后再次双击 `安装并启动CMRE.bat`。
+- 如果安全软件拦截游戏自带的启动程序，请确认目标文件位于自己的《星际争霸 II》安装目录。
 
 ### Windows 安全软件拦截 BAT
 
