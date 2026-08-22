@@ -1,0 +1,3 @@
+Button/Name/CMCPCommanderPrestigeExampleButton=新威望名称
+Button/Tooltip/CMCPCommanderPrestigeExampleButton=<s val="Coop_Prestige_Tooltip">优势：</s><n/>在这里填写优势。<n/><n/><s val="Coop_Prestige_Tooltip">劣势：</s><n/>在这里填写劣势。
+

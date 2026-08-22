@@ -1,0 +1,3 @@
+Button/Name/CMCPCommanderPrestigeExampleButton=New Prestige Name
+Button/Tooltip/CMCPCommanderPrestigeExampleButton=<s val="Coop_Prestige_Tooltip">Advantages:</s><n/>Describe the advantages here.<n/><n/><s val="Coop_Prestige_Tooltip">Disadvantages:</s><n/>Describe the disadvantages here.
+
