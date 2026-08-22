@@ -11,8 +11,9 @@
 ## 设计目标
 
 - 每个威望使用独立目录，避免不同威望的数据混在一起。
-- 安装器自动发现 `prestiges/<指挥官>/<威望>/prestige.json`，未来新增威望没有固定数量上限。
-- 重复运行安装器即可安装新模块或更新已有模块。
+- `prestiges` 目录是唯一安装清单；安装器自动发现其中的 `prestige.json`，未来新增威望没有固定数量上限。
+- 重复运行安装器会安装新增模块、更新保留模块，并自动卸载已经从 `prestiges` 目录移除的模块。
+- CMRE 目录中自动保存中文安装记录和卸载快照，即使模块目录已经删除，也能精确清理旧威望。
 - 安装和卸载前自动备份将要修改的 CMRE 文件。
 - 不覆盖原版三个威望；自制威望会作为额外选项加入。
 
@@ -27,6 +28,8 @@ powershell -ExecutionPolicy Bypass -File .\scripts\Install-CMRECustomPrestiges.p
 ```
 
 把 `D:\StarCraft II` 改成自己的《星际争霸 II》根目录。安装完成后进入 CMRE 的指挥官选择界面，雷诺会出现第 4 个威望。
+
+想停用某个自制威望，只需删除或移走它在 `prestiges` 下的目录，然后再次运行安装器。安装记录位于 `Mods/CMRE/CMRE_自制威望安装记录.txt`。
 
 完整说明见 [安装、更新与卸载](docs/INSTALLATION.md)。想继续制作新威望，请看 [添加新威望](docs/ADDING_PRESTIGES.md)。
 
