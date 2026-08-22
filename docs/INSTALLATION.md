@@ -1,6 +1,6 @@
 # 从零开始安装 CMRE 与自制威望
 
-这份教程写给不熟悉 GitHub、PowerShell 或《星际争霸 II》模组目录的玩家。请按顺序完成，不要跳过 CMRE 的安装。
+这份教程写给不熟悉 GitHub 或《星际争霸 II》模组目录的玩家。请按顺序完成，不要跳过 CMRE 的安装。
 
 ## 一、需要准备什么
 
@@ -88,47 +88,42 @@ CMRE 官方仓库还列出了部分完全本地运行场景可能需要的外部
 4. 下载完成后右键 ZIP 文件，选择“全部解压”。
 5. 解压后会得到类似 `CMRE-Custom-Prestiges-main` 的文件夹。
 
-这个文件夹可以放在桌面、下载目录或其他方便的位置，不必放进《星际争霸 II》的 `Mods` 文件夹。建议放到一个不会被随手删除的位置，例如：
+把整个 `CMRE-Custom-Prestiges-main` 文件夹移动到《星际争霸 II》根目录下的 `Mods` 文件夹中。BAT 安装器会根据这个位置自动识别游戏路径，因此不要放到桌面、下载目录或 `Mods` 的更深层子目录。
 
 ```text
-D:\SC2Mods\CMRE-Custom-Prestiges-main
+D:\Game\StarCraft II\Mods\CMRE-Custom-Prestiges-main
 ```
 
-不要单独移动 `scripts` 或 `prestiges`。正确的仓库结构应保持为：
+它应当与 `CMRE` 文件夹并列。不要把它放进 `Mods\CMRE`，也不要单独移动 BAT、`scripts` 或 `prestiges`。正确结构如下：
 
 ```text
-CMRE-Custom-Prestiges-main
-├─ scripts
-│  ├─ Install-CMRECustomPrestiges.ps1
-│  └─ Uninstall-CMRECustomPrestiges.ps1
-├─ prestiges
-│  └─ raynor
-│     └─ all-in-raiders
-├─ docs
-└─ README.md
+D:\Game\StarCraft II
+└─ Mods
+   ├─ CMRE
+   │  └─ CMRE_Core_Triggers.SC2Mod
+   └─ CMRE-Custom-Prestiges-main
+      ├─ 安装自制威望.bat
+      ├─ 卸载自制威望.bat
+      ├─ scripts
+      │  ├─ Install-CMRECustomPrestiges.ps1
+      │  └─ Uninstall-CMRECustomPrestiges.ps1
+      ├─ prestiges
+      │  └─ raynor
+      │     └─ all-in-raiders
+      ├─ docs
+      └─ README.md
 ```
 
 ## 六、安装自制威望
 
-### 方法一：在文件夹中打开终端
-
 1. 打开解压后的 `CMRE-Custom-Prestiges-main` 文件夹。
-2. 在文件夹空白处按住 Shift 并点击鼠标右键，选择“在终端中打开”或“在此处打开 PowerShell”。Windows 11 也可以直接右键选择“在终端中打开”。
-3. 复制下面的命令，替换游戏路径后按回车：
+2. 双击 `安装自制威望.bat`。
+3. 等待黑色窗口完成检查和安装，不要在执行过程中关闭窗口。
+4. 看到绿色的安装信息以及“自制威望已经与 prestiges 目录同步完成”后，按任意键关闭窗口。
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\Install-CMRECustomPrestiges.ps1 -StarCraftIIPath "D:\Game\StarCraft II"
-```
+不需要手工输入游戏路径。BAT 会检查自己的父目录是否为 `Mods`，再检查同级的 `CMRE\CMRE_Core_Triggers.SC2Mod`；任一位置不正确都会停止，不会向猜测的路径写入数据。
 
-路径中含有空格时必须保留双引号。
-
-### 方法二：从普通 PowerShell 运行
-
-如果已经打开普通 PowerShell，可以在命令中写出脚本的完整路径：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File "D:\SC2Mods\CMRE-Custom-Prestiges-main\scripts\Install-CMRECustomPrestiges.ps1" -StarCraftIIPath "D:\Game\StarCraft II"
-```
+BAT 内部会调用仓库自带的 PowerShell 核心脚本，但普通玩家不需要打开 PowerShell，也不需要复制命令。
 
 安装器会自动完成以下工作：
 
@@ -178,10 +173,10 @@ D:\Game\StarCraft II\Maps\CMRE\TestMap.SC2Map
 
 `prestiges` 目录就是安装清单，不需要编辑额外的白名单：
 
-- 新威望目录放入 `prestiges/<指挥官>/<威望>` 后，再运行安装器，即可安装。
-- 想停用某个威望，把它的整个目录移到 `prestiges` 之外，再运行安装器，即可自动卸载。
-- 想恢复威望，把目录移回原位，再运行安装器。
-- `prestiges` 目录为空时，安装器会卸载本工具以前安装的全部威望。
+- 新威望目录放入 `prestiges/<指挥官>/<威望>` 后，再双击 `安装自制威望.bat`，即可安装。
+- 想停用某个威望，把它的整个目录移到 `prestiges` 之外，再双击安装 BAT，即可自动卸载。
+- 想恢复威望，把目录移回原位并再次双击安装 BAT。
+- `prestiges` 目录为空时，双击安装 BAT 会卸载本工具以前安装的全部威望。
 
 不要只删除目录中的某一个 XML 文件；应移动或删除完整的威望目录。
 
@@ -189,11 +184,11 @@ D:\Game\StarCraft II\Maps\CMRE\TestMap.SC2Map
 
 ### 更新 CMRE
 
-重新从 CMRE 仓库下载最新版，把新的 `Mods` 和 `Maps` 合并到游戏根目录。CMRE 更新可能覆盖自制数据，所以更新 CMRE 后必须再次运行本仓库的安装器。
+重新从 CMRE 仓库下载最新版，把新的 `Mods` 和 `Maps` 合并到游戏根目录。CMRE 更新可能覆盖自制数据，所以更新 CMRE 后必须再次双击 `安装自制威望.bat`。
 
 ### 更新本仓库
 
-不熟悉 Git 时，最简单的方法是重新点击 **Code → Download ZIP** 下载最新版。解压后保留需要启用的 `prestiges` 目录，再运行安装器。
+不熟悉 Git 时，最简单的方法是重新点击 **Code → Download ZIP** 下载最新版。解压后把新文件夹放回游戏的 `Mods` 文件夹，保留需要启用的 `prestiges` 目录，再双击安装 BAT。
 
 安装器可以重复运行：已有内容会更新，不会重复添加；已经不在目录中的旧威望会自动清理。
 
@@ -201,15 +196,11 @@ D:\Game\StarCraft II\Maps\CMRE\TestMap.SC2Map
 
 ### 只卸载一个威望
 
-把对应威望目录移出 `prestiges`，然后再次运行安装器。
+把对应威望目录移出 `prestiges`，然后再次双击 `安装自制威望.bat`。
 
 ### 卸载本工具记录的全部自制威望
 
-在仓库目录运行：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\Uninstall-CMRECustomPrestiges.ps1 -StarCraftIIPath "D:\Game\StarCraft II"
-```
+双击仓库根目录中的 `卸载自制威望.bat`。
 
 卸载器只移除本仓库声明的自制条目和补丁节点，并在操作前备份，不会直接使用旧备份覆盖 CMRE 的其他后续改动。
 
@@ -217,13 +208,17 @@ powershell -ExecutionPolicy Bypass -File .\scripts\Uninstall-CMRECustomPrestiges
 
 ### 提示“找不到 CMRE_Core_Triggers.SC2Mod”
 
-- 检查 `-StarCraftIIPath` 是否指向游戏根目录。
+- 检查 `CMRE-Custom-Prestiges-main` 是否直接位于游戏的 `Mods` 文件夹中。
 - 检查是否错误地形成了 `Mods\CMRE_OpenSource-main\Mods\CMRE` 这样的多层目录。
 - 正确路径必须是 `<游戏根目录>\Mods\CMRE\CMRE_Core_Triggers.SC2Mod`。
 
-### PowerShell 阻止脚本运行
+### 双击 BAT 后窗口提示路径错误
 
-请完整使用教程中的 `powershell -ExecutionPolicy Bypass -File ...` 命令。这个设置只对本次命令生效，不会永久修改系统执行策略。
+不要单独复制 BAT。确认完整仓库文件夹直接位于 `<游戏根目录>\Mods`，并且 CMRE 位于同一个 `Mods` 下的 `CMRE` 文件夹中。
+
+### Windows 安全软件拦截 BAT
+
+BAT 是可以用记事本查看的文本文件，内部只调用仓库中的 PowerShell 安装脚本。如果安全软件拦截，请先核对文件来自本仓库，再根据系统提示选择允许；不要从第三方网盘下载别人重新打包的 EXE。
 
 ### 游戏中没有出现新威望
 
