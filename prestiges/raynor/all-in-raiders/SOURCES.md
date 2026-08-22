@@ -2,7 +2,7 @@
 
 ## 必要依赖
 
-- CMRE 本地目录版核心模组，尤其是 `CMRE_Core_Base.SC2Mod` 与 `CMRE_Core_Triggers.SC2Mod`。
+- [WondersReady/CMRE_OpenSource](https://github.com/WondersReady/CMRE_OpenSource) 提供的 CMRE 本地目录版核心模组，尤其是 `CMRE_Core_Base.SC2Mod` 与 `CMRE_Core_Triggers.SC2Mod`。
 - 本模块只保存针对 CMRE 的增量数据，不包含完整 CMRE 文件。
 
 ## 机制来源
@@ -13,4 +13,3 @@
 ## 公开网络资料
 
 当前版本没有直接复制外部网页文件或文字。未来若使用公开网络页面补充机制资料，将在此处记录页面标题、链接、访问日期和用途。
-
