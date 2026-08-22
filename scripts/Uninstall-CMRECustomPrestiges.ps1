@@ -1,4 +1,4 @@
-[CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
+﻿[CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
     [Parameter(Mandatory = $true)]
     [string]$StarCraftIIPath,
@@ -87,7 +87,7 @@ function Backup-TargetFile {
 
 $PreviousState = $null
 if (Test-Path -LiteralPath $StateFile -PathType Leaf) {
-    $PreviousState = Get-Content -LiteralPath $StateFile -Raw | ConvertFrom-Json
+    $PreviousState = Get-Content -LiteralPath $StateFile -Raw -Encoding UTF8 | ConvertFrom-Json
 }
 
 $RepositoryManifestFiles = @(Get-ChildItem -LiteralPath (Join-Path $RepositoryRoot 'prestiges') -Filter 'prestige.json' -File -Recurse | Sort-Object FullName)
@@ -119,7 +119,7 @@ foreach ($requestedModuleId in $RequestedModuleIds) {
 
     $fallbackManifestPath = $null
     foreach ($repositoryManifestFile in $RepositoryManifestFiles) {
-        $repositoryManifest = Get-Content -LiteralPath $repositoryManifestFile.FullName -Raw | ConvertFrom-Json
+        $repositoryManifest = Get-Content -LiteralPath $repositoryManifestFile.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
         if ([string]$repositoryManifest.id -eq $requestedModuleId) {
             $fallbackManifestPath = $repositoryManifestFile.FullName
             break
@@ -136,7 +136,7 @@ foreach ($requestedModuleId in $RequestedModuleIds) {
 $UninstalledModuleIds = @()
 foreach ($manifestRecord in $ManifestRecords) {
     $moduleRoot = Split-Path -Parent $manifestRecord.path
-    $manifest = Get-Content -LiteralPath $manifestRecord.path -Raw | ConvertFrom-Json
+    $manifest = Get-Content -LiteralPath $manifestRecord.path -Raw -Encoding UTF8 | ConvertFrom-Json
 
     foreach ($catalogDefinition in @($manifest.catalog)) {
         $sourceFile = Join-Path $moduleRoot (Join-Path 'catalog' $catalogDefinition.file)
@@ -178,11 +178,11 @@ foreach ($manifestRecord in $ManifestRecords) {
         $targetFile = Join-Path $TargetMod "$($localeDefinition.locale).SC2Data\LocalizedData\GameStrings.txt"
         if (-not (Test-Path -LiteralPath $targetFile -PathType Leaf)) { continue }
         $keys = @(
-            Get-Content -LiteralPath $sourceFile |
+            Get-Content -LiteralPath $sourceFile -Encoding UTF8 |
                 Where-Object { (-not [string]::IsNullOrWhiteSpace($_)) -and $_.Contains('=') } |
                 ForEach-Object { $_.Substring(0, $_.IndexOf('=')) }
         )
-        $originalLines = @(Get-Content -LiteralPath $targetFile)
+        $originalLines = @(Get-Content -LiteralPath $targetFile -Encoding UTF8)
         $remainingLines = @($originalLines | Where-Object {
             $line = $_
             -not ($keys | Where-Object { $line.StartsWith("$_=", [System.StringComparison]::Ordinal) })

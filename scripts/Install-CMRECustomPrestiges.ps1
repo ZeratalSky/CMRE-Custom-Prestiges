@@ -1,4 +1,4 @@
-[CmdletBinding(SupportsShouldProcess = $true)]
+﻿[CmdletBinding(SupportsShouldProcess = $true)]
 param(
     [Parameter(Mandatory = $false)]
     [string]$StarCraftIIPath,
@@ -18,6 +18,12 @@ function Resolve-StarCraftIIPath {
     if (-not [string]::IsNullOrWhiteSpace($RequestedPath)) {
         $candidates += $RequestedPath
     }
+
+    $repositoryParent = Split-Path -Parent $RepositoryRoot
+    if ((Split-Path -Leaf $repositoryParent) -ieq 'Mods') {
+        $candidates += (Split-Path -Parent $repositoryParent)
+    }
+
     $candidates += @(
         'C:\Program Files (x86)\StarCraft II',
         'C:\Program Files\StarCraft II'
@@ -148,7 +154,7 @@ if ($ManifestFiles.Count -eq 0) {
 
 $CurrentModuleIds = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::OrdinalIgnoreCase)
 foreach ($manifestFile in $ManifestFiles) {
-    $candidateManifest = Get-Content -LiteralPath $manifestFile.FullName -Raw | ConvertFrom-Json
+    $candidateManifest = Get-Content -LiteralPath $manifestFile.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
     if ([string]::IsNullOrWhiteSpace($candidateManifest.id) -or ($candidateManifest.id -notmatch '^[A-Za-z0-9_.-]+$')) {
         throw "模块 ID 为空或含有不安全字符：$($manifestFile.FullName)"
     }
@@ -158,7 +164,7 @@ foreach ($manifestFile in $ManifestFiles) {
 }
 
 if (Test-Path -LiteralPath $StateFile -PathType Leaf) {
-    $previousState = Get-Content -LiteralPath $StateFile -Raw | ConvertFrom-Json
+    $previousState = Get-Content -LiteralPath $StateFile -Raw -Encoding UTF8 | ConvertFrom-Json
     $staleModuleIds = @(
         @($previousState.modules) |
             Where-Object { -not $CurrentModuleIds.Contains([string]$_.id) } |
@@ -178,7 +184,7 @@ $InstalledModules = @()
 
 foreach ($manifestFile in $ManifestFiles) {
     $moduleRoot = Split-Path -Parent $manifestFile.FullName
-    $manifest = Get-Content -LiteralPath $manifestFile.FullName -Raw | ConvertFrom-Json
+    $manifest = Get-Content -LiteralPath $manifestFile.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
     if ($manifest.schemaVersion -ne 1) {
         throw "不支持的模块清单版本：$($manifestFile.FullName)"
     }
@@ -241,10 +247,10 @@ foreach ($manifestFile in $ManifestFiles) {
         if (-not (Test-Path -LiteralPath $targetFile -PathType Leaf)) { throw "CMRE 缺少本地化文件：$targetFile" }
 
         $targetLines = [System.Collections.Generic.List[string]]::new()
-        foreach ($line in @(Get-Content -LiteralPath $targetFile)) { [void]$targetLines.Add($line) }
+        foreach ($line in @(Get-Content -LiteralPath $targetFile -Encoding UTF8)) { [void]$targetLines.Add($line) }
         $changed = $false
 
-        foreach ($sourceLine in @(Get-Content -LiteralPath $sourceFile)) {
+        foreach ($sourceLine in @(Get-Content -LiteralPath $sourceFile -Encoding UTF8)) {
             if ([string]::IsNullOrWhiteSpace($sourceLine) -or -not $sourceLine.Contains('=')) { continue }
             $key = $sourceLine.Substring(0, $sourceLine.IndexOf('='))
             $foundIndex = -1
