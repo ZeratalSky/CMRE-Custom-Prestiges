@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "name": "CMRE Custom Prestiges",
+  "modulePattern": "prestiges/*/*/prestige.json",
+  "description": "Modular custom prestige collection for StarCraft II CMRE.",
+  "modules": [
+    "raynor/all-in-raiders"
+  ]
+}
+
