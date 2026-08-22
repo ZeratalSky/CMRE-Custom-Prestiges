@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "id": "CMCommanderPrestigeRaynorAllInOne",
+  "name": {
+    "zhCN": "全能游骑兵",
+    "enUS": "All-In Raiders"
+  },
+  "commander": "TerranRaynor",
+  "version": "0.1.0",
+  "catalog": [
+    {
+      "file": "UpgradeData.xml",
+      "ownedEntries": [
+        { "type": "CUpgrade", "id": "CMCommanderPrestigeRaynorAllInOne" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "BehaviorData.xml",
+      "ownedEntries": [
+        { "type": "CBehaviorBuff", "id": "CMRaynorAllInOneHyperionRegen" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "ValidatorData.xml",
+      "ownedEntries": [
+        { "type": "CValidatorPlayerRequirement", "id": "CMCommanderPrestigeRaynorAllInOne" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "EffectData.xml",
+      "ownedEntries": [
+        { "type": "CEffectRemoveBehavior", "id": "CMRaynorAllInOneRemoveHyperionTimedLife" },
+        { "type": "CEffectApplyBehavior", "id": "CMRaynorAllInOneApplyHyperionRegen" }
+      ],
+      "patchEntries": [
+        { "type": "CEffectSet", "id": "HyperionVoidCoopSpawnSet" }
+      ]
+    },
+    {
+      "file": "ButtonData.xml",
+      "ownedEntries": [
+        { "type": "CButton", "id": "CMCommanderPrestigeRaynorAllInOneButton" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "RequirementNodeData.xml",
+      "ownedEntries": [
+        { "type": "CRequirementCountUpgrade", "id": "CountUpgradeCMCommanderPrestigeRaynorAllInOneCompleteOnly" }
+      ],
+      "patchEntries": [
+        { "type": "CRequirementOr", "id": "Or789532539CountUnitAlias_BarracksCompleteOnlyCountUpgradeCommanderPrestigeRaynorAirCompleteOnly" },
+        { "type": "CRequirementOr", "id": "Or96167438CountUnitAlias_FactoryCompleteOnlyCountUpgradeCommanderPrestigeRaynorAirCompleteOnly" }
+      ]
+    },
+    {
+      "file": "UserData.xml",
+      "ownedEntries": [],
+      "patchEntries": [
+        { "type": "CUser", "id": "PlayerPrestige" }
+      ]
+    }
+  ],
+  "locales": [
+    { "locale": "zhCN", "file": "zhCN.GameStrings.txt" },
+    { "locale": "enUS", "file": "enUS.GameStrings.txt" }
+  ]
+}
+
