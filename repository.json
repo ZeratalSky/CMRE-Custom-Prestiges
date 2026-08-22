@@ -1,10 +1,9 @@
 {
   "schemaVersion": 1,
-  "name": "CMRE Custom Prestiges",
+  "name": "CMRE 自制威望合集",
   "modulePattern": "prestiges/*/*/prestige.json",
-  "description": "Modular custom prestige collection for StarCraft II CMRE.",
+  "description": "适用于《星际争霸 II》CMRE 的模块化自制威望合集。",
   "modules": [
     "raynor/all-in-raiders"
   ]
 }
-
