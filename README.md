@@ -19,14 +19,14 @@
 
 1. 从 [CMRE 核心仓库](https://github.com/WondersReady/CMRE_OpenSource) 点击 **Code → Download ZIP** 下载 CMRE。
 2. 解压 CMRE，把其中的 `Mods` 和 `Maps` 复制到《星际争霸 II》根目录并合并；不要复制外层 `CMRE_OpenSource-main` 文件夹。
-3. 从本仓库点击 **Code → Download ZIP**，解压到桌面或 `D:\SC2Mods` 等方便的位置。
-4. 在本仓库解压目录打开 PowerShell，运行：
+3. 从本仓库点击 **Code → Download ZIP**，解压后把整个 `CMRE-Custom-Prestiges-main` 文件夹移动到游戏的 `Mods` 文件夹中。
+4. 双击 `安装自制威望.bat`，等待窗口显示安装成功。
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\Install-CMRECustomPrestiges.ps1 -StarCraftIIPath "D:\StarCraft II"
+```text
+D:\StarCraft II\Mods\CMRE-Custom-Prestiges-main\安装自制威望.bat
 ```
 
-把 `D:\StarCraft II` 改成自己的《星际争霸 II》根目录。安装完成后进入 CMRE 的指挥官选择界面，雷诺会出现第 4 个威望。
+BAT 会自动从当前位置识别游戏根目录；如果文件夹没有直接放在 `Mods` 中，或没有检测到 CMRE，它会停止并显示错误提示。安装完成后进入 CMRE 的指挥官选择界面，雷诺会出现第 4 个威望。
 
 想停用某个自制威望，只需删除或移走它在 `prestiges` 下的目录，然后再次运行安装器。安装记录位于 `Mods/CMRE/CMRE_自制威望安装记录.txt`。
 
