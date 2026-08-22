@@ -17,11 +17,12 @@
 - 安装和卸载前自动备份将要修改的 CMRE 文件。
 - 不覆盖原版三个威望；自制威望会作为额外选项加入。
 
-## 快速安装
+## 新手安装概览
 
-1. 安装并确认 CMRE 可以正常运行。
-2. 下载本仓库 ZIP 并解压。
-3. 在 PowerShell 中运行：
+1. 从 [CMRE 核心仓库](https://github.com/WondersReady/CMRE_OpenSource) 点击 **Code → Download ZIP** 下载 CMRE。
+2. 解压 CMRE，把其中的 `Mods` 和 `Maps` 复制到《星际争霸 II》根目录并合并；不要复制外层 `CMRE_OpenSource-main` 文件夹。
+3. 从本仓库点击 **Code → Download ZIP**，解压到桌面或 `D:\SC2Mods` 等方便的位置。
+4. 在本仓库解压目录打开 PowerShell，运行：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\Install-CMRECustomPrestiges.ps1 -StarCraftIIPath "D:\StarCraft II"
@@ -31,7 +32,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\Install-CMRECustomPrestiges.p
 
 想停用某个自制威望，只需删除或移走它在 `prestiges` 下的目录，然后再次运行安装器。安装记录位于 `Mods/CMRE/CMRE_自制威望安装记录.txt`。
 
-完整说明见 [安装、更新与卸载](docs/INSTALLATION.md)。想继续制作新威望，请看 [添加新威望](docs/ADDING_PRESTIGES.md)。
+第一次安装或不熟悉 GitHub 时，请阅读包含目录示例和故障排查的 [从零开始完整安装教程](docs/INSTALLATION.md)。想继续制作新威望，请看 [添加新威望](docs/ADDING_PRESTIGES.md)。
 
 ## 兼容性说明
 
@@ -45,7 +46,7 @@ CMRE 更新可能改变数据结构。更新 CMRE 后建议重新运行安装器
 
 ## 来源与致谢
 
-- CMRE 是本项目的必要依赖；本仓库不包含或重新发布完整 CMRE，只保存自制增量数据。
+- [WondersReady/CMRE_OpenSource](https://github.com/WondersReady/CMRE_OpenSource) 是本项目依赖的 CMRE 核心模组与地图仓库；感谢 CMRE 作者和贡献者。本仓库不包含或重新发布完整 CMRE，只保存自制增量数据。
 - 部分威望的机制资料、设计参考或说明可能整理自公开网络页面。每个模块应在自己的 `SOURCES.md` 中注明具体来源与用途。
 - 网络公开不等于放弃著作权。原始项目、网页内容、游戏素材及名称的权利归各自权利人所有。
 - 当前雷诺模块的具体来源说明见 [`prestiges/raynor/all-in-raiders/SOURCES.md`](prestiges/raynor/all-in-raiders/SOURCES.md)。
