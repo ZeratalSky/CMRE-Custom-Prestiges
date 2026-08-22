@@ -22,15 +22,35 @@ powershell -ExecutionPolicy Bypass -File .\scripts\Install-CMRECustomPrestiges.p
 
 1. 检查 CMRE 核心文件是否完整。
 2. 自动发现仓库内的所有威望模块。
-3. 备份即将修改的文件。
-4. 合并威望数据和中英文文本。
-5. 写入安装状态文件。
+3. 对比上一次安装状态，自动卸载已从 `prestiges` 目录移除的威望。
+4. 备份即将修改的文件。
+5. 合并威望数据和中英文文本。
+6. 保存卸载快照、机器状态文件和中文安装记录。
 
 备份位于：
 
 ```text
 <星际争霸 II 根目录>/Mods/CMRE/_CMRECustomPrestigesBackup
 ```
+
+中文安装记录位于：
+
+```text
+<星际争霸 II 根目录>/Mods/CMRE/CMRE_自制威望安装记录.txt
+```
+
+它会列出当前实际安装的目录、中文名称、模块 ID 和版本。卸载快照位于 `CMRE_CustomPrestiges.installed`，请不要手工删除，否则已经移出仓库的模块可能无法被安全清理。
+
+## 目录同步规则
+
+`prestiges` 目录就是安装清单，不需要另外维护白名单：
+
+- 目录中新出现的威望：自动安装。
+- 目录中仍然存在的威望：自动检查并更新。
+- 上次已安装、现在已从目录删除或移走的威望：自动卸载。
+- 目录为空：自动卸载本工具以前安装的全部威望。
+
+因此，想临时停用某个威望，可以把整个威望目录移到 `prestiges` 之外，再运行安装器；想恢复时移回来并再次运行安装器。
 
 ## 验证
 
@@ -44,7 +64,7 @@ Maps/CMRE/TestMap.SC2Map
 
 ## 更新
 
-下载或拉取新版本文件后，再次运行同一条安装命令。安装器是幂等的：已有条目会更新，不会重复添加。
+下载或拉取新版本文件后，再次运行同一条安装命令。安装器是幂等的：已有条目会更新，不会重复添加，同时会清理目录中已经不存在的旧威望。
 
 如果先更新了 CMRE，也应重新运行安装器，因为 CMRE 更新可能覆盖自制内容。
 
@@ -57,6 +77,8 @@ powershell -ExecutionPolicy Bypass -File .\scripts\Uninstall-CMRECustomPrestiges
 ```
 
 卸载器只移除本仓库声明的自制条目和补丁节点，并在操作前生成新备份，不会直接用旧备份覆盖其他后续改动。
+
+通常不必单独运行卸载器：从 `prestiges` 目录移走某个威望后运行安装器，即可只卸载该威望。单独运行卸载器用于一次性卸载当前记录中的全部自制威望。
 
 ## 常见问题
 
@@ -73,4 +95,3 @@ powershell -ExecutionPolicy Bypass -File .\scripts\Uninstall-CMRECustomPrestiges
 ### 如何恢复
 
 优先运行卸载器。只有在 CMRE 文件已经损坏或无法解析时，才手动从 `_CMRECustomPrestigesBackup` 恢复最近一次备份。
-
