@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "CMCPCommanderPrestigeExample",
+  "name": {
+    "zhCN": "新威望名称",
+    "enUS": "New Prestige Name"
+  },
+  "commander": "CommanderInstanceId",
+  "version": "0.1.0",
+  "catalog": [
+    {
+      "file": "UpgradeData.xml",
+      "ownedEntries": [
+        { "type": "CUpgrade", "id": "CMCPCommanderPrestigeExample" }
+      ],
+      "patchEntries": []
+    }
+  ],
+  "locales": [
+    { "locale": "zhCN", "file": "zhCN.GameStrings.txt" },
+    { "locale": "enUS", "file": "enUS.GameStrings.txt" }
+  ]
+}
+
