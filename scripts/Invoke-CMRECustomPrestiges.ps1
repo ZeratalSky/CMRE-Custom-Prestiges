@@ -1,7 +1,7 @@
 ﻿[CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('Install', 'Uninstall', 'OpenTestMap', 'InstallAndLaunch')]
+    [ValidateSet('Install', 'Uninstall', 'OpenTestMap', 'InstallAndLaunch', 'PrepareDependencies')]
     [string]$Action
 )
 
@@ -27,20 +27,6 @@ function Start-CMRELauncher {
         throw '没有找到《星际争霸 II》本地启动程序 SC2Switcher。请在战网客户端中扫描和修复游戏。'
     }
 
-    $OptionalLocalDependencies = @(
-        (Join-Path $StarCraftIIPath 'Mods\CM_ArtPack\CM_ArtPack_Base.SC2Mod'),
-        (Join-Path $StarCraftIIPath 'Mods\CM\CM_Core_Extra.SC2Mod')
-    )
-    $MissingDependencies = @($OptionalLocalDependencies | Where-Object { -not (Test-Path -LiteralPath $_) })
-    if ($MissingDependencies.Count -gt 0) {
-        Write-Host ''
-        Write-Host '[提示] 检测到 CMRE 完全本地运行所需的部分外部依赖尚未安装：' -ForegroundColor Yellow
-        foreach ($MissingDependency in $MissingDependencies) {
-            Write-Host "  - $MissingDependency" -ForegroundColor DarkYellow
-        }
-        Write-Host '启动器仍会继续打开；如果地图报告缺少依赖，请按 CMRE 仓库说明补齐这些文件。' -ForegroundColor Yellow
-    }
-
     Write-Host "CMRE 启动器：$LauncherMap" -ForegroundColor Gray
     Write-Host "游戏启动程序：$($SwitcherPath[0])" -ForegroundColor Gray
     if ($env:CMCP_NO_LAUNCH -eq '1') {
@@ -64,6 +50,9 @@ try {
     }
     elseif ($Action -eq 'Uninstall') {
         Write-Host '       CMRE 自制威望一键卸载器' -ForegroundColor Cyan
+    }
+    elseif ($Action -eq 'PrepareDependencies') {
+        Write-Host '       CMRE 首次依赖准备工具' -ForegroundColor Cyan
     }
     else {
         Write-Host '       CMRE 本地测试地图启动器' -ForegroundColor Cyan
@@ -92,9 +81,25 @@ try {
         Write-Host "安装记录：$(Join-Path $StarCraftIIPath 'Mods\CMRE\CMRE_自制威望安装记录.txt')" -ForegroundColor Cyan
         if ($Action -eq 'InstallAndLaunch') {
             Write-Host ''
+            Write-Host '正在检查战网缓存并准备本地任务依赖……' -ForegroundColor Gray
+            $RuntimeScript = Join-Path $PSScriptRoot 'Prepare-CMRELocalRuntime.ps1'
+            if (-not (Test-Path -LiteralPath $RuntimeScript -PathType Leaf)) {
+                throw '本地运行环境脚本缺失。请重新下载完整仓库。'
+            }
+            & $RuntimeScript -StarCraftIIPath $StarCraftIIPath -AllowEditorDownload
+            Write-Host ''
             Write-Host '正在打开本地 CMRE 启动器……' -ForegroundColor Gray
             Start-CMRELauncher
         }
+    }
+    elseif ($Action -eq 'PrepareDependencies') {
+        $RuntimeScript = Join-Path $PSScriptRoot 'Prepare-CMRELocalRuntime.ps1'
+        if (-not (Test-Path -LiteralPath $RuntimeScript -PathType Leaf)) {
+            throw '本地运行环境脚本缺失。请重新下载完整仓库。'
+        }
+        Write-Host '正在检查战网缓存并准备本地任务依赖……' -ForegroundColor Gray
+        Write-Host ''
+        & $RuntimeScript -StarCraftIIPath $StarCraftIIPath -AllowEditorDownload
     }
     elseif ($Action -eq 'Uninstall') {
         Write-Host '正在卸载本工具记录的全部自制威望，请稍候……' -ForegroundColor Gray
@@ -104,6 +109,10 @@ try {
             throw '卸载核心脚本缺失。请重新下载完整仓库，不要单独移动 BAT 文件。'
         }
         & $CoreScript -StarCraftIIPath $StarCraftIIPath -Confirm:$false
+        $RuntimeScript = Join-Path $PSScriptRoot 'Prepare-CMRELocalRuntime.ps1'
+        if (Test-Path -LiteralPath $RuntimeScript -PathType Leaf) {
+            & $RuntimeScript -StarCraftIIPath $StarCraftIIPath -Restore
+        }
         Write-Host ''
         Write-Host '[成功] 本工具记录的自制威望已经卸载。' -ForegroundColor Green
     }
