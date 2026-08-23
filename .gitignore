@@ -1,5 +1,6 @@
 .backups/
 .test-install/
+.test-*/
 *.log
 .DS_Store
 Thumbs.db
