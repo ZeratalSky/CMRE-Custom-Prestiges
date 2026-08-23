@@ -1,0 +1,8 @@
+Button/Name/CMCommanderPrestigeArtanisAllInOneButton=全能大主教
+Unit/Name/CMArtanisHero=阿塔尼斯
+Button/Tooltip/CMCommanderPrestigeArtanisAllInOneButton=<s val="Coop_Prestige_Tooltip">优势：</s><n/>获得三个原版威望的全部优势，且无劣势；护盾超载仍对全军生效，守护之壳冷却为60秒。<n/>4分钟时，英雄阿塔尼斯加入战斗（500生命/500护盾，阵亡后60秒复活，不受普通攻防升级影响）。<n/>星界之风冷却为5秒，恢复100点生命与50点护盾。
+UserData/PlayerHeros/CMArtanisHero_Name=阿塔尼斯
+UserData/PlayerHeros/CMArtanisHero_HeroReviveMsgNormal=阿塔尼斯已阵亡。他将在~Duration~秒后于枢纽附近复活。
+UserData/PlayerHeros/CMArtanisHero_HeroReviveMsgNoTownHall=<c val="FF9800">阿塔尼斯已阵亡。你需要一座枢纽来让他复活。</c>
+UserData/PlayerHeros/CMArtanisHero_HeroReviveMsgComplete=<c val="FF9800">阿塔尼斯已在你的枢纽附近复活。</c>
+UserData/PlayerHeros/CMArtanisHero_HeroReviveMsgFirstBorn=<c val="FF9800">大主教阿塔尼斯已加入战斗。</c>

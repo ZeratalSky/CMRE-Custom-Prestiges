@@ -1,0 +1,8 @@
+Button/Name/CMCommanderPrestigeArtanisAllInOneButton=All-In Hierarch
+Unit/Name/CMArtanisHero=Artanis
+Button/Tooltip/CMCommanderPrestigeArtanisAllInOneButton=<s val="Coop_Prestige_Tooltip">Advantages:</s><n/>Gain every benefit from all three standard prestiges with no disadvantages. Shield Overcharge remains army-wide, and Guardian Shell has a 60-second cooldown.<n/>At 4:00, hero Artanis joins the battle (500 life/500 shields, 60-second revival, unaffected by standard attack and armor upgrades).<n/>Astral Wind has a 5-second cooldown and restores 100 life and 50 shields.
+UserData/PlayerHeros/CMArtanisHero_Name=Artanis
+UserData/PlayerHeros/CMArtanisHero_HeroReviveMsgNormal=Artanis has fallen. He will revive near the Nexus in ~Duration~ seconds.
+UserData/PlayerHeros/CMArtanisHero_HeroReviveMsgNoTownHall=<c val="FF9800">Artanis has fallen. You need a Nexus to revive him.</c>
+UserData/PlayerHeros/CMArtanisHero_HeroReviveMsgComplete=<c val="FF9800">Artanis has revived near your Nexus.</c>
+UserData/PlayerHeros/CMArtanisHero_HeroReviveMsgFirstBorn=<c val="FF9800">Hierarch Artanis has joined the battle.</c>
