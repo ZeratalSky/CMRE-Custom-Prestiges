@@ -1,3 +1,2 @@
 Button/Name/CMCommanderPrestigeRaynorAllInOneButton=全能游骑兵
-Button/Tooltip/CMCommanderPrestigeRaynorAllInOneButton=<s val="Coop_Prestige_Tooltip">优势：</s><n/>获得雷诺三个原版威望的全部优势，并移除全部劣势。生化作战单位的基础生命值提高100%，相关科技与步兵护甲升级继续提供对应的额外生命值。机械单位开启“加力燃烧”时攻击速度提高100%，技能冷却时间缩短30秒，同时保留完整的移动速度加成且不消耗生命值。星港无科技需求且不消耗高能瓦斯，星港单位的高能瓦斯消耗降低30%；每一点星港单位人口使雷诺的面板技能冷却速度提高1%。休伯利安号首次召唤后永久存在，并且每秒恢复6点生命值；高级定点防御无人机每60秒恢复1次使用次数，最多可储存9999次（实质上无上限）。<n/><n/><s val="Coop_Prestige_Tooltip">劣势：</s><n/>无。
-
+Button/Tooltip/CMCommanderPrestigeRaynorAllInOneButton=<s val="Coop_Prestige_Tooltip">优势：</s><n/>获得三个原版威望的全部优势，且无劣势。<n/>休伯利安号永久存在，每秒恢复6点生命值；冷却照常从召唤时开始，场上限1艘。<n/>高级定点防御无人机每60秒获得1次使用次数，最多储存9999次。
