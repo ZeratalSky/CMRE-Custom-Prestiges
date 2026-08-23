@@ -3,6 +3,20 @@
     <CRequirementCountUpgrade id="CountUpgradeCMCommanderPrestigeRaynorAllInOneCompleteOnly">
         <Count Link="CMCommanderPrestigeRaynorAllInOne" State="CompleteOnly"/>
     </CRequirementCountUpgrade>
+    <CRequirementCountUnit id="CountUnitCMRaynorAllInOneHyperionCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="HyperionVoidCoop" State="CompleteOnly"/>
+    </CRequirementCountUnit>
+    <CRequirementNot id="NotCountUpgradeCMCommanderPrestigeRaynorAllInOneCompleteOnly">
+        <OperandArray index="0" value="CountUpgradeCMCommanderPrestigeRaynorAllInOneCompleteOnly"/>
+    </CRequirementNot>
+    <CRequirementNot id="NotCountUnitCMRaynorAllInOneHyperionCompleteOnly">
+        <OperandArray index="0" value="CountUnitCMRaynorAllInOneHyperionCompleteOnly"/>
+    </CRequirementNot>
+    <CRequirementOr id="OrNotCMRaynorAllInOneOrNoHyperion">
+        <OperandArray value="NotCountUpgradeCMCommanderPrestigeRaynorAllInOneCompleteOnly"/>
+        <OperandArray value="NotCountUnitCMRaynorAllInOneHyperionCompleteOnly"/>
+    </CRequirementOr>
     <CRequirementOr id="Or789532539CountUnitAlias_BarracksCompleteOnlyCountUpgradeCommanderPrestigeRaynorAirCompleteOnly">
         <OperandArray index="2" value="CountUpgradeCMCommanderPrestigeRaynorAllInOneCompleteOnly"/>
     </CRequirementOr>
@@ -10,4 +24,3 @@
         <OperandArray index="2" value="CountUpgradeCMCommanderPrestigeRaynorAllInOneCompleteOnly"/>
     </CRequirementOr>
 </Catalog>
-

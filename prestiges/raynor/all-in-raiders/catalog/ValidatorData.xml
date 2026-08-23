@@ -6,5 +6,10 @@
         <UnitSelectionNotRequired value="1"/>
         <Value value="CMCommanderPrestigeRaynorAllInOne"/>
     </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="CMRaynorAllInOneCanSummonHyperion">
+        <WhichPlayer Value="Creator"/>
+        <Find value="1"/>
+        <UnitSelectionNotRequired value="1"/>
+        <Value value="CMRaynorAllInOneCanSummonHyperion"/>
+    </CValidatorPlayerRequirement>
 </Catalog>
-

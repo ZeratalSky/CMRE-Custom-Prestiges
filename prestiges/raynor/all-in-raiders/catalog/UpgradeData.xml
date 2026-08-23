@@ -27,10 +27,8 @@
         <EffectArray Operation="Subtract" Reference="Unit,Battlecruiser,CostResource[Vespene]" Value="72"/>
         <EffectArray Operation="Subtract" Reference="Unit,Starport,CostResource[Vespene]" Value="100"/>
         <EffectArray Operation="Subtract" Reference="Unit,StarportFlying,CostResource[Vespene]" Value="100"/>
-        <EffectArray Operation="Set" Reference="Abil,VoidCoopSummonHyperion,Cost[0].Cooldown.TimeUse" Value="86400"/>
         <EffectArray Operation="Set" Reference="Abil,HyperionAdvancedPDD,Cost[0].Charge.CountMax" Value="9999"/>
         <EffectArray Operation="Set" Reference="Abil,HyperionAdvancedPDD,Cost[0].Charge.TimeStart" Value="60"/>
         <EffectArray Operation="Set" Reference="Abil,HyperionAdvancedPDD,Cost[0].Charge.TimeUse" Value="60"/>
     </CUpgrade>
 </Catalog>
-

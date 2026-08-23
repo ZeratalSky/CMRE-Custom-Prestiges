@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CRequirement id="CMCommanderPrestigeRaynorAllInOne">
+        <NodeArray index="Use" Link="CountUpgradeCMCommanderPrestigeRaynorAllInOneCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="CMRaynorAllInOneCanSummonHyperion">
+        <NodeArray index="Use" Link="OrNotCMRaynorAllInOneOrNoHyperion"/>
+    </CRequirement>
+</Catalog>
