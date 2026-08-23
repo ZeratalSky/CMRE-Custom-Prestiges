@@ -6,7 +6,7 @@
     "enUS": "All-In Raiders"
   },
   "commander": "TerranRaynor",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "catalog": [
     {
       "file": "UpgradeData.xml",
@@ -25,13 +25,23 @@
     {
       "file": "ValidatorData.xml",
       "ownedEntries": [
-        { "type": "CValidatorPlayerRequirement", "id": "CMCommanderPrestigeRaynorAllInOne" }
+        { "type": "CValidatorPlayerRequirement", "id": "CMCommanderPrestigeRaynorAllInOne" },
+        { "type": "CValidatorPlayerRequirement", "id": "CMRaynorAllInOneCanSummonHyperion" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "RequirementData.xml",
+      "ownedEntries": [
+        { "type": "CRequirement", "id": "CMCommanderPrestigeRaynorAllInOne" },
+        { "type": "CRequirement", "id": "CMRaynorAllInOneCanSummonHyperion" }
       ],
       "patchEntries": []
     },
     {
       "file": "EffectData.xml",
       "ownedEntries": [
+        { "type": "CEffectCreateUnit", "id": "SummonHyperionCreateUnit" },
         { "type": "CEffectRemoveBehavior", "id": "CMRaynorAllInOneRemoveHyperionTimedLife" },
         { "type": "CEffectApplyBehavior", "id": "CMRaynorAllInOneApplyHyperionRegen" }
       ],
@@ -49,7 +59,11 @@
     {
       "file": "RequirementNodeData.xml",
       "ownedEntries": [
-        { "type": "CRequirementCountUpgrade", "id": "CountUpgradeCMCommanderPrestigeRaynorAllInOneCompleteOnly" }
+        { "type": "CRequirementCountUpgrade", "id": "CountUpgradeCMCommanderPrestigeRaynorAllInOneCompleteOnly" },
+        { "type": "CRequirementCountUnit", "id": "CountUnitCMRaynorAllInOneHyperionCompleteOnly" },
+        { "type": "CRequirementNot", "id": "NotCountUpgradeCMCommanderPrestigeRaynorAllInOneCompleteOnly" },
+        { "type": "CRequirementNot", "id": "NotCountUnitCMRaynorAllInOneHyperionCompleteOnly" },
+        { "type": "CRequirementOr", "id": "OrNotCMRaynorAllInOneOrNoHyperion" }
       ],
       "patchEntries": [
         { "type": "CRequirementOr", "id": "Or789532539CountUnitAlias_BarracksCompleteOnlyCountUpgradeCommanderPrestigeRaynorAirCompleteOnly" },
@@ -69,4 +83,3 @@
     { "locale": "enUS", "file": "enUS.GameStrings.txt" }
   ]
 }
-
