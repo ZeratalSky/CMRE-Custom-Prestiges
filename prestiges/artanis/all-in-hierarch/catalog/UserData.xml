@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="PlayerPrestige">
+        <Instances Id="CMCommanderPrestigeArtanisAllInOne">
+            <GameLink GameLink="CMCommanderPrestigeArtanisAllInOne">
+                <Field Id="Necessary - Primary Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CMCommanderPrestigeArtanisAllInOneButton">
+                <Field Id="Necessary - Icon"/>
+            </GameLink>
+            <Int Int="1">
+                <Field Id="OWT - Hero"/>
+            </Int>
+            <User Type="PlayerHeros" Instance="CMArtanisHero">
+                <Field Id="OW - Hero Links"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="ArtanisCombatAbilities1">
+                <Field Id="Addition - Upgrade Supplements"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="ArtanisCombatAbilities2">
+                <Field Id="Addition - Upgrade Supplements" Index="1"/>
+            </User>
+            <User Type="PlayerCommanders" Instance="ProtossArtanis">
+                <Field Id="Necessary - Commander"/>
+            </User>
+        </Instances>
+    </CUser>
+    <CUser id="PlayerHeros">
+        <Instances Id="CMArtanisHero">
+            <AbilCmd Abil="ZeratulRevive">
+                <Field Id="ReviveAbilityCommand"/>
+            </AbilCmd>
+            <GameLink GameLink="CMArtanisInitialReviveTimer">
+                <Field Id="HeroUnitFirstReviveBehavior"/>
+            </GameLink>
+            <GameLink GameLink="ZeratulReviveTimer">
+                <Field Id="HeroUnitNormalReviveBehavior"/>
+            </GameLink>
+            <GameLink GameLink="ZeratulCoopReviveBeacon">
+                <Field Id="HeroReviveUnit"/>
+            </GameLink>
+            <GameLink GameLink="CMArtanisHero">
+                <Field Id="HeroUnit"/>
+            </GameLink>
+            <String String="Abil/ZeratulRevive">
+                <Field Id="HeroReviveLink"/>
+            </String>
+            <Text Text="UserData/PlayerHeros/CMArtanisHero_Name">
+                <Field Id="Name"/>
+            </Text>
+            <Text Text="UserData/PlayerHeros/CMArtanisHero_HeroReviveMsgNormal">
+                <Field Id="HeroReviveMsgNormal"/>
+            </Text>
+            <Text Text="UserData/PlayerHeros/CMArtanisHero_HeroReviveMsgNoTownHall">
+                <Field Id="HeroReviveMsgNoTownHall"/>
+            </Text>
+            <Text Text="UserData/PlayerHeros/CMArtanisHero_HeroReviveMsgComplete">
+                <Field Id="HeroReviveMsgComplete"/>
+            </Text>
+            <Text Text="UserData/PlayerHeros/CMArtanisHero_HeroReviveMsgFirstBorn">
+                <Field Id="HeroReviveMsgFirstBorn"/>
+            </Text>
+        </Instances>
+    </CUser>
+</Catalog>

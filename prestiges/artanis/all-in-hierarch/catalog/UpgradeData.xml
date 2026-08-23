@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUpgrade id="CMCommanderPrestigeArtanisAllInOne" parent="CommanderPrestige">
+        <!-- P1: combat ability improvements, without the unit cost increases. -->
+        <EffectArray Reference="Effect,LightningBombDamage,Amount" Value="10"/>
+        <EffectArray Reference="Effect,Feedback,VitalFractionCurrent[Energy]" Value="1"/>
+        <EffectArray Reference="Effect,PsiStormDamage,Amount" Value="10"/>
+        <EffectArray Reference="Effect,PsiStormDamageInitial,Amount" Value="10"/>
+        <EffectArray Reference="Effect,HighArchonPsiStormDamage,Amount" Value="10"/>
+        <EffectArray Reference="Effect,HighArchonPsiStormDamageInitial,Amount" Value="10"/>
+        <EffectArray Reference="Effect,HighArchonPsiStormHeal,RechargeVitalRate" Value="14.2968"/>
+        <EffectArray Reference="Effect,VoidZealotWhirlwindDamage,Amount" Value="5"/>
+        <EffectArray Reference="Behavior,Charging,Modification.MoveSpeedMultiplier" Value="1.2"/>
+        <EffectArray Reference="Behavior,ImmortalBarrierBase,DamageResponse.ModifyLimit" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Abil,ReaverHangar,InfoArray[Ammo1].Time" Value="4.000000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,GravitonBeamVoidCampaign,Cost[0].Cooldown.TimeUse" Value="15.000000"/>
+
+        <!-- P2: mobile power field and one-second cooldown, without the energy cost. -->
+        <EffectArray Reference="Effect,CommanderPrestigeArtanisPowerFieldFindNewField,Chance" Value="1"/>
+        <EffectArray Operation="Subtract" Reference="Abil,SOAPylonPower,Cost[0].Cooldown.TimeUse" Value="29.000000"/>
+
+        <!-- P3: Unbound Fanatics and improved global Shield Overcharge, without disabling Guardian Shell or increasing Orbital Strike cost. -->
+        <EffectArray Reference="Effect,CommanderPrestigeArtanisOrbitalStrikesArchon,Chance" Value="1"/>
+        <EffectArray Reference="Effect,CommanderPrestigeArtanisOrbitalStrikesKnockback,Chance" Value="1"/>
+        <EffectArray Reference="Effect,CommanderPrestigeArtanisOrbitalStrikesArchonPrecursor,Chance" Value="1"/>
+        <EffectArray Operation="Subtract" Reference="Abil,SoASuperShield,Cost[0].Vital[Energy]" Value="25"/>
+        <EffectArray Operation="Subtract" Reference="Abil,SoASuperShield,Cost[0].Cooldown.TimeUse" Value="90"/>
+
+        <!-- Custom Guardian Shell and hero rules. -->
+        <EffectArray Operation="Set" Reference="Behavior,SOAHeroicShieldWeakness,Duration" Value="60"/>
+        <EffectArray Operation="Set" Reference="Unit,CMArtanisHero,LifeMax" Value="500"/>
+        <EffectArray Operation="Set" Reference="Unit,CMArtanisHero,LifeStart" Value="500"/>
+        <EffectArray Operation="Set" Reference="Unit,CMArtanisHero,ShieldsMax" Value="500"/>
+        <EffectArray Operation="Set" Reference="Unit,CMArtanisHero,ShieldsStart" Value="500"/>
+        <EffectArray Operation="Set" Reference="Abil,MutatorAmonArtanisAstralWind,Cost[0].Cooldown.TimeUse" Value="5"/>
+        <EffectArray Operation="Set" Reference="Effect,MutatorAmonArtanisAstralWindSelf,VitalArray[Life].Change" Value="100"/>
+        <EffectArray Operation="Set" Reference="Effect,MutatorAmonArtanisAstralWindSelf,VitalArray[Shields].Change" Value="50"/>
+        <EffectArray Operation="Set" Reference="Effect,MutatorAmonArtanisAstralWindOther,VitalArray[Life].Change" Value="100"/>
+        <EffectArray Operation="Set" Reference="Effect,MutatorAmonArtanisAstralWindOther,VitalArray[Shields].Change" Value="50"/>
+    </CUpgrade>
+</Catalog>

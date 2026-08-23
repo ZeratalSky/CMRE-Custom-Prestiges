@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUnit id="CMArtanisHero">
+        <DeathTime value="-1"/>
+        <DeathRevealRadius value="3"/>
+        <Race value="Prot"/>
+        <Mob value="Campaign"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="500"/>
+        <LifeMax value="500"/>
+        <LifeArmor value="3"/>
+        <LifeRegenRate value="1"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossPlating"/>
+        <ShieldsStart value="500"/>
+        <ShieldsMax value="500"/>
+        <ShieldArmor value="3"/>
+        <ShieldRegenDelay value="3"/>
+        <ShieldRegenRate value="4"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="2.75"/>
+        <Acceleration value="1000"/>
+        <Deceleration value="1000"/>
+        <LateralAcceleration value="46"/>
+        <Sight value="10"/>
+        <CostCategory value="Army"/>
+        <AttackTargetPriority value="20"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="attack"/>
+        <AbilArray Link="move"/>
+        <AbilArray Link="Warpable"/>
+        <AbilArray Link="ProgressRally"/>
+        <AbilArray Link="MutatorAmonArtanisLightningDash"/>
+        <AbilArray Link="MutatorAmonArtanisAstralWind"/>
+        <BehaviorArray Link="AllUnitBehaviorController"/>
+        <BehaviorArray Link="HeroCCImmunity"/>
+        <WeaponArray Link="MutatorAmonArtanisMelee"/>
+        <WeaponArray Link="MutatorAmonArtanis"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons Face="ArtanisLightningDash" Type="AbilCmd" AbilCmd="MutatorAmonArtanisLightningDash,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="ArtanisAstralWind" Type="AbilCmd" AbilCmd="MutatorAmonArtanisAstralWind,Execute" Row="2" Column="2"/>
+        </CardLayouts>
+        <InnerRadius value="0.5"/>
+        <Radius value="0.75"/>
+        <CargoSize value="2"/>
+        <SubgroupPriority value="199"/>
+        <MinimapRadius value="0.625"/>
+        <EditorCategories value="ObjectType:Hero,ObjectFamily:Campaign"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <AlliedPushPriority value="11"/>
+    </CUnit>
+</Catalog>

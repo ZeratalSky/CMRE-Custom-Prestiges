@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CActorUnit id="CMArtanisHero" parent="GenericUnitStandardNoAutoSoundLinks" unitName="CMArtanisHero">
+        <Model value="ArtanisVoid"/>
+        <On Terms="WeaponStart.MutatorAmonArtanis.AttackStart" Send="AnimBracketStart AttackAir Attack,Superior"/>
+        <On Terms="WeaponStop.MutatorAmonArtanis.AttackStop" Send="AnimBracketStop AttackAir"/>
+        <On Terms="WeaponStart.MutatorAmonArtanisMelee.AttackStart" Send="AnimBracketStart Attack Attack"/>
+        <On Terms="WeaponStop.MutatorAmonArtanisMelee.AttackStop" Send="AnimBracketStop Attack"/>
+        <On Terms="Abil.MutatorAmonArtanisLightningDash.SourceCastStart" Send="$Spell,E 0 -1.000000 -1.000000 1.000000 AsTimeScale"/>
+        <On Terms="Abil.MutatorAmonArtanisAstralWind.SourceCastStart; !UnitWalking" Send="$Spell,B 0 -1.000000 -1.000000 1.000000 AsTimeScale"/>
+        <PortraitActor value=""/>
+        <PortraitModel value=""/>
+        <BarOffset value="70"/>
+        <BarWidth value="42"/>
+        <HeroIcon value="Assets\Textures\ui_commanderportrait_artanis.dds"/>
+        <UnitIcon value="Assets\Textures\ui_commanderportrait_artanis.dds"/>
+        <SoundArray index="Birth" value="Swarm_Silent"/>
+        <SoundArray index="Ready" value="Swarm_Silent"/>
+        <SoundArray index="What" value="Swarm_Silent"/>
+        <SoundArray index="Yes" value="Swarm_Silent"/>
+        <SoundArray index="Attack" value="Swarm_Silent"/>
+        <SoundArray index="Pissed" value="Swarm_Silent"/>
+        <SoundArray index="Movement" value="Swarm_Silent"/>
+    </CActorUnit>
+</Catalog>

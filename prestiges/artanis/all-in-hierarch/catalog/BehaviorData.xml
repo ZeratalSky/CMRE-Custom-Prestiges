@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CBehaviorBuff id="CMArtanisInitialReviveTimer">
+        <InfoFlags index="Hidden" value="1"/>
+        <Alignment value="Positive"/>
+        <BuffFlags index="Countdown" value="0"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <Duration value="240"/>
+    </CBehaviorBuff>
+</Catalog>
