@@ -4,6 +4,7 @@
   "modulePattern": "prestiges/*/*/prestige.json",
   "description": "适用于《星际争霸 II》CMRE 的模块化自制威望合集。",
   "modules": [
-    "raynor/all-in-raiders"
+    "raynor/all-in-raiders",
+    "artanis/all-in-hierarch"
   ]
 }
