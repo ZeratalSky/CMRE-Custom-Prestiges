@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CButton id="CMCommanderPrestigeArtanisEmbraceGloryButton">
+        <Name value="Button/Name/CMCommanderPrestigeArtanisEmbraceGloryButton"/>
+        <Tooltip value="Button/Tooltip/CMCommanderPrestigeArtanisEmbraceGloryButton"/>
+        <Icon value="Assets\Textures\ui_commanderportrait_artanis.dds"/>
+        <AlertIcon value="Assets\Textures\ui_commanderportrait_artanis.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CButton>
+</Catalog>

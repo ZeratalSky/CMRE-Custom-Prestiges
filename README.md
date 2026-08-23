@@ -1,6 +1,6 @@
 # CMRE 自制威望合集
 
-这是一个用于《星际争霸 II》CMRE 的自制威望扩展。目前包含雷诺“全能游骑兵”和阿塔尼斯“全能大主教”，以后新增的威望也会放在同一个 `prestiges` 目录中。
+这是一个用于《星际争霸 II》CMRE 的自制威望扩展。目前包含雷诺“全能游骑兵”，以及阿塔尼斯“全能大主教”和“拥抱战斗的荣耀”。以后新增的威望也会放在同一个 `prestiges` 目录中。
 
 ## 安装
 
@@ -75,6 +75,21 @@ D:\StarCraft II
 
 - 无。
 
+### 阿塔尼斯：拥抱战斗的荣耀
+
+**优点**
+
+- 轨道轰炸无冷却，每发携带一名永久存在的无拘狂热者；无拘狂热者的护盾与护盾恢复速度提高 100%。
+- 守护之壳冷却时间减少 50%。
+- 每损失 2 人口获得 1 点亚顿之矛能量；太阳轰炸不消耗能量。
+
+**缺点**
+
+- 光影议会、圣堂武士文献馆、机械研究所、舰队航标和护盾超载不可用。
+- 守护之壳只对无拘狂热者和队友生效；亚顿之矛能量不再自动恢复，攻防升级不可用。
+- 轨道轰炸能量消耗提高 100%，且不再对地面造成伤害。
+- 机械台与星门单位造价提高 50%，观察者除外。
+
 ## 更新与卸载
 
 更新 CMRE 或本仓库后，再运行一次 `安装并启动CMRE.bat`。安装器会在修改前备份相关数据，并让已安装内容与 `prestiges` 目录保持一致。
@@ -92,7 +107,7 @@ D:\StarCraft II
 ## 来源与致谢
 
 - [WondersReady/CMRE_OpenSource](https://github.com/WondersReady/CMRE_OpenSource) 提供本项目依赖的 CMRE 核心模组与地图。本仓库不包含完整 CMRE。
-- 每个威望的设计依据和外部资料记录在各自的 `SOURCES.md` 中：[雷诺](prestiges/raynor/all-in-raiders/SOURCES.md)、[阿塔尼斯](prestiges/artanis/all-in-hierarch/SOURCES.md)。
+- 每个威望的设计依据和外部资料记录在各自的 `SOURCES.md` 中：[雷诺](prestiges/raynor/all-in-raiders/SOURCES.md)、[全能大主教](prestiges/artanis/all-in-hierarch/SOURCES.md)、[拥抱战斗的荣耀](prestiges/artanis/embrace-glory/SOURCES.md)。
 - 游戏素材、名称及第三方项目的权利归各自权利人所有。
 
 这是非官方玩家项目。使用者需要自行拥有《星际争霸 II》及可用的 CMRE 文件。

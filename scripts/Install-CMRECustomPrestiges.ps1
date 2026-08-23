@@ -193,10 +193,17 @@ foreach ($manifestFile in $ManifestFiles) {
         $sourceFile = Join-Path $moduleRoot (Join-Path 'catalog' $catalogDefinition.file)
         $targetFile = Join-Path $GameDataDirectory $catalogDefinition.file
         if (-not (Test-Path -LiteralPath $sourceFile -PathType Leaf)) { throw "缺少数据片段：$sourceFile" }
-        if (-not (Test-Path -LiteralPath $targetFile -PathType Leaf)) { throw "CMRE 缺少目标数据文件：$targetFile" }
 
         $sourceDocument = Load-XmlDocument -Path $sourceFile
-        $targetDocument = Load-XmlDocument -Path $targetFile
+        if (Test-Path -LiteralPath $targetFile -PathType Leaf) {
+            $targetDocument = Load-XmlDocument -Path $targetFile
+        }
+        else {
+            $targetDocument = New-Object System.Xml.XmlDocument
+            $declaration = $targetDocument.CreateXmlDeclaration('1.0', 'utf-8', $null)
+            [void]$targetDocument.AppendChild($declaration)
+            [void]$targetDocument.AppendChild($targetDocument.CreateElement('Catalog'))
+        }
         $changed = $false
 
         foreach ($sourceEntry in @($sourceDocument.DocumentElement.ChildNodes | Where-Object { $_.NodeType -eq [System.Xml.XmlNodeType]::Element })) {
@@ -235,7 +242,9 @@ foreach ($manifestFile in $ManifestFiles) {
         }
 
         if ($changed -and $PSCmdlet.ShouldProcess($targetFile, "安装模块 $($manifest.id)")) {
-            Backup-TargetFile -TargetFile $targetFile -TargetMod $TargetMod -BackupRoot $BackupRoot -BackedUp $BackedUp
+            if (Test-Path -LiteralPath $targetFile -PathType Leaf) {
+                Backup-TargetFile -TargetFile $targetFile -TargetMod $TargetMod -BackupRoot $BackupRoot -BackedUp $BackedUp
+            }
             Save-XmlDocument -Document $targetDocument -Path $targetFile
         }
     }

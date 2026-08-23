@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CBehaviorBuff id="CMArtanisEmbraceGloryLostSupplyRemainder">
+        <BehaviorFlags index="Permanent" value="1"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <MaxStackCount value="1"/>
+    </CBehaviorBuff>
+</Catalog>

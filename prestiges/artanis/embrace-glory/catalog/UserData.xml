@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="PlayerPrestige">
+        <Instances Id="CMCommanderPrestigeArtanisEmbraceGlory">
+            <GameLink GameLink="CMCommanderPrestigeArtanisEmbraceGlory">
+                <Field Id="Necessary - Primary Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CMCommanderPrestigeArtanisEmbraceGloryButton">
+                <Field Id="Necessary - Icon"/>
+            </GameLink>
+            <Unit Unit="TwilightCouncil"><Field Id="UM - Disable Unit"/></Unit>
+            <Unit Unit="TemplarArchive"><Field Id="UM - Disable Unit" Index="1"/></Unit>
+            <Unit Unit="RoboticsBay"><Field Id="UM - Disable Unit" Index="2"/></Unit>
+            <Unit Unit="FleetBeacon"><Field Id="UM - Disable Unit" Index="3"/></Unit>
+            <AbilCmd Abil="SoASuperShield"><Field Id="UM - Disable Abil"/></AbilCmd>
+            <AbilCmd Abil="CommanderPrestigeArtanisOrbitalStrikeShieldOverchargeTargeted"><Field Id="UM - Disable Abil" Index="1"/></AbilCmd>
+            <AbilCmd Abil="ForgeResearch"><Field Id="UM - Disable Abil" Index="2"/></AbilCmd>
+            <AbilCmd Abil="ForgeResearch" Cmd="1"><Field Id="UM - Disable Abil" Index="3"/></AbilCmd>
+            <AbilCmd Abil="ForgeResearch" Cmd="2"><Field Id="UM - Disable Abil" Index="4"/></AbilCmd>
+            <AbilCmd Abil="ForgeResearch" Cmd="3"><Field Id="UM - Disable Abil" Index="5"/></AbilCmd>
+            <AbilCmd Abil="ForgeResearch" Cmd="4"><Field Id="UM - Disable Abil" Index="6"/></AbilCmd>
+            <AbilCmd Abil="ForgeResearch" Cmd="5"><Field Id="UM - Disable Abil" Index="7"/></AbilCmd>
+            <AbilCmd Abil="ForgeResearch" Cmd="6"><Field Id="UM - Disable Abil" Index="8"/></AbilCmd>
+            <AbilCmd Abil="ForgeResearch" Cmd="7"><Field Id="UM - Disable Abil" Index="9"/></AbilCmd>
+            <AbilCmd Abil="ForgeResearch" Cmd="8"><Field Id="UM - Disable Abil" Index="10"/></AbilCmd>
+            <AbilCmd Abil="CyberneticsCoreResearch"><Field Id="UM - Disable Abil" Index="11"/></AbilCmd>
+            <AbilCmd Abil="CyberneticsCoreResearch" Cmd="1"><Field Id="UM - Disable Abil" Index="12"/></AbilCmd>
+            <AbilCmd Abil="CyberneticsCoreResearch" Cmd="2"><Field Id="UM - Disable Abil" Index="13"/></AbilCmd>
+            <AbilCmd Abil="CyberneticsCoreResearch" Cmd="3"><Field Id="UM - Disable Abil" Index="14"/></AbilCmd>
+            <AbilCmd Abil="CyberneticsCoreResearch" Cmd="4"><Field Id="UM - Disable Abil" Index="15"/></AbilCmd>
+            <AbilCmd Abil="CyberneticsCoreResearch" Cmd="5"><Field Id="UM - Disable Abil" Index="16"/></AbilCmd>
+            <User Type="PlayerResponse" Instance="CMArtanisEmbraceGloryLostSupply">
+                <Field Id="PM - Player Responses"/>
+            </User>
+            <User Type="PlayerCommanders" Instance="ProtossArtanis">
+                <Field Id="Necessary - Commander"/>
+            </User>
+        </Instances>
+    </CUser>
+    <CUser id="PlayerResponse">
+        <Instances Id="CMArtanisEmbraceGloryLostSupply">
+            <GameLink GameLink="CMArtanisEmbraceGloryLostSupply">
+                <Field Id="Response"/>
+            </GameLink>
+        </Instances>
+    </CUser>
+</Catalog>

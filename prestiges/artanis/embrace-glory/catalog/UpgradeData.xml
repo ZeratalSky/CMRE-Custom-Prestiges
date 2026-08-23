@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUpgrade id="CMCommanderPrestigeArtanisEmbraceGlory" parent="CommanderPrestige">
+        <EffectArray Reference="Effect,CommanderPrestigeArtanisOrbitalStrikesArchon,Chance" Value="1"/>
+        <EffectArray Reference="Effect,CommanderPrestigeArtanisOrbitalStrikesKnockback,Chance" Value="1"/>
+        <EffectArray Reference="Effect,CommanderPrestigeArtanisOrbitalStrikesArchonPrecursor,Chance" Value="1"/>
+        <EffectArray Reference="Abil,SOAOrbitalStrikeActivate,Cost[0].Vital[Energy]" Value="25"/>
+        <EffectArray Operation="Set" Reference="Abil,SOAOrbitalStrikeActivate,Cost[0].Cooldown.TimeStart" Value="0"/>
+        <EffectArray Operation="Set" Reference="Abil,SOAOrbitalStrikeActivate,Cost[0].Cooldown.TimeUse" Value="0"/>
+        <EffectArray Operation="Set" Reference="Effect,SOAOrbitalStrikeDamage,Amount" Value="0"/>
+        <EffectArray Reference="Unit,CommanderPrestigeArtanisOrbitalStrikesArchon,ShieldsStart" Value="1000"/>
+        <EffectArray Reference="Unit,CommanderPrestigeArtanisOrbitalStrikesArchon,ShieldsMax" Value="1000"/>
+        <EffectArray Reference="Unit,CommanderPrestigeArtanisOrbitalStrikesArchon,ShieldRegenRate" Value="100"/>
+        <EffectArray Operation="Set" Reference="Behavior,CommanderPrestigeArtanisOrbitalStrikesArchon,Duration" Value="0"/>
+        <EffectArray Operation="Set" Reference="Behavior,SOAHeroicShieldWeakness,Duration" Value="120"/>
+        <EffectArray Operation="Set" Reference="Unit,SoACasterArtanis,EnergyRegenRate" Value="0"/>
+        <EffectArray Operation="Set" Reference="Abil,SOAStrafeAttack,Cost[0].Vital[Energy]" Value="0"/>
+        <EffectArray Reference="Unit,ImmortalAiur,CostResource[Minerals]" Value="125"/>
+        <EffectArray Reference="Unit,ImmortalAiur,CostResource[Vespene]" Value="50"/>
+        <EffectArray Reference="Unit,Reaver,CostResource[Minerals]" Value="150"/>
+        <EffectArray Reference="Unit,Reaver,CostResource[Vespene]" Value="100"/>
+        <EffectArray Reference="Unit,PhoenixAiur,CostResource[Minerals]" Value="75"/>
+        <EffectArray Reference="Unit,PhoenixAiur,CostResource[Vespene]" Value="50"/>
+        <EffectArray Reference="Unit,Tempest,CostResource[Minerals]" Value="150"/>
+        <EffectArray Reference="Unit,Tempest,CostResource[Vespene]" Value="100"/>
+    </CUpgrade>
+</Catalog>
