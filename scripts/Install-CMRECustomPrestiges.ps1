@@ -169,11 +169,43 @@ $TargetMod = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_Core_Triggers.SC
 $GameDataDirectory = Join-Path $TargetMod 'Base.SC2Data\GameData'
 $StateFile = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_CustomPrestiges.state.json'
 $RecordFile = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_自制威望安装记录.txt'
+$SelectionFile = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_自制威望选择.txt'
 $CacheRoot = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_CustomPrestiges.installed'
-$ManifestFiles = @(Get-ChildItem -LiteralPath (Join-Path $RepositoryRoot 'prestiges') -Filter 'prestige.json' -File -Recurse | Sort-Object FullName)
+$AllManifestFiles = @(Get-ChildItem -LiteralPath (Join-Path $RepositoryRoot 'prestiges') -Filter 'prestige.json' -File -Recurse | Sort-Object FullName)
+$ManifestFiles = $AllManifestFiles
+
+if (Test-Path -LiteralPath $SelectionFile -PathType Leaf) {
+    $enabledModuleIds = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::OrdinalIgnoreCase)
+    foreach ($line in @(Get-Content -LiteralPath $SelectionFile -Encoding UTF8)) {
+        $moduleId = $line.Trim()
+        if ([string]::IsNullOrWhiteSpace($moduleId) -or $moduleId.StartsWith('#')) { continue }
+        if ($moduleId -notmatch '^[A-Za-z0-9_.-]+$') {
+            throw "威望选择文件包含无效模块 ID：$moduleId"
+        }
+        [void]$enabledModuleIds.Add($moduleId)
+    }
+
+    $ManifestFiles = @(
+        $AllManifestFiles | Where-Object {
+            $candidateManifest = Get-Content -LiteralPath $_.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
+            $enabledModuleIds.Contains([string]$candidateManifest.id)
+        }
+    )
+
+    $availableModuleIds = @(
+        $AllManifestFiles | ForEach-Object {
+            [string](Get-Content -LiteralPath $_.FullName -Raw -Encoding UTF8 | ConvertFrom-Json).id
+        }
+    )
+    foreach ($enabledModuleId in $enabledModuleIds) {
+        if ($availableModuleIds -notcontains $enabledModuleId) {
+            Write-Warning "选择文件中的威望当前不可用，已忽略：$enabledModuleId"
+        }
+    }
+}
 
 if ($ManifestFiles.Count -eq 0) {
-    Write-Host 'prestiges 目录中没有威望模块；将自动卸载以前由本工具安装的全部威望。' -ForegroundColor Yellow
+    Write-Host '当前没有选中的可用威望；将自动卸载以前由本工具安装的全部威望。' -ForegroundColor Yellow
 }
 
 $CurrentModuleIds = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::OrdinalIgnoreCase)
@@ -195,7 +227,7 @@ if (Test-Path -LiteralPath $StateFile -PathType Leaf) {
             ForEach-Object { [string]$_.id }
     )
     if ($staleModuleIds.Count -gt 0) {
-        Write-Host "检测到已从 prestiges 目录移除的威望，准备自动卸载：$($staleModuleIds -join '、')" -ForegroundColor Yellow
+        Write-Host "检测到未选中或已移除的威望，准备自动卸载：$($staleModuleIds -join '、')" -ForegroundColor Yellow
         $uninstallScript = Join-Path $PSScriptRoot 'Uninstall-CMRECustomPrestiges.ps1'
         & $uninstallScript -StarCraftIIPath $ResolvedStarCraftIIPath -ModuleId $staleModuleIds -SkipBackup:$SkipBackup -Confirm:$false -WhatIf:$WhatIfPreference
     }
@@ -398,6 +430,7 @@ $recordLines = New-Object 'System.Collections.Generic.List[string]'
 [void]$recordLines.Add('CMRE 自制威望安装记录')
 [void]$recordLines.Add("更新时间：$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss'))")
 [void]$recordLines.Add("来源目录：$(Join-Path $RepositoryRoot 'prestiges')")
+[void]$recordLines.Add("选择文件：$SelectionFile")
 [void]$recordLines.Add("当前数量：$($InstalledModules.Count)")
 [void]$recordLines.Add('')
 [void]$recordLines.Add('序号 | 指挥官/威望 | 中文名称 | 模块 ID | 版本')
@@ -411,6 +444,6 @@ if ($PSCmdlet.ShouldProcess($RecordFile, '写入中文安装记录')) {
     [System.IO.File]::WriteAllLines($RecordFile, $recordLines, $Utf8NoBom)
 }
 
-Write-Host "同步完成：目录中共有 $($InstalledModules.Count) 个威望模块，CMRE 已与目录保持一致。" -ForegroundColor Cyan
+Write-Host "同步完成：当前选择中共有 $($InstalledModules.Count) 个威望模块，CMRE 已与选择保持一致。" -ForegroundColor Cyan
 Write-Host "安装记录：$RecordFile" -ForegroundColor Cyan
 if (-not $SkipBackup) { Write-Host "备份目录：$BackupRoot" }
