@@ -6,7 +6,7 @@
         <AbilArray Link="CMStetmannEnemyJUICEOverload"/>
         <BehaviorArray Link="CMStetmannEnemyZoneController"/>
         <BehaviorArray Link="CMStetmannStetelliteDetector"/>
-        <CardLayouts>
+        <CardLayouts index="0">
             <LayoutButtons Face="CMStetmannEnemyFASTOverloadButton" Type="AbilCmd" AbilCmd="CMStetmannEnemyFASTOverload,Execute" Row="0" Column="1"/>
             <LayoutButtons Face="CMStetmannEnemyHUGSOverloadButton" Type="AbilCmd" AbilCmd="CMStetmannEnemyHUGSOverload,Execute" Row="0" Column="1"/>
             <LayoutButtons Face="CMStetmannEnemyJUICEOverloadButton" Type="AbilCmd" AbilCmd="CMStetmannEnemyJUICEOverload,Execute" Row="0" Column="1"/>

@@ -3,13 +3,16 @@
     <CButton id="CMCommanderPrestigeStetmannSuperSignalExpertButton">
         <Icon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadenergy.dds"/>
     </CButton>
-    <CButton id="CMStetmannEnemyFASTOverloadButton">
+    <CButton id="CMStetmannEnemyFASTOverloadButton" parent="FASTOverloadStetmann">
         <Icon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadspeed.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadspeed.dds"/>
     </CButton>
-    <CButton id="CMStetmannEnemyHUGSOverloadButton">
+    <CButton id="CMStetmannEnemyHUGSOverloadButton" parent="HUGSOverloadStetmann">
         <Icon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadhealth.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadhealth.dds"/>
     </CButton>
-    <CButton id="CMStetmannEnemyJUICEOverloadButton">
+    <CButton id="CMStetmannEnemyJUICEOverloadButton" parent="JUICEOverloadStetmann">
         <Icon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadenergy.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadenergy.dds"/>
     </CButton>
 </Catalog>

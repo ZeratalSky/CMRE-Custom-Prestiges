@@ -6,7 +6,7 @@
     "enUS": "Super Signal Savant"
   },
   "commander": "ZergStetmann",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "catalog": [
     {
       "file": "ActorData.xml",
