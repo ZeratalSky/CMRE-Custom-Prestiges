@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CActorUnit id="CMRaynorEliteDuskWing" parent="DuskWingBanshee" unitName="CMRaynorEliteDuskWing">
+        <On index="0" Terms="UnitBirth.CMRaynorEliteDuskWing"/><On index="1" Terms="UnitBirth.CMRaynorEliteDuskWing"/>
+        <On index="2" Terms="UnitRevive.CMRaynorEliteDuskWing"/><On index="3" Terms="UnitRevive.CMRaynorEliteDuskWing"/>
+        <On index="4" Terms="UnitConstruction.CMRaynorEliteDuskWing.Start"/><On index="5" Terms="UnitConstruction.CMRaynorEliteDuskWing.Finish"/>
+    </CActorUnit>
+</Catalog>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CButton id="CMCommanderPrestigeRaynorMercenaryCommanderButton">
+        <Icon value="Assets\Textures\BTN-Unit-Terran-MarineMercenary.dds"/>
+        <AlertIcon value="Assets\Textures\BTN-Unit-Terran-MarineMercenary.dds"/>
+        <Name value="Button/Name/CMCommanderPrestigeRaynorMercenaryCommanderButton"/>
+        <Tooltip value="Button/Tooltip/CMCommanderPrestigeRaynorMercenaryCommanderButton"/>
+        <EditorCategories value="Race:Terran"/>
+    </CButton>
+</Catalog>

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "CMCommanderPrestigeRaynorMercenaryRaider",
+  "name": { "zhCN": "雇佣兵游骑兵", "enUS": "Mercenary Raider" },
+  "commander": "TerranRaynor",
+  "version": "0.3.0",
+  "conflictGroup": "raynor-mercenary-replacement",
+  "dependencies": ["CMRaynorMercenaryShared"],
+  "catalog": [
+    {
+      "file": "UpgradeData.xml",
+      "ownedEntries": [{ "type": "CUpgrade", "id": "CMCommanderPrestigeRaynorMercenaryRaider" }],
+      "patchEntries": []
+    },
+    {
+      "file": "ButtonData.xml",
+      "ownedEntries": [{ "type": "CButton", "id": "CMCommanderPrestigeRaynorMercenaryRaiderButton" }],
+      "patchEntries": []
+    },
+    {
+      "file": "RequirementNodeData.xml",
+      "ownedEntries": [{ "type": "CRequirementCountUpgrade", "id": "CountUpgradeCMCommanderPrestigeRaynorMercenaryRaiderCompleteOnly" }],
+      "patchEntries": [
+        { "type": "CRequirementOr", "id": "Or789532539CountUnitAlias_BarracksCompleteOnlyCountUpgradeCommanderPrestigeRaynorAirCompleteOnly" },
+        { "type": "CRequirementOr", "id": "Or96167438CountUnitAlias_FactoryCompleteOnlyCountUpgradeCommanderPrestigeRaynorAirCompleteOnly" }
+      ]
+    },
+    {
+      "file": "UserData.xml",
+      "ownedEntries": [],
+      "patchEntries": [{ "type": "CUser", "id": "PlayerPrestige" }]
+    }
+  ],
+  "locales": [
+    { "locale": "zhCN", "file": "zhCN.GameStrings.txt" },
+    { "locale": "enUS", "file": "enUS.GameStrings.txt" }
+  ],
+  "textPatches": [
+    { "id": "raynor-mercenary-raider-trigger", "target": "Base.SC2Data\\LibCOMU.galaxy", "anchor": "void libCOMU_InitTriggers () {", "position": "before", "source": "galaxy\\MercenaryReplacement.galaxy" },
+    { "id": "raynor-mercenary-raider-trigger-init", "target": "Base.SC2Data\\LibCOMU.galaxy", "anchor": "    libCOMU_gt_CT_OrderCostCopyUsed_Init();", "position": "after", "source": "galaxy\\MercenaryReplacementInit.galaxy" }
+  ]
+}

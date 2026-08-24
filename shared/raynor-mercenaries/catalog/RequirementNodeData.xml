@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog><CRequirementCountUpgrade id="CMRaynorCountPunisherGrenadesCompleteOnly"><Count Link="PunisherGrenades" State="CompleteOnly"/></CRequirementCountUpgrade><CRequirementCountUpgrade id="CMRaynorCountBattlecruiserSpecializationsCompleteOnly"><Count Link="BattlecruiserEnableSpecializations" State="CompleteOnly"/></CRequirementCountUpgrade></Catalog>

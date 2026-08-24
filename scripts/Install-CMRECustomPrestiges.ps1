@@ -172,6 +172,11 @@ $RecordFile = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_自制威望安
 $SelectionFile = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_自制威望选择.txt'
 $CacheRoot = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_CustomPrestiges.installed'
 $AllManifestFiles = @(Get-ChildItem -LiteralPath (Join-Path $RepositoryRoot 'prestiges') -Filter 'prestige.json' -File -Recurse | Sort-Object FullName)
+$AllSharedManifestFiles = @()
+$sharedRoot = Join-Path $RepositoryRoot 'shared'
+if (Test-Path -LiteralPath $sharedRoot -PathType Container) {
+    $AllSharedManifestFiles = @(Get-ChildItem -LiteralPath $sharedRoot -Filter 'shared.json' -File -Recurse | Sort-Object FullName)
+}
 $ManifestFiles = $AllManifestFiles
 
 if (Test-Path -LiteralPath $SelectionFile -PathType Leaf) {
@@ -208,6 +213,51 @@ if ($ManifestFiles.Count -eq 0) {
     Write-Host '当前没有选中的可用威望；将自动卸载以前由本工具安装的全部威望。' -ForegroundColor Yellow
 }
 
+$PrestigeManifestFiles = @($ManifestFiles)
+$conflictGroups = @{}
+foreach ($prestigeManifestFile in $PrestigeManifestFiles) {
+    $prestigeManifest = Get-Content -LiteralPath $prestigeManifestFile.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
+    $conflictGroup = [string]$prestigeManifest.conflictGroup
+    if ([string]::IsNullOrWhiteSpace($conflictGroup)) { continue }
+    if (-not $conflictGroups.ContainsKey($conflictGroup)) { $conflictGroups[$conflictGroup] = @() }
+    $conflictGroups[$conflictGroup] += $prestigeManifest
+}
+foreach ($conflictGroup in $conflictGroups.Keys) {
+    $members = @($conflictGroups[$conflictGroup])
+    if ($members.Count -gt 1) {
+        $names = @($members | ForEach-Object { "$($_.name.zhCN)（$($_.id)）" }) -join '、'
+        throw "检测到互斥威望：$names。它们会使当前版本的《星际争霸 II》在地图初始化时闪退，请只选择其中一个。"
+    }
+}
+
+$sharedManifestById = @{}
+foreach ($sharedManifestFile in $AllSharedManifestFiles) {
+    $sharedManifest = Get-Content -LiteralPath $sharedManifestFile.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
+    $sharedId = [string]$sharedManifest.id
+    if ([string]::IsNullOrWhiteSpace($sharedId) -or ($sharedId -notmatch '^[A-Za-z0-9_.-]+$')) {
+        throw "共享模块 ID 为空或含有不安全字符：$($sharedManifestFile.FullName)"
+    }
+    if ($sharedManifestById.ContainsKey($sharedId)) { throw "检测到重复的共享模块 ID：$sharedId" }
+    $sharedManifestById[$sharedId] = $sharedManifestFile
+}
+
+$requiredSharedIds = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::OrdinalIgnoreCase)
+foreach ($prestigeManifestFile in $PrestigeManifestFiles) {
+    $prestigeManifest = Get-Content -LiteralPath $prestigeManifestFile.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
+    foreach ($dependencyId in @($prestigeManifest.dependencies | Where-Object { $null -ne $_ })) {
+        $dependencyId = [string]$dependencyId
+        if (-not $sharedManifestById.ContainsKey($dependencyId)) {
+            throw "威望 $($prestigeManifest.id) 缺少共享依赖：$dependencyId"
+        }
+        [void]$requiredSharedIds.Add($dependencyId)
+    }
+}
+
+$ManifestFiles = @(
+    $requiredSharedIds | Sort-Object | ForEach-Object { $sharedManifestById[$_] }
+    $PrestigeManifestFiles
+)
+
 $CurrentModuleIds = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::OrdinalIgnoreCase)
 foreach ($manifestFile in $ManifestFiles) {
     $candidateManifest = Get-Content -LiteralPath $manifestFile.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -216,6 +266,20 @@ foreach ($manifestFile in $ManifestFiles) {
     }
     if (-not $CurrentModuleIds.Add([string]$candidateManifest.id)) {
         throw "检测到重复的模块 ID：$($candidateManifest.id)"
+    }
+}
+
+$ownedEntryOwners = @{}
+foreach ($manifestFile in $ManifestFiles) {
+    $candidateManifest = Get-Content -LiteralPath $manifestFile.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
+    foreach ($catalogDefinition in @($candidateManifest.catalog)) {
+        foreach ($ownedEntry in @($catalogDefinition.ownedEntries)) {
+            $entryKey = "$($catalogDefinition.file)|$($ownedEntry.type)|$($ownedEntry.id)"
+            if ($ownedEntryOwners.ContainsKey($entryKey)) {
+                throw "数据对象被多个模块重复拥有：$entryKey（$($ownedEntryOwners[$entryKey])、$($candidateManifest.id)）"
+            }
+            $ownedEntryOwners[$entryKey] = [string]$candidateManifest.id
+        }
     }
 }
 
@@ -262,6 +326,16 @@ foreach ($manifestFile in $ManifestFiles) {
         }
         $changed = $false
 
+        # removeEntries is used for one-way migrations that delete obsolete sparse
+        # overlays from this writable mod. Dependency catalog objects remain intact.
+        foreach ($removeEntry in @($catalogDefinition.removeEntries | Where-Object { $null -ne $_ })) {
+            $obsoleteEntry = Find-CatalogEntry -Document $targetDocument -Type ([string]$removeEntry.type) -Id ([string]$removeEntry.id)
+            if ($null -ne $obsoleteEntry) {
+                [void]$targetDocument.DocumentElement.RemoveChild($obsoleteEntry)
+                $changed = $true
+            }
+        }
+
         foreach ($sourceEntry in @($sourceDocument.DocumentElement.ChildNodes | Where-Object { $_.NodeType -eq [System.Xml.XmlNodeType]::Element })) {
             $isOwned = Test-EntryDeclaration -CatalogDefinition $catalogDefinition -SourceEntry $sourceEntry
             $targetEntry = Find-CatalogEntry -Document $targetDocument -Type $sourceEntry.LocalName -Id $sourceEntry.GetAttribute('id')
@@ -280,7 +354,11 @@ foreach ($manifestFile in $ManifestFiles) {
             }
 
             if ($null -eq $targetEntry) {
-                throw "补丁目标不存在：$($sourceEntry.LocalName)/$($sourceEntry.GetAttribute('id'))"
+                # The catalog object may live in a dependency mod rather than in the writable
+                # trigger mod.  In that case a sparse entry here is the normal SC2 overlay.
+                [void]$targetDocument.DocumentElement.AppendChild($importedEntry)
+                $changed = $true
+                continue
             }
 
             foreach ($sourceChild in @($sourceEntry.ChildNodes | Where-Object { $_.NodeType -eq [System.Xml.XmlNodeType]::Element })) {
@@ -409,10 +487,16 @@ foreach ($manifestFile in $ManifestFiles) {
         id = $manifest.id
         nameZhCN = $manifest.name.zhCN
         version = $manifest.version
+        kind = $(if ([string]$manifest.kind -eq 'shared') { 'shared' } else { 'prestige' })
         sourcePath = $relativeModulePath
         cacheDirectory = $manifest.id
     }
-    Write-Host "已安装：$($manifest.name.zhCN) ($($manifest.id)) v$($manifest.version)" -ForegroundColor Green
+    if ([string]$manifest.kind -eq 'shared') {
+        Write-Host "已同步共享数据：$($manifest.name.zhCN) ($($manifest.id)) v$($manifest.version)" -ForegroundColor DarkGreen
+    }
+    else {
+        Write-Host "已安装：$($manifest.name.zhCN) ($($manifest.id)) v$($manifest.version)" -ForegroundColor Green
+    }
 }
 
 $state = [ordered]@{
@@ -431,12 +515,13 @@ $recordLines = New-Object 'System.Collections.Generic.List[string]'
 [void]$recordLines.Add("更新时间：$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss'))")
 [void]$recordLines.Add("来源目录：$(Join-Path $RepositoryRoot 'prestiges')")
 [void]$recordLines.Add("选择文件：$SelectionFile")
-[void]$recordLines.Add("当前数量：$($InstalledModules.Count)")
+$InstalledPrestiges = @($InstalledModules | Where-Object { $_.kind -ne 'shared' })
+[void]$recordLines.Add("当前数量：$($InstalledPrestiges.Count)")
 [void]$recordLines.Add('')
 [void]$recordLines.Add('序号 | 指挥官/威望 | 中文名称 | 模块 ID | 版本')
 [void]$recordLines.Add('-----|-------------|----------|---------|-----')
 $recordIndex = 1
-foreach ($installedModule in $InstalledModules) {
+foreach ($installedModule in $InstalledPrestiges) {
     [void]$recordLines.Add("$recordIndex | $($installedModule.sourcePath) | $($installedModule.nameZhCN) | $($installedModule.id) | $($installedModule.version)")
     $recordIndex++
 }
@@ -444,6 +529,6 @@ if ($PSCmdlet.ShouldProcess($RecordFile, '写入中文安装记录')) {
     [System.IO.File]::WriteAllLines($RecordFile, $recordLines, $Utf8NoBom)
 }
 
-Write-Host "同步完成：当前选择中共有 $($InstalledModules.Count) 个威望模块，CMRE 已与选择保持一致。" -ForegroundColor Cyan
+Write-Host "同步完成：当前选择中共有 $($InstalledPrestiges.Count) 个威望模块，CMRE 已与选择保持一致。" -ForegroundColor Cyan
 Write-Host "安装记录：$RecordFile" -ForegroundColor Cyan
 if (-not $SkipBackup) { Write-Host "备份目录：$BackupRoot" }

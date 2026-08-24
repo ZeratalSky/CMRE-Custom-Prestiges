@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog><CRequirement id="CMRaynorHavePunisherGrenades"><NodeArray index="Use" Link="CMRaynorCountPunisherGrenadesCompleteOnly"/></CRequirement><CRequirement id="CMRaynorHaveBattlecruiserSpecializations"><NodeArray index="Use" Link="CMRaynorCountBattlecruiserSpecializationsCompleteOnly"/></CRequirement></Catalog>

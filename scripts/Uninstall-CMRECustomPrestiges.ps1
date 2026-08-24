@@ -105,6 +105,10 @@ if (Test-Path -LiteralPath $StateFile -PathType Leaf) {
 }
 
 $RepositoryManifestFiles = @(Get-ChildItem -LiteralPath (Join-Path $RepositoryRoot 'prestiges') -Filter 'prestige.json' -File -Recurse | Sort-Object FullName)
+$sharedRoot = Join-Path $RepositoryRoot 'shared'
+if (Test-Path -LiteralPath $sharedRoot -PathType Container) {
+    $RepositoryManifestFiles += @(Get-ChildItem -LiteralPath $sharedRoot -Filter 'shared.json' -File -Recurse | Sort-Object FullName)
+}
 $ManifestRecords = @()
 $RequestedModuleIds = @()
 
@@ -125,9 +129,15 @@ foreach ($requestedModuleId in $RequestedModuleIds) {
         throw "模块 ID 为空或含有不安全字符：$requestedModuleId"
     }
 
-    $cachedManifestPath = Join-Path (Join-Path $CacheRoot $requestedModuleId) 'prestige.json'
+    $cachedModuleRoot = Join-Path $CacheRoot $requestedModuleId
+    $cachedManifestPath = Join-Path $cachedModuleRoot 'prestige.json'
+    $cachedSharedManifestPath = Join-Path $cachedModuleRoot 'shared.json'
     if (Test-Path -LiteralPath $cachedManifestPath -PathType Leaf) {
         $ManifestRecords += [ordered]@{ path = $cachedManifestPath; fromCache = $true }
+        continue
+    }
+    if (Test-Path -LiteralPath $cachedSharedManifestPath -PathType Leaf) {
+        $ManifestRecords += [ordered]@{ path = $cachedSharedManifestPath; fromCache = $true }
         continue
     }
 
@@ -178,6 +188,11 @@ foreach ($manifestRecord in $ManifestRecords) {
                     [void]$targetEntry.RemoveChild($matchingChild)
                     $changed = $true
                 }
+            }
+            $remainingElementChildren = @($targetEntry.ChildNodes | Where-Object { $_.NodeType -eq [System.Xml.XmlNodeType]::Element })
+            if (($remainingElementChildren.Count -eq 0) -and ($targetEntry.Attributes.Count -eq 1) -and $targetEntry.HasAttribute('id')) {
+                [void]$targetDocument.DocumentElement.RemoveChild($targetEntry)
+                $changed = $true
             }
         }
 
@@ -256,12 +271,13 @@ if ($RemainingModules.Count -gt 0) {
     $recordLines = New-Object 'System.Collections.Generic.List[string]'
     [void]$recordLines.Add('CMRE 自制威望安装记录')
     [void]$recordLines.Add("更新时间：$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss'))")
-    [void]$recordLines.Add("当前数量：$($RemainingModules.Count)")
+    $RemainingPrestiges = @($RemainingModules | Where-Object { [string]$_.kind -ne 'shared' })
+    [void]$recordLines.Add("当前数量：$($RemainingPrestiges.Count)")
     [void]$recordLines.Add('')
     [void]$recordLines.Add('序号 | 指挥官/威望 | 中文名称 | 模块 ID | 版本')
     [void]$recordLines.Add('-----|-------------|----------|---------|-----')
     $recordIndex = 1
-    foreach ($remainingModule in $RemainingModules) {
+    foreach ($remainingModule in $RemainingPrestiges) {
         $sourcePath = $(if ([string]::IsNullOrWhiteSpace($remainingModule.sourcePath)) { '未知目录' } else { $remainingModule.sourcePath })
         $nameZhCN = $(if ([string]::IsNullOrWhiteSpace($remainingModule.nameZhCN)) { $remainingModule.id } else { $remainingModule.nameZhCN })
         [void]$recordLines.Add("$recordIndex | $sourcePath | $nameZhCN | $($remainingModule.id) | $($remainingModule.version)")

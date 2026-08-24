@@ -1,0 +1,2 @@
+Button/Name/CMCommanderPrestigeRaynorMercenaryRaiderButton=雇佣兵游骑兵
+Button/Tooltip/CMCommanderPrestigeRaynorMercenaryRaiderButton=<s val="Coop_Prestige_Tooltip">优势：</s><n/>星港无需瓦斯，空军瓦斯消耗降低30%，并根据空军人口加快面板技能冷却；所有可训练作战单位替换为对应的战役佣兵。<n/><n/><s val="Coop_Prestige_Tooltip">劣势：</s><n/>作战单位矿物消耗提高50%。

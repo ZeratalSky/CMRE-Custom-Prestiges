@@ -1,0 +1,2 @@
+Button/Name/CMCommanderPrestigeRaynorBackwaterWarlordButton=Backwater Warlord
+Button/Tooltip/CMCommanderPrestigeRaynorBackwaterWarlordButton=<s val="Coop_Prestige_Tooltip">Advantage:</s><n/>Biological combat units gain 100% additional life. All trainable combat units are replaced by their campaign mercenary counterparts.<n/><n/><s val="Coop_Prestige_Tooltip">Disadvantage:</s><n/>MULEs are unavailable.

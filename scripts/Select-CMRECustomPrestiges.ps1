@@ -57,6 +57,7 @@ try {
                 Id = [string]$manifest.id
                 Name = [string]$manifest.name.zhCN
                 Commander = Get-CommanderName -Commander ([string]$manifest.commander)
+                ConflictGroup = [string]$manifest.conflictGroup
             }
         }
     )
@@ -87,7 +88,7 @@ $Form.MinimumSize = New-Object System.Drawing.Size(700, 400)
 $Form.Font = New-Object System.Drawing.Font('Microsoft YaHei UI', 9)
 
 $Description = New-Object System.Windows.Forms.Label
-$Description.Text = '勾选需要安装的威望。保存后会自动安装勾选项，并卸载未勾选项。'
+$Description.Text = '勾选需要安装的威望。标记为同一互斥组的威望不能同时安装，否则游戏会在载入时闪退。'
 $Description.AutoSize = $true
 $Description.Location = New-Object System.Drawing.Point(18, 18)
 $Form.Controls.Add($Description)
@@ -213,6 +214,14 @@ $Form.Controls.Add($Status)
 $SyncButton.Add_Click({
     try {
         Save-VisibleSelections
+        $selectedModules = @($Modules | Where-Object { $SelectedIds.Contains($_.Id) })
+        $selectedConflictGroups = @($selectedModules | Where-Object { -not [string]::IsNullOrWhiteSpace($_.ConflictGroup) } | Group-Object ConflictGroup)
+        foreach ($group in $selectedConflictGroups) {
+            if ($group.Count -gt 1) {
+                $names = @($group.Group | ForEach-Object { $_.Name }) -join '、'
+                throw "以下威望互相冲突，不能同时安装：$names。请只保留其中一个。"
+            }
+        }
         $lines = New-Object 'System.Collections.Generic.List[string]'
         [void]$lines.Add('# 每行一个需要安装的威望模块 ID；请优先使用图形选择器修改。')
         foreach ($module in $Modules) {

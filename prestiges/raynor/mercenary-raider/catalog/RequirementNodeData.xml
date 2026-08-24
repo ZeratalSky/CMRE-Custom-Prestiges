@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CRequirementCountUpgrade id="CountUpgradeCMCommanderPrestigeRaynorMercenaryRaiderCompleteOnly"><Count Link="CMCommanderPrestigeRaynorMercenaryRaider" State="CompleteOnly"/></CRequirementCountUpgrade>
+    <CRequirementOr id="Or789532539CountUnitAlias_BarracksCompleteOnlyCountUpgradeCommanderPrestigeRaynorAirCompleteOnly"><OperandArray index="3" value="CountUpgradeCMCommanderPrestigeRaynorMercenaryRaiderCompleteOnly"/></CRequirementOr>
+    <CRequirementOr id="Or96167438CountUnitAlias_FactoryCompleteOnlyCountUpgradeCommanderPrestigeRaynorAirCompleteOnly"><OperandArray index="3" value="CountUpgradeCMCommanderPrestigeRaynorMercenaryRaiderCompleteOnly"/></CRequirementOr>
+</Catalog>

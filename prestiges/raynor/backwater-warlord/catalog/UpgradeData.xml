@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUpgrade id="CMCommanderPrestigeRaynorBackwaterWarlord" parent="CommanderPrestigeRaynorBio">
+        <EffectArray Operation="Set" Reference="Unit,WarPig,Food" Value="-1"/><EffectArray Operation="Set" Reference="Unit,DevilDog,Food" Value="-2"/><EffectArray Operation="Set" Reference="Unit,HammerSecurity,Food" Value="-2"/><EffectArray Operation="Set" Reference="Unit,MercMedic,Food" Value="-1"/>
+        <EffectArray Operation="Set" Reference="Unit,MercVulture,Food" Value="-2"/><EffectArray Operation="Set" Reference="Unit,SpartanCompany,Food" Value="-2"/><EffectArray Operation="Set" Reference="Unit,SiegeBreaker,Food" Value="-3"/><EffectArray Operation="Set" Reference="Unit,SiegeBreakerSieged,Food" Value="-3"/>
+        <EffectArray Operation="Set" Reference="Unit,HelsAngelFighter,Food" Value="-2"/><EffectArray Operation="Set" Reference="Unit,HelsAngelAssault,Food" Value="-2"/><EffectArray Operation="Set" Reference="Unit,DuskWing,Food" Value="-3"/><EffectArray Operation="Set" Reference="Unit,DukesRevenge,Food" Value="-6"/>
+        <EffectArray Operation="Multiply" Reference="Unit,WarPig,LifeMax" Value="2"/><EffectArray Operation="Multiply" Reference="Unit,WarPig,LifeStart" Value="2"/>
+        <EffectArray Operation="Multiply" Reference="Unit,DevilDog,LifeMax" Value="2"/><EffectArray Operation="Multiply" Reference="Unit,DevilDog,LifeStart" Value="2"/>
+        <EffectArray Operation="Multiply" Reference="Unit,HammerSecurity,LifeMax" Value="2"/><EffectArray Operation="Multiply" Reference="Unit,HammerSecurity,LifeStart" Value="2"/>
+        <EffectArray Operation="Multiply" Reference="Unit,MercMedic,LifeMax" Value="2"/><EffectArray Operation="Multiply" Reference="Unit,MercMedic,LifeStart" Value="2"/>
+    </CUpgrade>
+    <CUpgrade id="CMRaynorBackwaterWarlordArmorLevel1" parent="CommanderPrestige">
+        <EffectArray Reference="Unit,WarPig,LifeMax" Value="6.5"/><EffectArray Reference="Unit,WarPig,LifeStart" Value="6.5"/>
+        <EffectArray Reference="Unit,HammerSecurity,LifeMax" Value="12.5"/><EffectArray Reference="Unit,HammerSecurity,LifeStart" Value="12.5"/>
+        <EffectArray Reference="Unit,DevilDog,LifeMax" Value="20"/><EffectArray Reference="Unit,DevilDog,LifeStart" Value="20"/>
+        <EffectArray Reference="Unit,MercMedic,LifeMax" Value="6"/><EffectArray Reference="Unit,MercMedic,LifeStart" Value="6"/>
+    </CUpgrade>
+    <CUpgrade id="CMRaynorBackwaterWarlordArmorLevel2" parent="CMRaynorBackwaterWarlordArmorLevel1"/>
+    <CUpgrade id="CMRaynorBackwaterWarlordArmorLevel3" parent="CMRaynorBackwaterWarlordArmorLevel1"/>
+</Catalog>

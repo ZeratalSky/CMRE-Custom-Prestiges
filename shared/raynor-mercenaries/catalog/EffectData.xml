@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectLaunchMissile id="HammerSecurityLM"><ImpactEffect value="CMRaynorHammerSecurityImpactSet"/></CEffectLaunchMissile>
+    <CEffectSet id="CMRaynorHammerSecurityImpactSet"><EffectArray index="0" value="HammerSecurityDamage"/><EffectArray index="1" value="CMRaynorHammerSecurityConcussiveShells"/></CEffectSet>
+    <CEffectApplyBehavior id="CMRaynorHammerSecurityConcussiveShells"><ValidatorArray index="0" value="CMRaynorPunisherGrenadesResearched"/><ValidatorArray index="1" value="NotStructure"/><ValidatorArray index="2" value="NotFrenzied"/><Behavior value="CMRaynorHammerSecurityConcussiveSlow"/></CEffectApplyBehavior>
+    <CEffectCreateUnit id="BansheeAirstrikeCU"><SpawnUnit value="CMRaynorEliteDuskWing"/></CEffectCreateUnit>
+    <CEffectCreateUnit id="BansheeAirstrikeAllyCU"><SpawnUnit value="CMRaynorEliteDuskWing"/></CEffectCreateUnit>
+</Catalog>

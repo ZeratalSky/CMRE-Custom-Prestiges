@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CAbilSpecialize id="MakeMercVultureSpiderMines"><InfoArray index="Specialize1" Time="12" Alert="SpiderMineComplete" Effect="ReplenishMercVultureMines"><Charge><CountMax value="3"/><CountUse value="1"/><HideCount value="1"/><Location value="Unit"/></Charge><Button DefaultButtonFace="SpiderMineReplenish" Requirements="UseNanoConstructor"/><Flags index="AutoCast" value="1"/><Flags index="AutoCastOn" value="1"/></InfoArray></CAbilSpecialize>
+    <CAbilEffectInstant id="DukesRevengeDefensiveMatrix"><Cost index="0"><Vital index="Energy" value="0"/><Cooldown Link="Abil/DukesRevengeDefensiveMatrix" Location="Unit" TimeUse="30"/></Cost></CAbilEffectInstant>
+    <CAbilEffectTarget id="DukesRevengeMissilePods"><Cost index="0"><Vital index="Energy" value="0"/><Cooldown Link="Abil/DukesRevengeMissilePods" Location="Unit" TimeUse="10"/></Cost></CAbilEffectTarget>
+    <CAbilEffectTarget id="DukesRevengeYamato"><Cost index="0"><Vital index="Energy" value="0"/><Cooldown Link="Abil/DukesRevengeYamato" Location="Unit" TimeUse="60"/></Cost><CmdButtonArray index="Execute" Requirements="CMRaynorHaveBattlecruiserSpecializations"/></CAbilEffectTarget>
+    <CAbilResearch id="StarportTechLabResearch"><InfoArray index="Research1" removed="1"/><InfoArray index="Research10" removed="1"/></CAbilResearch>
+</Catalog>

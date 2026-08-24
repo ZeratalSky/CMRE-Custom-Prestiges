@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="PlayerPrestige">
+        <Instances Id="CMCommanderPrestigeRaynorBackwaterWarlord">
+            <AbilCmd Abil="CalldownMULE"><Field Id="UM - Disable Abil"/></AbilCmd>
+            <GameLink GameLink="CMCommanderPrestigeRaynorBackwaterWarlord"><Field Id="Necessary - Primary Upgrade"/></GameLink>
+            <GameLink GameLink="CMCommanderPrestigeRaynorBackwaterWarlordButton"><Field Id="Necessary - Icon"/></GameLink>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="RaynorBio1"><Field Id="Addition - Upgrade Supplements"/></User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="RaynorBio2"><Field Id="Addition - Upgrade Supplements" Index="1"/></User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="RaynorBio3ArmorLevel1"><Field Id="Addition - Upgrade Supplements" Index="2"/></User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="RaynorBio3ArmorLevel2"><Field Id="Addition - Upgrade Supplements" Index="3"/></User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="RaynorBio3ArmorLevel3"><Field Id="Addition - Upgrade Supplements" Index="4"/></User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="CMRaynorBackwaterWarlordArmorLevel1"><Field Id="Addition - Upgrade Supplements" Index="5"/></User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="CMRaynorBackwaterWarlordArmorLevel2"><Field Id="Addition - Upgrade Supplements" Index="6"/></User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="CMRaynorBackwaterWarlordArmorLevel3"><Field Id="Addition - Upgrade Supplements" Index="7"/></User>
+            <User Type="PlayerCommanders" Instance="TerranRaynor"><Field Id="Necessary - Commander"/></User>
+        </Instances>
+    </CUser>
+    <CUser id="PlayerPrestigeUpgradeSupplements">
+        <Instances Id="CMRaynorBackwaterWarlordArmorLevel1"><GameLink GameLink="RaynorTalentedTerranInfantryArmorLevel1"><Field Id="Upgrade"/></GameLink><GameLink GameLink="CMRaynorBackwaterWarlordArmorLevel1"><Field Id="Supplement"/></GameLink></Instances>
+        <Instances Id="CMRaynorBackwaterWarlordArmorLevel2"><GameLink GameLink="RaynorTalentedTerranInfantryArmorLevel2"><Field Id="Upgrade"/></GameLink><GameLink GameLink="CMRaynorBackwaterWarlordArmorLevel2"><Field Id="Supplement"/></GameLink></Instances>
+        <Instances Id="CMRaynorBackwaterWarlordArmorLevel3"><GameLink GameLink="RaynorTalentedTerranInfantryArmorLevel3"><Field Id="Upgrade"/></GameLink><GameLink GameLink="CMRaynorBackwaterWarlordArmorLevel3"><Field Id="Supplement"/></GameLink></Instances>
+    </CUser>
+</Catalog>

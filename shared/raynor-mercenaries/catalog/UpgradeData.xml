@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUpgrade id="RaynorTalentedTerranInfantryArmorLevel1"><AffectedUnitArray value="MercMedic"/><EffectArray Reference="Unit,MercMedic,LifeArmorLevel" Value="1"/><EffectArray Reference="Unit,MercMedic,LifeArmor" Value="1"/><EffectArray Reference="Unit,MercMedic,LifeMax" Value="6"/><EffectArray Reference="Unit,MercMedic,LifeStart" Value="6"/><EffectArray Operation="Set" Reference="Actor,MercMedic,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-infantryarmorlevel1.dds"/></CUpgrade>
+    <CUpgrade id="RaynorTalentedTerranInfantryArmorLevel2"><AffectedUnitArray value="MercMedic"/><EffectArray Reference="Unit,MercMedic,LifeArmorLevel" Value="1"/><EffectArray Reference="Unit,MercMedic,LifeArmor" Value="1"/><EffectArray Reference="Unit,MercMedic,LifeMax" Value="6"/><EffectArray Reference="Unit,MercMedic,LifeStart" Value="6"/><EffectArray Operation="Set" Reference="Actor,MercMedic,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-infantryarmorlevel2.dds"/></CUpgrade>
+    <CUpgrade id="RaynorTalentedTerranInfantryArmorLevel3"><AffectedUnitArray value="MercMedic"/><EffectArray Reference="Unit,MercMedic,LifeArmorLevel" Value="1"/><EffectArray Reference="Unit,MercMedic,LifeArmor" Value="1"/><EffectArray Reference="Unit,MercMedic,LifeMax" Value="6"/><EffectArray Reference="Unit,MercMedic,LifeStart" Value="6"/><EffectArray Operation="Set" Reference="Actor,MercMedic,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-infantryarmorlevel3.dds"/></CUpgrade>
+    <CUpgrade id="ShieldWall"><AffectedUnitArray value="WarPig"/><EffectArray Reference="Unit,WarPig,LifeMax" Value="10"/><EffectArray Reference="Unit,WarPig,LifeStart" Value="10"/></CUpgrade>
+    <CUpgrade id="FirebatJuggernautPlating"><AffectedUnitArray value="DevilDog"/><EffectArray Reference="Unit,DevilDog,LifeMax" Value="100"/><EffectArray Reference="Unit,DevilDog,LifeStart" Value="100"/></CUpgrade>
+    <CUpgrade id="VehicleAfterburners">
+        <AffectedUnitArray value="MercVulture"/><AffectedUnitArray value="SpartanCompany"/><AffectedUnitArray value="SiegeBreaker"/><AffectedUnitArray value="SiegeBreakerSieged"/>
+        <AffectedUnitArray value="HelsAngelFighter"/><AffectedUnitArray value="HelsAngelAssault"/><AffectedUnitArray value="DuskWing"/><AffectedUnitArray value="CMRaynorEliteDuskWing"/><AffectedUnitArray value="DukesRevenge"/>
+    </CUpgrade>
+    <CUpgrade id="SwannCommanderVehicleWeaponRange">
+        <EffectArray Reference="Weapon,MercVulture,Range" Value="1"/><EffectArray Reference="Weapon,MercVulture,MinScanRange" Value="1"/>
+        <EffectArray Reference="Weapon,SpartanCompanyA,Range" Value="1"/><EffectArray Reference="Weapon,SpartanCompanyA,MinScanRange" Value="1"/>
+        <EffectArray Reference="Weapon,SpartanCompanyAUpgraded,Range" Value="1"/><EffectArray Reference="Weapon,SpartanCompanyAUpgraded,MinScanRange" Value="1"/>
+        <EffectArray Reference="Weapon,SpartanCompanyG,Range" Value="1"/><EffectArray Reference="Weapon,SpartanCompanyG,MinScanRange" Value="1"/>
+        <EffectArray Reference="Weapon,SpartanCompanyGUpgraded,Range" Value="1"/><EffectArray Reference="Weapon,SpartanCompanyGUpgraded,MinScanRange" Value="1"/>
+        <EffectArray Reference="Weapon,SiegeBreaker,Range" Value="1"/><EffectArray Reference="Weapon,SiegeBreaker,MinScanRange" Value="1"/>
+        <AffectedUnitArray value="MercVulture"/><AffectedUnitArray value="SpartanCompany"/><AffectedUnitArray value="SiegeBreaker"/><AffectedUnitArray value="SiegeBreakerSieged"/>
+        <AffectedUnitArray value="HelsAngelFighter"/><AffectedUnitArray value="HelsAngelAssault"/><AffectedUnitArray value="CMRaynorEliteDuskWing"/><AffectedUnitArray value="DukesRevenge"/>
+    </CUpgrade>
+</Catalog>

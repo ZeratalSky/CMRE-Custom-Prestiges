@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog><CBehaviorBuff id="CMRaynorHammerSecurityConcussiveSlow"><Alignment value="Negative"/><InfoIcon value="Assets\Textures\btn-ability-terran-slow.dds"/><Duration value="1.5"/><Modification MoveSpeedMultiplier="0.5"/></CBehaviorBuff><CBehaviorBuff id="DuskWingBansheeCloak"><Modification WeaponRange="2" WeaponScanBonus="2"/></CBehaviorBuff></Catalog>

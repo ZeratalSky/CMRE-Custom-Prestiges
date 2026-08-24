@@ -1,0 +1,2 @@
+Button/Name/CMCommanderPrestigeRaynorBackwaterWarlordButton=死水军阀
+Button/Tooltip/CMCommanderPrestigeRaynorBackwaterWarlordButton=<s val="Coop_Prestige_Tooltip">优势：</s><n/>生物战斗单位生命值提高100%；所有可训练作战单位替换为对应的战役佣兵。<n/><n/><s val="Coop_Prestige_Tooltip">劣势：</s><n/>矿骡不可用。

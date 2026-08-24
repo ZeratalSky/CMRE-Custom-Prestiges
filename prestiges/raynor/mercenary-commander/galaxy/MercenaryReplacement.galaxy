@@ -1,0 +1,57 @@
+string CMRaynorMercenaryCommander_GetReplacement (string lp_unitType) {
+    if (lp_unitType == "Marine") { return "WarPig"; }
+    if (lp_unitType == "Firebat") { return "DevilDog"; }
+    if (lp_unitType == "Marauder") { return "HammerSecurity"; }
+    if (lp_unitType == "Medic") { return "MercMedic"; }
+    if (lp_unitType == "Vulture") { return "MercVulture"; }
+    if (lp_unitType == "Goliath") { return "SpartanCompany"; }
+    if (lp_unitType == "SiegeTank") { return "SiegeBreaker"; }
+    if (lp_unitType == "SiegeTankSieged") { return "SiegeBreakerSieged"; }
+    if (lp_unitType == "VikingFighter") { return "HelsAngelFighter"; }
+    if (lp_unitType == "VikingAssault") { return "HelsAngelAssault"; }
+    if (lp_unitType == "Banshee") { return "DuskWing"; }
+    if (lp_unitType == "Battlecruiser") { return "DukesRevenge"; }
+    return "";
+}
+
+bool CMRaynorMercenaryCommander_UnitCreated_Func (bool testConds, bool runActions) {
+    unit lv_original = EventUnitCreatedUnit();
+    unit lv_replacement;
+    int lv_owner = UnitGetOwner(lv_original);
+    int lv_player;
+    int lv_controlGroup;
+    string lv_replacementType = CMRaynorMercenaryCommander_GetReplacement(UnitGetType(lv_original));
+
+    if (testConds) {
+        if ((lv_owner < 1) || (lv_owner > libCOOC_gv_cCC_MAXCOMMANDERS_PVE)) { return false; }
+        if (TechTreeUpgradeCount(lv_owner, "CMCommanderPrestigeRaynorMercenaryCommander", c_techCountCompleteOnly) != 1) { return false; }
+        if (lv_replacementType == "") { return false; }
+    }
+    if (!runActions) { return true; }
+
+    UnitCreate(1, lv_replacementType, c_unitCreateIgnorePlacement, lv_owner, UnitGetPosition(lv_original), UnitGetFacing(lv_original));
+    lv_replacement = UnitLastCreated();
+    UnitSetPropertyFixed(lv_replacement, c_unitPropLifePercent, UnitGetPropertyFixed(lv_original, c_unitPropLifePercent, c_unitPropCurrent));
+    UnitSetPropertyFixed(lv_replacement, c_unitPropKills, UnitGetPropertyFixed(lv_original, c_unitPropKills, c_unitPropCurrent));
+    UnitIssueOrder(lv_replacement, UnitOrder(lv_original, 0), c_orderQueueReplace);
+    UnitIssueOrder(lv_replacement, UnitOrder(lv_original, 1), c_orderQueueAddToEnd);
+    UnitIssueOrder(lv_replacement, UnitOrder(lv_original, 2), c_orderQueueAddToEnd);
+
+    lv_player = 1;
+    for ( ; lv_player <= 15; lv_player += 1 ) {
+        if (UnitIsSelected(lv_original, lv_player)) { UnitSelect(lv_replacement, lv_player, true); }
+        lv_controlGroup = 0;
+        for ( ; lv_controlGroup <= 9; lv_controlGroup += 1 ) {
+            if (UnitGroupHasUnit(UnitControlGroup(lv_player, lv_controlGroup), lv_original)) {
+                UnitControlGroupAddUnit(lv_player, lv_controlGroup, lv_replacement);
+            }
+        }
+    }
+    UnitRemove(lv_original);
+    return true;
+}
+
+void CMRaynorMercenaryCommander_UnitCreated_Init () {
+    trigger lv_trigger = TriggerCreate("CMRaynorMercenaryCommander_UnitCreated_Func");
+    TriggerAddEventUnitCreated(lv_trigger, null, null, null);
+}

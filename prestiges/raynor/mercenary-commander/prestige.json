@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "CMCommanderPrestigeRaynorMercenaryCommander",
+  "name": { "zhCN": "雇佣兵指挥官", "enUS": "Mercenary Commander" },
+  "commander": "TerranRaynor",
+  "version": "0.3.0",
+  "conflictGroup": "raynor-mercenary-replacement",
+  "dependencies": ["CMRaynorMercenaryShared"],
+  "catalog": [
+    {
+      "file": "UpgradeData.xml",
+      "ownedEntries": [{ "type": "CUpgrade", "id": "CMCommanderPrestigeRaynorMercenaryCommander" }],
+      "patchEntries": []
+    },
+    {
+      "file": "ButtonData.xml",
+      "ownedEntries": [{ "type": "CButton", "id": "CMCommanderPrestigeRaynorMercenaryCommanderButton" }],
+      "patchEntries": []
+    },
+    {
+      "file": "UserData.xml",
+      "ownedEntries": [],
+      "patchEntries": [{ "type": "CUser", "id": "PlayerPrestige" }]
+    }
+  ],
+  "locales": [
+    { "locale": "zhCN", "file": "zhCN.GameStrings.txt" },
+    { "locale": "enUS", "file": "enUS.GameStrings.txt" }
+  ],
+  "textPatches": [
+    { "id": "raynor-mercenary-commander-trigger", "target": "Base.SC2Data\\LibCOMU.galaxy", "anchor": "void libCOMU_InitTriggers () {", "position": "before", "source": "galaxy\\MercenaryReplacement.galaxy" },
+    { "id": "raynor-mercenary-commander-trigger-init", "target": "Base.SC2Data\\LibCOMU.galaxy", "anchor": "    libCOMU_gt_CT_OrderCostCopyUsed_Init();", "position": "after", "source": "galaxy\\MercenaryReplacementInit.galaxy" }
+  ]
+}

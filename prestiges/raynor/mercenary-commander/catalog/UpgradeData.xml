@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUpgrade id="CMCommanderPrestigeRaynorMercenaryCommander" parent="CommanderPrestige">
+        <EffectArray Operation="Set" Reference="Unit,WarPig,Food" Value="-1"/><EffectArray Operation="Set" Reference="Unit,DevilDog,Food" Value="-2"/><EffectArray Operation="Set" Reference="Unit,HammerSecurity,Food" Value="-2"/><EffectArray Operation="Set" Reference="Unit,MercMedic,Food" Value="-1"/>
+        <EffectArray Operation="Set" Reference="Unit,MercVulture,Food" Value="-2"/><EffectArray Operation="Set" Reference="Unit,SpartanCompany,Food" Value="-2"/><EffectArray Operation="Set" Reference="Unit,SiegeBreaker,Food" Value="-3"/><EffectArray Operation="Set" Reference="Unit,SiegeBreakerSieged,Food" Value="-3"/>
+        <EffectArray Operation="Set" Reference="Unit,HelsAngelFighter,Food" Value="-2"/><EffectArray Operation="Set" Reference="Unit,HelsAngelAssault,Food" Value="-2"/><EffectArray Operation="Set" Reference="Unit,DuskWing,Food" Value="-3"/><EffectArray Operation="Set" Reference="Unit,DukesRevenge,Food" Value="-6"/>
+    </CUpgrade>
+</Catalog>

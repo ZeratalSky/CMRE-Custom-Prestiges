@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="PlayerPrestige"><Instances Id="CMCommanderPrestigeRaynorMercenaryCommander">
+        <GameLink GameLink="CMCommanderPrestigeRaynorMercenaryCommander"><Field Id="Necessary - Primary Upgrade"/></GameLink>
+        <GameLink GameLink="CMCommanderPrestigeRaynorMercenaryCommanderButton"><Field Id="Necessary - Icon"/></GameLink>
+        <User Type="PlayerCommanders" Instance="TerranRaynor"><Field Id="Necessary - Commander"/></User>
+    </Instances></CUser>
+</Catalog>

@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "kind": "shared",
+  "id": "CMRaynorMercenaryShared",
+  "name": { "zhCN": "雷诺佣兵通用数据", "enUS": "Raynor Mercenary Shared Data" },
+  "version": "0.3.2",
+  "catalog": [
+    {
+      "file": "UnitData.xml",
+      "ownedEntries": [{ "type": "CUnit", "id": "CMRaynorEliteDuskWing" }],
+      "patchEntries": [
+        { "type": "CUnit", "id": "WarPig" }, { "type": "CUnit", "id": "DevilDog" },
+        { "type": "CUnit", "id": "HammerSecurity" }, { "type": "CUnit", "id": "MercVulture" },
+        { "type": "CUnit", "id": "SpartanCompany" }, { "type": "CUnit", "id": "SiegeBreaker" },
+        { "type": "CUnit", "id": "SiegeBreakerSieged" }, { "type": "CUnit", "id": "HelsAngelFighter" },
+        { "type": "CUnit", "id": "HelsAngelAssault" }, { "type": "CUnit", "id": "DuskWing" },
+        { "type": "CUnit", "id": "DukesRevenge" }, { "type": "CUnit", "id": "StarportTechLab" },
+        { "type": "CUnit", "id": "StarportTechReactor" }
+      ]
+    },
+    {
+      "file": "ActorData.xml",
+      "ownedEntries": [{ "type": "CActorUnit", "id": "CMRaynorEliteDuskWing" }],
+      "patchEntries": []
+    },
+    {
+      "file": "AbilData.xml",
+      "removeEntries": [
+        { "type": "CAbilBehavior", "id": "DuskWingBansheeCloakingField" },
+        { "type": "CAbilBehavior", "id": "CMRaynorEliteDuskWingCloakingField" }
+      ],
+      "ownedEntries": [],
+      "patchEntries": [
+        { "type": "CAbilSpecialize", "id": "MakeMercVultureSpiderMines" },
+        { "type": "CAbilEffectInstant", "id": "DukesRevengeDefensiveMatrix" },
+        { "type": "CAbilEffectTarget", "id": "DukesRevengeMissilePods" },
+        { "type": "CAbilEffectTarget", "id": "DukesRevengeYamato" },
+        { "type": "CAbilResearch", "id": "StarportTechLabResearch" }
+      ]
+    },
+    {
+      "file": "EffectData.xml",
+      "ownedEntries": [
+        { "type": "CEffectSet", "id": "CMRaynorHammerSecurityImpactSet" },
+        { "type": "CEffectApplyBehavior", "id": "CMRaynorHammerSecurityConcussiveShells" }
+      ],
+      "patchEntries": [
+        { "type": "CEffectLaunchMissile", "id": "HammerSecurityLM" },
+        { "type": "CEffectCreateUnit", "id": "BansheeAirstrikeCU" },
+        { "type": "CEffectCreateUnit", "id": "BansheeAirstrikeAllyCU" }
+      ]
+    },
+    {
+      "file": "BehaviorData.xml",
+      "removeEntries": [
+        { "type": "CBehaviorBuff", "id": "DistortionBlasters" }
+      ],
+      "ownedEntries": [{ "type": "CBehaviorBuff", "id": "CMRaynorHammerSecurityConcussiveSlow" }],
+      "patchEntries": [{ "type": "CBehaviorBuff", "id": "DuskWingBansheeCloak" }]
+    },
+    {
+      "file": "ValidatorData.xml",
+      "removeEntries": [
+        { "type": "CValidatorPlayerRequirement", "id": "CMRaynorClusterWarheadsMissing" },
+        { "type": "CValidatorUnitType", "id": "CMRaynorNotEliteDuskWing" },
+        { "type": "CValidatorCombine", "id": "CMRaynorDisableUnupgradedDuskWingGroundFire" }
+      ],
+      "ownedEntries": [{ "type": "CValidatorPlayerRequirement", "id": "CMRaynorPunisherGrenadesResearched" }],
+      "patchEntries": []
+    },
+    {
+      "file": "RequirementData.xml",
+      "removeEntries": [
+        { "type": "CRequirement", "id": "CMRaynorNotHaveClusterWarheads" }
+      ],
+      "ownedEntries": [
+        { "type": "CRequirement", "id": "CMRaynorHavePunisherGrenades" },
+        { "type": "CRequirement", "id": "CMRaynorHaveBattlecruiserSpecializations" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "RequirementNodeData.xml",
+      "removeEntries": [
+        { "type": "CRequirementCountUpgrade", "id": "CMRaynorCountClusterWarheadsCompleteOnly" },
+        { "type": "CRequirementNot", "id": "CMRaynorNotCountClusterWarheadsCompleteOnly" },
+        { "type": "CRequirementCountUpgrade", "id": "CMRaynorCountMercenaryCommanderCompleteOnly" },
+        { "type": "CRequirementCountUpgrade", "id": "CMRaynorCountBackwaterWarlordCompleteOnly" },
+        { "type": "CRequirementCountUpgrade", "id": "CMRaynorCountMercenaryRaiderCompleteOnly" },
+        { "type": "CRequirementOr", "id": "CMRaynorOrMercenaryPrestige" },
+        { "type": "CRequirementAnd", "id": "CMRaynorAndMercenaryPrestigeWithoutClusterWarheads" }
+      ],
+      "ownedEntries": [
+        { "type": "CRequirementCountUpgrade", "id": "CMRaynorCountPunisherGrenadesCompleteOnly" },
+        { "type": "CRequirementCountUpgrade", "id": "CMRaynorCountBattlecruiserSpecializationsCompleteOnly" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "UpgradeData.xml",
+      "ownedEntries": [],
+      "patchEntries": [
+        { "type": "CUpgrade", "id": "RaynorTalentedTerranInfantryArmorLevel1" },
+        { "type": "CUpgrade", "id": "RaynorTalentedTerranInfantryArmorLevel2" },
+        { "type": "CUpgrade", "id": "RaynorTalentedTerranInfantryArmorLevel3" },
+        { "type": "CUpgrade", "id": "ShieldWall" },
+        { "type": "CUpgrade", "id": "FirebatJuggernautPlating" },
+        { "type": "CUpgrade", "id": "VehicleAfterburners" },
+        { "type": "CUpgrade", "id": "SwannCommanderVehicleWeaponRange" }
+      ]
+    }
+  ],
+  "locales": [
+    { "locale": "zhCN", "file": "zhCN.GameStrings.txt" },
+    { "locale": "enUS", "file": "enUS.GameStrings.txt" }
+  ]
+}

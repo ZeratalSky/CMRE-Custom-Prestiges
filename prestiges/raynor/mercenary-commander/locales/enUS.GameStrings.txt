@@ -1,0 +1,2 @@
+Button/Name/CMCommanderPrestigeRaynorMercenaryCommanderButton=Mercenary Commander
+Button/Tooltip/CMCommanderPrestigeRaynorMercenaryCommanderButton=<s val="Coop_Prestige_Tooltip">Advantage:</s><n/>All trainable combat units are replaced by their campaign mercenary counterparts.<n/><n/><s val="Coop_Prestige_Tooltip">Disadvantage:</s><n/>None.
