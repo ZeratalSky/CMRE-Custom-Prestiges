@@ -19,43 +19,11 @@
     <CValidatorCombine id="OnDeathArtanisGuardianShell">
         <CombineArray value="CMArtanisEmbraceGloryGuardianShellAllowed"/>
     </CValidatorCombine>
-    <CValidatorUnitType id="CMArtanisEmbraceGloryTargetIsSoACaster">
-        <WhichUnit Value="Target"/>
-        <Value value="SoACasterArtanis"/>
-    </CValidatorUnitType>
-    <CValidatorUnitCompareBehaviorCount id="CMArtanisEmbraceGloryTargetHasRemainder">
-        <WhichUnit Value="Target"/>
-        <Compare value="GT"/>
-        <Behavior value="CMArtanisEmbraceGloryLostSupplyRemainder"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="CMArtanisEmbraceGloryCasterHasSupply1">
+    <CValidatorPlayerRequirement id="CMArtanisEmbraceGloryCasterActive">
         <WhichUnit Value="Caster"/>
-        <Compare value="GT"/>
-        <Behavior value="Supply1"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="CMArtanisEmbraceGloryCasterHasSupply2">
-        <WhichUnit Value="Caster"/>
-        <Compare value="GT"/>
-        <Behavior value="Supply2"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="CMArtanisEmbraceGloryCasterHasSupply3">
-        <WhichUnit Value="Caster"/>
-        <Compare value="GT"/>
-        <Behavior value="Supply3"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="CMArtanisEmbraceGloryCasterHasSupply4">
-        <WhichUnit Value="Caster"/>
-        <Compare value="GT"/>
-        <Behavior value="Supply4"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="CMArtanisEmbraceGloryCasterHasSupply5">
-        <WhichUnit Value="Caster"/>
-        <Compare value="GT"/>
-        <Behavior value="Supply5"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="CMArtanisEmbraceGloryCasterHasSupply6">
-        <WhichUnit Value="Caster"/>
-        <Compare value="GT"/>
-        <Behavior value="Supply6"/>
-    </CValidatorUnitCompareBehaviorCount>
+        <WhichPlayer Value="Creator"/>
+        <Find value="1"/>
+        <UnitSelectionNotRequired value="1"/>
+        <Value value="CMArtanisEmbraceGloryActive"/>
+    </CValidatorPlayerRequirement>
 </Catalog>

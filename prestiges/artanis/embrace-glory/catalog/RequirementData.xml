@@ -3,4 +3,7 @@
     <CRequirement id="CMArtanisEmbraceGloryNotActive">
         <NodeArray index="Use" Link="NotCountUpgradeCMCommanderPrestigeArtanisEmbraceGloryCompleteOnly"/>
     </CRequirement>
+    <CRequirement id="CMArtanisEmbraceGloryActive">
+        <NodeArray index="Use" Link="CountUpgradeCMCommanderPrestigeArtanisEmbraceGloryCompleteOnly"/>
+    </CRequirement>
 </Catalog>

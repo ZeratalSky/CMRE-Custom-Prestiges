@@ -71,6 +71,20 @@ function Find-MatchingChild {
     return $null
 }
 
+function Get-TextPatchMarkers {
+    param([string]$ModuleId, [string]$PatchId)
+    return [ordered]@{
+        Begin = "// CMRE_CUSTOM_PRESTIGE_BEGIN $ModuleId $PatchId"
+        End = "// CMRE_CUSTOM_PRESTIGE_END $ModuleId $PatchId"
+    }
+}
+
+function Remove-TextPatchBlock {
+    param([string]$Text, [string]$BeginMarker, [string]$EndMarker)
+    $pattern = '(?ms)^[ \t]*' + [regex]::Escape($BeginMarker) + '[ \t]*\r?\n.*?^[ \t]*' + [regex]::Escape($EndMarker) + '[ \t]*(?:\r?\n)?'
+    return [regex]::Replace($Text, $pattern, '')
+}
+
 $timestamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $BackupRoot = Join-Path $ResolvedStarCraftIIPath "Mods\CMRE\_CMRECustomPrestigesBackup\uninstall-$timestamp"
 $BackedUp = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::OrdinalIgnoreCase)
@@ -190,6 +204,23 @@ foreach ($manifestRecord in $ManifestRecords) {
         if ($remainingLines.Count -ne $originalLines.Count -and $PSCmdlet.ShouldProcess($targetFile, "移除模块 $($manifest.id) 的本地化文本")) {
             Backup-TargetFile -TargetFile $targetFile
             [System.IO.File]::WriteAllLines($targetFile, $remainingLines, $Utf8NoBom)
+        }
+    }
+
+    foreach ($textPatch in @($manifest.textPatches | Where-Object { $null -ne $_ })) {
+        $targetFile = [System.IO.Path]::GetFullPath((Join-Path $TargetMod ([string]$textPatch.target)))
+        $targetPrefix = $TargetMod.TrimEnd('\') + '\'
+        if (-not $targetFile.StartsWith($targetPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+            throw "文本补丁目标超出 CMRE_Core_Triggers.SC2Mod：$($textPatch.target)"
+        }
+        if (-not (Test-Path -LiteralPath $targetFile -PathType Leaf)) { continue }
+
+        $markers = Get-TextPatchMarkers -ModuleId ([string]$manifest.id) -PatchId ([string]$textPatch.id)
+        $originalText = [System.IO.File]::ReadAllText($targetFile)
+        $updatedText = Remove-TextPatchBlock -Text $originalText -BeginMarker $markers.Begin -EndMarker $markers.End
+        if (($updatedText -ne $originalText) -and $PSCmdlet.ShouldProcess($targetFile, "移除模块 $($manifest.id) 的文本补丁 $($textPatch.id)")) {
+            Backup-TargetFile -TargetFile $targetFile
+            [System.IO.File]::WriteAllText($targetFile, $updatedText, $Utf8NoBom)
         }
     }
 

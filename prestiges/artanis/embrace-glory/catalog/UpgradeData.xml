@@ -13,7 +13,6 @@
         <EffectArray Reference="Unit,CommanderPrestigeArtanisOrbitalStrikesArchon,ShieldRegenRate" Value="100"/>
         <EffectArray Operation="Set" Reference="Behavior,CommanderPrestigeArtanisOrbitalStrikesArchon,Duration" Value="0"/>
         <EffectArray Operation="Set" Reference="Behavior,SOAHeroicShieldWeakness,Duration" Value="120"/>
-        <EffectArray Operation="Set" Reference="Unit,SoACasterArtanis,EnergyRegenRate" Value="0"/>
         <EffectArray Operation="Set" Reference="Abil,SOAStrafeAttack,Cost[0].Vital[Energy]" Value="0"/>
         <EffectArray Reference="Unit,ImmortalAiur,CostResource[Minerals]" Value="125"/>
         <EffectArray Reference="Unit,ImmortalAiur,CostResource[Vespene]" Value="50"/>

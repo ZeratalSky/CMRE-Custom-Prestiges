@@ -1,6 +1,6 @@
 # CMRE 自制威望合集
 
-这是一个用于《星际争霸 II》CMRE 的自制威望扩展。目前包含雷诺“全能游骑兵”，以及阿塔尼斯“全能大主教”和“拥抱战斗的荣耀”。以后新增的威望也会放在同一个 `prestiges` 目录中。
+这是一个用于《星际争霸 II》CMRE 的自制威望扩展。目前包含雷诺“全能游骑兵”，以及阿塔尼斯“全能大主教”和“牢鸦的拥抱战斗的荣耀”。以后新增的威望也会放在同一个 `prestiges` 目录中。
 
 ## 安装
 
@@ -75,7 +75,7 @@ D:\StarCraft II
 
 - 无。
 
-### 阿塔尼斯：拥抱战斗的荣耀
+### 阿塔尼斯：牢鸦的拥抱战斗的荣耀
 
 **优点**
 
@@ -107,7 +107,7 @@ D:\StarCraft II
 ## 来源与致谢
 
 - [WondersReady/CMRE_OpenSource](https://github.com/WondersReady/CMRE_OpenSource) 提供本项目依赖的 CMRE 核心模组与地图。本仓库不包含完整 CMRE。
-- 每个威望的设计依据和外部资料记录在各自的 `SOURCES.md` 中：[雷诺](prestiges/raynor/all-in-raiders/SOURCES.md)、[全能大主教](prestiges/artanis/all-in-hierarch/SOURCES.md)、[拥抱战斗的荣耀](prestiges/artanis/embrace-glory/SOURCES.md)。
+- 每个威望的设计依据和外部资料记录在各自的 `SOURCES.md` 中：[雷诺](prestiges/raynor/all-in-raiders/SOURCES.md)、[全能大主教](prestiges/artanis/all-in-hierarch/SOURCES.md)、[牢鸦的拥抱战斗的荣耀](prestiges/artanis/embrace-glory/SOURCES.md)。
 - 游戏素材、名称及第三方项目的权利归各自权利人所有。
 
 这是非官方玩家项目。使用者需要自行拥有《星际争霸 II》及可用的 CMRE 文件。

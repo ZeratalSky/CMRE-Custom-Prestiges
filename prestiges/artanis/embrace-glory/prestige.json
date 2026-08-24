@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "id": "CMCommanderPrestigeArtanisEmbraceGlory",
   "name": {
-    "zhCN": "拥抱战斗的荣耀",
+    "zhCN": "牢鸦的拥抱战斗的荣耀",
     "enUS": "Embrace the Glory of Battle"
   },
   "commander": "ProtossArtanis",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "catalog": [
     {
       "file": "UpgradeData.xml",
@@ -25,33 +25,14 @@
     {
       "file": "BehaviorData.xml",
       "ownedEntries": [
-        { "type": "CBehaviorBuff", "id": "CMArtanisEmbraceGloryLostSupplyRemainder" }
+        { "type": "CBehaviorBuff", "id": "CMArtanisEmbraceGloryEnergyRegenDelay" }
       ],
       "patchEntries": []
     },
     {
       "file": "EffectData.xml",
       "ownedEntries": [
-        { "type": "CEffectSwitch", "id": "CMArtanisEmbraceGloryLostSupplySwitch" },
-        { "type": "CEffectEnumArea", "id": "CMArtanisEmbraceGloryFindSoAForSupply1" },
-        { "type": "CEffectEnumArea", "id": "CMArtanisEmbraceGloryFindSoAForSupply2" },
-        { "type": "CEffectEnumArea", "id": "CMArtanisEmbraceGloryFindSoAForSupply3" },
-        { "type": "CEffectEnumArea", "id": "CMArtanisEmbraceGloryFindSoAForSupply4" },
-        { "type": "CEffectEnumArea", "id": "CMArtanisEmbraceGloryFindSoAForSupply5" },
-        { "type": "CEffectEnumArea", "id": "CMArtanisEmbraceGloryFindSoAForSupply6" },
-        { "type": "CEffectSwitch", "id": "CMArtanisEmbraceGloryProcessSupply1" },
-        { "type": "CEffectSwitch", "id": "CMArtanisEmbraceGloryProcessSupply3" },
-        { "type": "CEffectSwitch", "id": "CMArtanisEmbraceGloryProcessSupply5" },
-        { "type": "CEffectApplyBehavior", "id": "CMArtanisEmbraceGloryApplyRemainder" },
-        { "type": "CEffectRemoveBehavior", "id": "CMArtanisEmbraceGloryRemoveRemainder" },
-        { "type": "CEffectModifyUnit", "id": "CMArtanisEmbraceGloryGrantEnergy1" },
-        { "type": "CEffectModifyUnit", "id": "CMArtanisEmbraceGloryGrantEnergy2" },
-        { "type": "CEffectModifyUnit", "id": "CMArtanisEmbraceGloryGrantEnergy3" },
-        { "type": "CEffectSet", "id": "CMArtanisEmbraceGloryGrant1RemoveRemainder" },
-        { "type": "CEffectSet", "id": "CMArtanisEmbraceGloryGrant2RemoveRemainder" },
-        { "type": "CEffectSet", "id": "CMArtanisEmbraceGloryGrant3RemoveRemainder" },
-        { "type": "CEffectSet", "id": "CMArtanisEmbraceGloryGrant1ApplyRemainder" },
-        { "type": "CEffectSet", "id": "CMArtanisEmbraceGloryGrant2ApplyRemainder" }
+        { "type": "CEffectApplyBehavior", "id": "CMArtanisEmbraceGloryApplySuppressEnergyRegen" }
       ],
       "patchEntries": []
     },
@@ -61,29 +42,16 @@
         { "type": "CValidatorPlayerRequirement", "id": "CMArtanisEmbraceGloryNotActive" },
         { "type": "CValidatorUnitType", "id": "CMArtanisEmbraceGlorySourceIsFanatic" },
         { "type": "CValidatorCombine", "id": "CMArtanisEmbraceGloryGuardianShellAllowed" },
-        { "type": "CValidatorUnitType", "id": "CMArtanisEmbraceGloryTargetIsSoACaster" },
-        { "type": "CValidatorUnitCompareBehaviorCount", "id": "CMArtanisEmbraceGloryTargetHasRemainder" },
-        { "type": "CValidatorUnitCompareBehaviorCount", "id": "CMArtanisEmbraceGloryCasterHasSupply1" },
-        { "type": "CValidatorUnitCompareBehaviorCount", "id": "CMArtanisEmbraceGloryCasterHasSupply2" },
-        { "type": "CValidatorUnitCompareBehaviorCount", "id": "CMArtanisEmbraceGloryCasterHasSupply3" },
-        { "type": "CValidatorUnitCompareBehaviorCount", "id": "CMArtanisEmbraceGloryCasterHasSupply4" },
-        { "type": "CValidatorUnitCompareBehaviorCount", "id": "CMArtanisEmbraceGloryCasterHasSupply5" },
-        { "type": "CValidatorUnitCompareBehaviorCount", "id": "CMArtanisEmbraceGloryCasterHasSupply6" },
+        { "type": "CValidatorPlayerRequirement", "id": "CMArtanisEmbraceGloryCasterActive" },
         { "type": "CValidatorCombine", "id": "OnDeathArtanisGuardianShell" }
-      ],
-      "patchEntries": []
-    },
-    {
-      "file": "PlayerResponseData.xml",
-      "ownedEntries": [
-        { "type": "CPlayerResponseUnitDeath", "id": "CMArtanisEmbraceGloryLostSupply" }
       ],
       "patchEntries": []
     },
     {
       "file": "RequirementData.xml",
       "ownedEntries": [
-        { "type": "CRequirement", "id": "CMArtanisEmbraceGloryNotActive" }
+        { "type": "CRequirement", "id": "CMArtanisEmbraceGloryNotActive" },
+        { "type": "CRequirement", "id": "CMArtanisEmbraceGloryActive" }
       ],
       "patchEntries": []
     },
@@ -96,16 +64,38 @@
       "patchEntries": []
     },
     {
+      "file": "UnitData.xml",
+      "ownedEntries": [
+        { "type": "CUnit", "id": "SoACasterArtanis" }
+      ],
+      "patchEntries": []
+    },
+    {
       "file": "UserData.xml",
       "ownedEntries": [],
       "patchEntries": [
-        { "type": "CUser", "id": "PlayerPrestige" },
-        { "type": "CUser", "id": "PlayerResponse" }
+        { "type": "CUser", "id": "PlayerPrestige" }
       ]
     }
   ],
   "locales": [
     { "locale": "zhCN", "file": "zhCN.GameStrings.txt" },
     { "locale": "enUS", "file": "enUS.GameStrings.txt" }
+  ],
+  "textPatches": [
+    {
+      "id": "lost-supply-trigger",
+      "target": "Base.SC2Data\\LibCOMU.galaxy",
+      "anchor": "void libCOMU_InitTriggers () {",
+      "position": "before",
+      "source": "galaxy\\LostSupplyTrigger.galaxy"
+    },
+    {
+      "id": "lost-supply-trigger-init",
+      "target": "Base.SC2Data\\LibCOMU.galaxy",
+      "anchor": "    libCOMU_gt_CT_OrderCostCopyUsed_Init();",
+      "position": "after",
+      "source": "galaxy\\LostSupplyTriggerInit.galaxy"
+    }
   ]
 }

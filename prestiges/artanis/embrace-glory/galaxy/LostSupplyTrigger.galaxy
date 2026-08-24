@@ -1,0 +1,49 @@
+bool CMArtanisEmbraceGlory_LostSupply_Func (bool testConds, bool runActions) {
+    int lv_player = UnitGetOwner(EventUnit());
+    fixed lv_supply;
+    fixed lv_totalSupply;
+    int lv_energyGain;
+    string lv_remainderKey;
+    unit lv_soaCaster;
+
+    if (testConds) {
+        if ((lv_player < 1) || (lv_player > libCOOC_gv_cCC_MAXCOMMANDERS_PVE)) {
+            return false;
+        }
+        if (TechTreeUpgradeCount(lv_player, "CMCommanderPrestigeArtanisEmbraceGlory", c_techCountCompleteOnly) != 1) {
+            return false;
+        }
+    }
+
+    if (!runActions) {
+        return true;
+    }
+
+    lv_supply = UnitGetPropertyFixed(EventUnit(), c_unitPropSuppliesUsed, c_unitPropCurrent);
+    if (lv_supply <= 0.0) {
+        return true;
+    }
+
+    lv_remainderKey = "CMArtanisEmbraceGloryLostSupplyRemainder_" + IntToString(lv_player);
+    lv_totalSupply = DataTableGetFixed(true, lv_remainderKey) + lv_supply;
+    lv_energyGain = FixedToInt(Floor(lv_totalSupply / 2.0));
+    DataTableSetFixed(true, lv_remainderKey, lv_totalSupply - (IntToFixed(lv_energyGain) * 2.0));
+
+    if (lv_energyGain > 0) {
+        lv_soaCaster = libCOMI_gv_cM_SoACasterUnit[lv_player];
+        if ((lv_soaCaster != null) && UnitIsValid(lv_soaCaster)) {
+            UnitSetPropertyFixed(
+                lv_soaCaster,
+                c_unitPropEnergy,
+                UnitGetPropertyFixed(lv_soaCaster, c_unitPropEnergy, c_unitPropCurrent) + IntToFixed(lv_energyGain)
+            );
+        }
+    }
+
+    return true;
+}
+
+void CMArtanisEmbraceGlory_LostSupply_Init () {
+    trigger lv_trigger = TriggerCreate("CMArtanisEmbraceGlory_LostSupply_Func");
+    TriggerAddEventUnitDied(lv_trigger, null);
+}

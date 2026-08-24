@@ -1,2 +1,2 @@
-Button/Name/CMCommanderPrestigeArtanisEmbraceGloryButton=拥抱战斗的荣耀
+Button/Name/CMCommanderPrestigeArtanisEmbraceGloryButton=牢鸦的拥抱战斗的荣耀
 Button/Tooltip/CMCommanderPrestigeArtanisEmbraceGloryButton=<s val="Coop_Prestige_Tooltip">优点：</s><n/>轨道轰炸无冷却，每发携带一名永久存在的无拘狂热者；无拘狂热者的护盾与护盾恢复速度提高100%。守护之壳冷却时间减少50%。每损失2人口获得1点亚顿之矛能量，太阳轰炸不消耗能量。<n/><n/><s val="Coop_Prestige_Tooltip">缺点：</s><n/>光影议会、圣堂武士文献馆、机械研究所、舰队航标与护盾超载不可用；守护之壳只对无拘狂热者和队友生效。亚顿之矛能量不再自动恢复，攻防升级不可用。轨道轰炸能量消耗提高100%且不造成地面伤害。机械台与星门单位（观察者除外）造价提高50%。

@@ -29,19 +29,9 @@
             <AbilCmd Abil="CyberneticsCoreResearch" Cmd="3"><Field Id="UM - Disable Abil" Index="14"/></AbilCmd>
             <AbilCmd Abil="CyberneticsCoreResearch" Cmd="4"><Field Id="UM - Disable Abil" Index="15"/></AbilCmd>
             <AbilCmd Abil="CyberneticsCoreResearch" Cmd="5"><Field Id="UM - Disable Abil" Index="16"/></AbilCmd>
-            <User Type="PlayerResponse" Instance="CMArtanisEmbraceGloryLostSupply">
-                <Field Id="PM - Player Responses"/>
-            </User>
             <User Type="PlayerCommanders" Instance="ProtossArtanis">
                 <Field Id="Necessary - Commander"/>
             </User>
-        </Instances>
-    </CUser>
-    <CUser id="PlayerResponse">
-        <Instances Id="CMArtanisEmbraceGloryLostSupply">
-            <GameLink GameLink="CMArtanisEmbraceGloryLostSupply">
-                <Field Id="Response"/>
-            </GameLink>
         </Instances>
     </CUser>
 </Catalog>

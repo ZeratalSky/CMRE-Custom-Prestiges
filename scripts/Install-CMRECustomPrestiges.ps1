@@ -140,6 +140,30 @@ function Test-EntryDeclaration {
     return ($owned.Count -eq 1)
 }
 
+function Get-TextPatchMarkers {
+    param(
+        [string]$ModuleId,
+        [string]$PatchId
+    )
+    if ([string]::IsNullOrWhiteSpace($PatchId) -or ($PatchId -notmatch '^[A-Za-z0-9_.-]+$')) {
+        throw "文本补丁 ID 为空或含有不安全字符：$PatchId"
+    }
+    return [ordered]@{
+        Begin = "// CMRE_CUSTOM_PRESTIGE_BEGIN $ModuleId $PatchId"
+        End = "// CMRE_CUSTOM_PRESTIGE_END $ModuleId $PatchId"
+    }
+}
+
+function Remove-TextPatchBlock {
+    param(
+        [string]$Text,
+        [string]$BeginMarker,
+        [string]$EndMarker
+    )
+    $pattern = '(?ms)^[ \t]*' + [regex]::Escape($BeginMarker) + '[ \t]*\r?\n.*?^[ \t]*' + [regex]::Escape($EndMarker) + '[ \t]*(?:\r?\n)?'
+    return [regex]::Replace($Text, $pattern, '')
+}
+
 $ResolvedStarCraftIIPath = Resolve-StarCraftIIPath -RequestedPath $StarCraftIIPath
 $TargetMod = Join-Path $ResolvedStarCraftIIPath 'Mods\CMRE\CMRE_Core_Triggers.SC2Mod'
 $GameDataDirectory = Join-Path $TargetMod 'Base.SC2Data\GameData'
@@ -282,6 +306,58 @@ foreach ($manifestFile in $ManifestFiles) {
         if ($changed -and $PSCmdlet.ShouldProcess($targetFile, "安装模块 $($manifest.id) 的本地化文本")) {
             Backup-TargetFile -TargetFile $targetFile -TargetMod $TargetMod -BackupRoot $BackupRoot -BackedUp $BackedUp
             [System.IO.File]::WriteAllLines($targetFile, $targetLines, $Utf8NoBom)
+        }
+    }
+
+    foreach ($textPatch in @($manifest.textPatches | Where-Object { $null -ne $_ })) {
+        $targetFile = [System.IO.Path]::GetFullPath((Join-Path $TargetMod ([string]$textPatch.target)))
+        $targetPrefix = $TargetMod.TrimEnd('\') + '\'
+        if (-not $targetFile.StartsWith($targetPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+            throw "文本补丁目标超出 CMRE_Core_Triggers.SC2Mod：$($textPatch.target)"
+        }
+        if (-not (Test-Path -LiteralPath $targetFile -PathType Leaf)) {
+            throw "文本补丁目标不存在：$targetFile"
+        }
+
+        $sourceFile = [System.IO.Path]::GetFullPath((Join-Path $moduleRoot ([string]$textPatch.source)))
+        $modulePrefix = $moduleRoot.TrimEnd('\') + '\'
+        if (-not $sourceFile.StartsWith($modulePrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+            throw "文本补丁源文件超出威望模块目录：$($textPatch.source)"
+        }
+        if (-not (Test-Path -LiteralPath $sourceFile -PathType Leaf)) {
+            throw "缺少文本补丁：$sourceFile"
+        }
+
+        $markers = Get-TextPatchMarkers -ModuleId ([string]$manifest.id) -PatchId ([string]$textPatch.id)
+        $originalText = [System.IO.File]::ReadAllText($targetFile)
+        $targetText = Remove-TextPatchBlock -Text $originalText -BeginMarker $markers.Begin -EndMarker $markers.End
+        $anchor = [string]$textPatch.anchor
+        $anchorIndex = $targetText.IndexOf($anchor, [System.StringComparison]::Ordinal)
+        if ($anchorIndex -lt 0) { throw "文本补丁锚点不存在：$($textPatch.id)" }
+        if ($targetText.IndexOf($anchor, $anchorIndex + $anchor.Length, [System.StringComparison]::Ordinal) -ge 0) {
+            throw "文本补丁锚点不唯一：$($textPatch.id)"
+        }
+
+        $newline = $(if ($targetText.Contains("`r`n")) { "`r`n" } else { "`n" })
+        $sourceText = [System.IO.File]::ReadAllText($sourceFile).Trim("`r", "`n")
+        $sourceText = [regex]::Replace($sourceText, '\r\n|\r|\n', $newline)
+        if ([string]::IsNullOrWhiteSpace($sourceText)) { throw "文本补丁内容为空：$sourceFile" }
+        $block = $markers.Begin + $newline + $sourceText + $newline + $markers.End
+
+        if ([string]$textPatch.position -eq 'before') {
+            $updatedText = $targetText.Substring(0, $anchorIndex) + $block + $newline + $targetText.Substring($anchorIndex)
+        }
+        elseif ([string]$textPatch.position -eq 'after') {
+            $insertIndex = $anchorIndex + $anchor.Length
+            $updatedText = $targetText.Substring(0, $insertIndex) + $newline + $block + $targetText.Substring($insertIndex)
+        }
+        else {
+            throw "文本补丁 position 只能是 before 或 after：$($textPatch.id)"
+        }
+
+        if (($updatedText -ne $originalText) -and $PSCmdlet.ShouldProcess($targetFile, "安装模块 $($manifest.id) 的文本补丁 $($textPatch.id)")) {
+            Backup-TargetFile -TargetFile $targetFile -TargetMod $TargetMod -BackupRoot $BackupRoot -BackedUp $BackedUp
+            [System.IO.File]::WriteAllText($targetFile, $updatedText, $Utf8NoBom)
         }
     }
 
