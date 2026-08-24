@@ -38,6 +38,7 @@ function Get-CommanderName {
     switch ($Commander) {
         'TerranRaynor' { return '雷诺' }
         'ProtossArtanis' { return '阿塔尼斯' }
+        'ZergStetmann' { return '斯台特曼' }
         default { return $Commander }
     }
 }
