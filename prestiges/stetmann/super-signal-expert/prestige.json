@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "id": "CMCommanderPrestigeStetmannSuperSignalExpert",
+  "name": {
+    "zhCN": "超级信号专家",
+    "enUS": "Super Signal Savant"
+  },
+  "commander": "ZergStetmann",
+  "version": "0.1.3",
+  "catalog": [
+    {
+      "file": "ActorData.xml",
+      "ownedEntries": [
+        { "type": "CActorUnit", "id": "PowerTowerStetmann" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "UpgradeData.xml",
+      "ownedEntries": [
+        { "type": "CUpgrade", "id": "CMCommanderPrestigeStetmannSuperSignalExpert" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "ButtonData.xml",
+      "ownedEntries": [
+        { "type": "CButton", "id": "CMCommanderPrestigeStetmannSuperSignalExpertButton" },
+        { "type": "CButton", "id": "CMStetmannEnemyFASTOverloadButton" },
+        { "type": "CButton", "id": "CMStetmannEnemyHUGSOverloadButton" },
+        { "type": "CButton", "id": "CMStetmannEnemyJUICEOverloadButton" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "BehaviorData.xml",
+      "ownedEntries": [
+        { "type": "CBehaviorBuff", "id": "CMStetmannEnemyZoneController" },
+        { "type": "CBehaviorDetector", "id": "CMStetmannStetelliteDetector" },
+        { "type": "CBehaviorBuff", "id": "CMStetmannEnemyFASTZone" },
+        { "type": "CBehaviorBuff", "id": "CMStetmannEnemyHUGSZone" },
+        { "type": "CBehaviorBuff", "id": "CMStetmannEnemyJUICEZone" },
+        { "type": "CBehaviorBuff", "id": "CMStetmannEnemyFASTOverload" },
+        { "type": "CBehaviorBuff", "id": "CMStetmannEnemyHUGSOverload" },
+        { "type": "CBehaviorBuff", "id": "CMStetmannEnemyJUICEOverload" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "EffectData.xml",
+      "ownedEntries": [
+        { "type": "CEffectSwitch", "id": "PowerTowerStetmannPowerSwitch" },
+        { "type": "CEffectSwitch", "id": "CMStetmannEnemyZoneSwitch" },
+        { "type": "CEffectEnumArea", "id": "CMStetmannEnemyFASTZoneSearch" },
+        { "type": "CEffectEnumArea", "id": "CMStetmannEnemyHUGSZoneSearch" },
+        { "type": "CEffectEnumArea", "id": "CMStetmannEnemyJUICEZoneSearch" },
+        { "type": "CEffectApplyBehavior", "id": "CMStetmannEnemyFASTZoneApply" },
+        { "type": "CEffectApplyBehavior", "id": "CMStetmannEnemyHUGSZoneApply" },
+        { "type": "CEffectApplyBehavior", "id": "CMStetmannEnemyJUICEZoneApply" },
+        { "type": "CEffectRemoveBehavior", "id": "CMStetmannEnemyFASTZoneRemove" },
+        { "type": "CEffectRemoveBehavior", "id": "CMStetmannEnemyHUGSZoneRemove" },
+        { "type": "CEffectRemoveBehavior", "id": "CMStetmannEnemyJUICEZoneRemove" },
+        { "type": "CEffectApplyBehavior", "id": "CMStetmannEnemyFASTOverloadApply" },
+        { "type": "CEffectApplyBehavior", "id": "CMStetmannEnemyHUGSOverloadApply" },
+        { "type": "CEffectApplyBehavior", "id": "CMStetmannEnemyJUICEOverloadApply" },
+        { "type": "CEffectModifyUnit", "id": "CMStetmannEnemyJUICEOverloadClearEnergy" },
+        { "type": "CEffectSet", "id": "CMStetmannEnemyFASTOverloadSet" },
+        { "type": "CEffectSet", "id": "CMStetmannEnemyHUGSOverloadSet" },
+        { "type": "CEffectSet", "id": "CMStetmannEnemyJUICEOverloadSet" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "AbilData.xml",
+      "ownedEntries": [
+        { "type": "CAbilEffectTarget", "id": "CMStetmannEnemyFASTOverload" },
+        { "type": "CAbilEffectTarget", "id": "CMStetmannEnemyHUGSOverload" },
+        { "type": "CAbilEffectTarget", "id": "CMStetmannEnemyJUICEOverload" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "ValidatorData.xml",
+      "ownedEntries": [
+        { "type": "CValidatorPlayerRequirement", "id": "CMStetmannSuperSignalExpertActive" },
+        { "type": "CValidatorPlayerRequirement", "id": "CMStetmannSuperSignalExpertCreator" },
+        { "type": "CValidatorUnitCompareBehaviorCount", "id": "CMStetmannTargetNotHaveFASTOverload" },
+        { "type": "CValidatorUnitCompareBehaviorCount", "id": "CMStetmannTargetNotHaveHUGSOverload" },
+        { "type": "CValidatorUnitCompareBehaviorCount", "id": "CMStetmannTargetNotHaveJUICEOverload" },
+        { "type": "CValidatorCombine", "id": "CMStetmannEnemyJUICEOverloadTarget" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "RequirementData.xml",
+      "ownedEntries": [
+        { "type": "CRequirement", "id": "CMStetmannEnemyFASTOverloadRequirements" },
+        { "type": "CRequirement", "id": "CMStetmannEnemyHUGSOverloadRequirements" },
+        { "type": "CRequirement", "id": "CMStetmannEnemyJUICEOverloadRequirements" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "RequirementNodeData.xml",
+      "ownedEntries": [
+        { "type": "CRequirementCountUpgrade", "id": "CountUpgradeCMCommanderPrestigeStetmannSuperSignalExpertCompleteOnly" },
+        { "type": "CRequirementAnd", "id": "CMStetmannEnemyOverloadCanUse" },
+        { "type": "CRequirementAnd", "id": "CMStetmannEnemyFASTOverloadShow" },
+        { "type": "CRequirementAnd", "id": "CMStetmannEnemyHUGSOverloadShow" },
+        { "type": "CRequirementAnd", "id": "CMStetmannEnemyJUICEOverloadShow" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "UnitData.xml",
+      "ownedEntries": [
+        { "type": "CUnit", "id": "PowerTowerStetmann" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "UserData.xml",
+      "ownedEntries": [],
+      "patchEntries": [
+        { "type": "CUser", "id": "PlayerPrestige" }
+      ]
+    }
+  ],
+  "locales": [
+    { "locale": "zhCN", "file": "zhCN.GameStrings.txt" },
+    { "locale": "enUS", "file": "enUS.GameStrings.txt" }
+  ]
+}
