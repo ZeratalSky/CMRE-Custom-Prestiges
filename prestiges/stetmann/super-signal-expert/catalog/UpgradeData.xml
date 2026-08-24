@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUpgrade id="CMCommanderPrestigeStetmannSuperSignalExpert" parent="CommanderPrestige">
+        <EffectArray Operation="Set" Reference="Behavior,PowerTowerDeathStetmann,Modification.StateFlags[Invulnerable]" Value="1"/>
+        <EffectArray Operation="Set" Reference="Behavior,PowerSourceStetmann,Radius" Value="12"/>
+        <EffectArray Operation="Set" Reference="Actor,PowerTowerStetmannRange,Range" Value="12"/>
+        <EffectArray Operation="Set" Reference="Unit,PowerTowerStetmann,Sight" Value="18"/>
+        <EffectArray Operation="Set" Reference="Unit,PowerTowerStetmannDeactivated,Sight" Value="18"/>
+    </CUpgrade>
+</Catalog>

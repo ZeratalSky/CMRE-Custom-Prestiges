@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CActorUnit id="PowerTowerStetmann">
+        <On Terms="UnitBirth.*.Normal; ValidateUnit CMStetmannSuperSignalExpertCreator" Target="StetmannBlob" Send="Destroy"/>
+        <On Terms="UnitBirth.*.Normal; ValidateUnit CMStetmannSuperSignalExpertCreator" Send="Create CommanderPrestigeStetmannStetellitesBlob"/>
+        <On Terms="AbilMorph.*.Finish; MorphTo PowerTowerStetmann; ValidateUnit CMStetmannSuperSignalExpertCreator" Target="StetmannBlob" Send="Destroy"/>
+        <On Terms="AbilMorph.*.Finish; MorphTo PowerTowerStetmann; ValidateUnit CMStetmannSuperSignalExpertCreator" Send="Create CommanderPrestigeStetmannStetellitesBlob"/>
+    </CActorUnit>
+</Catalog>

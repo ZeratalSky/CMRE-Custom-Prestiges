@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CBehaviorBuff id="CMStetmannEnemyZoneController">
+        <BehaviorFlags index="Permanent" value="1"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <DisableValidatorArray value="CMStetmannSuperSignalExpertActive"/>
+        <Period value="0.5"/>
+        <PeriodicEffect value="CMStetmannEnemyZoneSwitch"/>
+    </CBehaviorBuff>
+    <CBehaviorDetector id="CMStetmannStetelliteDetector">
+        <InfoFlags index="Hidden" value="1"/>
+        <DisableValidatorArray value="CMStetmannSuperSignalExpertActive"/>
+        <DetectionArc value="360"/>
+        <DetectionRange value="12"/>
+    </CBehaviorDetector>
+    <CBehaviorBuff id="CMStetmannEnemyFASTZone">
+        <Alignment value="Negative"/>
+        <Duration value="1.1"/>
+        <Modification MoveSpeedMultiplier="0.5"/>
+        <InfoIcon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadspeed.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CMStetmannEnemyHUGSZone">
+        <Alignment value="Negative"/>
+        <Duration value="1.1"/>
+        <Modification LifeArmorBonus="-1"/>
+        <DamageResponse ModifyFraction="1.1">
+            <Chance value="1"/>
+        </DamageResponse>
+        <InfoIcon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadhealth.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CMStetmannEnemyJUICEZone">
+        <Alignment value="Negative"/>
+        <Duration value="1.1"/>
+        <Modification>
+            <VitalRegenArray index="Energy" value="-5"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadenergy.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CMStetmannEnemyFASTOverload">
+        <Alignment value="Negative"/>
+        <Duration value="45"/>
+        <Modification AttackSpeedMultiplier="0.01" MoveSpeedMultiplier="0.01"/>
+        <InfoIcon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadspeed.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CMStetmannEnemyHUGSOverload">
+        <Alignment value="Negative"/>
+        <Duration value="45"/>
+        <Modification LifeArmorMultiplier="0"/>
+        <DamageResponse ModifyFraction="1.25">
+            <Chance value="1"/>
+        </DamageResponse>
+        <InfoIcon value="Assets\Textures\btn-upgrade-zerg-tunnelingclaws.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CMStetmannEnemyJUICEOverload">
+        <Alignment value="Negative"/>
+        <Duration value="45"/>
+        <InitialEffect value="CMStetmannEnemyJUICEOverloadClearEnergy"/>
+        <InfoIcon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadenergy.dds"/>
+    </CBehaviorBuff>
+</Catalog>

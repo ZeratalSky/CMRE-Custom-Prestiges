@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CRequirement id="CMStetmannEnemyFASTOverloadRequirements">
+        <NodeArray index="Use" Link="CMStetmannEnemyOverloadCanUse"/>
+        <NodeArray index="Show" Link="CMStetmannEnemyFASTOverloadShow"/>
+    </CRequirement>
+    <CRequirement id="CMStetmannEnemyHUGSOverloadRequirements">
+        <NodeArray index="Use" Link="CMStetmannEnemyOverloadCanUse"/>
+        <NodeArray index="Show" Link="CMStetmannEnemyHUGSOverloadShow"/>
+    </CRequirement>
+    <CRequirement id="CMStetmannEnemyJUICEOverloadRequirements">
+        <NodeArray index="Use" Link="CMStetmannEnemyOverloadCanUse"/>
+        <NodeArray index="Show" Link="CMStetmannEnemyJUICEOverloadShow"/>
+    </CRequirement>
+</Catalog>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="PlayerPrestige">
+        <Instances Id="CMCommanderPrestigeStetmannSuperSignalExpert">
+            <AbilCmd Abil="MorphToSuperGaryStetmann"><Field Id="UM - Disable Abil"/></AbilCmd>
+            <GameLink GameLink="CMCommanderPrestigeStetmannSuperSignalExpert"><Field Id="Necessary - Primary Upgrade"/></GameLink>
+            <GameLink GameLink="CMCommanderPrestigeStetmannSuperSignalExpertButton"><Field Id="Necessary - Icon"/></GameLink>
+            <User Type="PlayerCommanders" Instance="ZergStetmann"><Field Id="Necessary - Commander"/></User>
+        </Instances>
+    </CUser>
+</Catalog>

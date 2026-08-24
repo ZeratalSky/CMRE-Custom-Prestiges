@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CButton id="CMCommanderPrestigeStetmannSuperSignalExpertButton">
+        <Icon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadenergy.dds"/>
+    </CButton>
+    <CButton id="CMStetmannEnemyFASTOverloadButton">
+        <Icon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadspeed.dds"/>
+    </CButton>
+    <CButton id="CMStetmannEnemyHUGSOverloadButton">
+        <Icon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadhealth.dds"/>
+    </CButton>
+    <CButton id="CMStetmannEnemyJUICEOverloadButton">
+        <Icon value="Assets\Textures\btn-ability-stetmann-stetelliteoverloadenergy.dds"/>
+    </CButton>
+</Catalog>

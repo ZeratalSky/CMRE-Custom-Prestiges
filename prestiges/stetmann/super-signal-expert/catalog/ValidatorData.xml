@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CValidatorPlayerRequirement id="CMStetmannSuperSignalExpertActive">
+        <WhichPlayer Value="Caster"/>
+        <Find value="1"/>
+        <Value value="CMCommanderPrestigeStetmannSuperSignalExpert"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="CMStetmannSuperSignalExpertCreator">
+        <Find value="1"/>
+        <Value value="CMCommanderPrestigeStetmannSuperSignalExpert"/>
+        <WhichPlayer Value="Creator"/>
+        <UnitSelectionNotRequired value="1"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorUnitCompareBehaviorCount id="CMStetmannTargetNotHaveFASTOverload">
+        <Behavior value="CMStetmannEnemyFASTOverload"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="CMStetmannTargetNotHaveHUGSOverload">
+        <Behavior value="CMStetmannEnemyHUGSOverload"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="CMStetmannTargetNotHaveJUICEOverload">
+        <Behavior value="CMStetmannEnemyJUICEOverload"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorCombine id="CMStetmannEnemyJUICEOverloadTarget">
+        <Type value="And"/>
+        <CombineArray value="CMStetmannTargetNotHaveJUICEOverload"/>
+        <CombineArray value="TargetEnergyMaxGT0"/>
+    </CValidatorCombine>
+</Catalog>

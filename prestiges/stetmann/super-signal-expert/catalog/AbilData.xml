@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CAbilEffectTarget id="CMStetmannEnemyFASTOverload">
+        <Effect index="0" value="CMStetmannEnemyFASTOverloadSet"/>
+        <Flags index="AllowMovement" value="1"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Cost>
+            <Charge CountMax="10" CountUse="1" Link="Abil/MechaOverloadStetmann" Location="Unit"/>
+            <Cooldown Link="Abil/MechaOverloadStetmann" Location="Unit"/>
+        </Cost>
+        <TargetFilters value="Visible;Self,Player,Ally,Neutral,Structure,Missile,Uncommandable,Dead,Hidden,MapBoss"/>
+        <TargetSorts>
+            <SortArray value="TSInCombat"/>
+            <SortArray value="TSPriorityDesc"/>
+        </TargetSorts>
+        <Range value="12"/>
+        <Arc value="360"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Structure"/>
+        <AutoCastRange value="12"/>
+        <AutoCastValidatorArray value="CMStetmannTargetNotHaveFASTOverload"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CMStetmannEnemyFASTOverloadButton" Requirements="CMStetmannEnemyFASTOverloadRequirements"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="CMStetmannEnemyHUGSOverload">
+        <Effect index="0" value="CMStetmannEnemyHUGSOverloadSet"/>
+        <Flags index="AllowMovement" value="1"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Cost>
+            <Charge CountMax="10" CountUse="1" Link="Abil/MechaOverloadStetmann" Location="Unit"/>
+            <Cooldown Link="Abil/MechaOverloadStetmann" Location="Unit"/>
+        </Cost>
+        <TargetFilters value="Visible;Self,Player,Ally,Neutral,Missile,Uncommandable,Dead,Hidden,MapBoss"/>
+        <TargetSorts>
+            <SortArray value="TSInCombat"/>
+            <SortArray value="TSPriorityDesc"/>
+        </TargetSorts>
+        <Range value="12"/>
+        <Arc value="360"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral"/>
+        <AutoCastRange value="12"/>
+        <AutoCastValidatorArray value="CMStetmannTargetNotHaveHUGSOverload"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CMStetmannEnemyHUGSOverloadButton" Requirements="CMStetmannEnemyHUGSOverloadRequirements"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="CMStetmannEnemyJUICEOverload">
+        <Effect index="0" value="CMStetmannEnemyJUICEOverloadSet"/>
+        <Flags index="AllowMovement" value="1"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Cost>
+            <Charge CountMax="10" CountUse="1" Link="Abil/MechaOverloadStetmann" Location="Unit"/>
+            <Cooldown Link="Abil/MechaOverloadStetmann" Location="Unit"/>
+        </Cost>
+        <TargetFilters value="Visible;Self,Player,Ally,Neutral,Missile,Uncommandable,Dead,Hidden,MapBoss"/>
+        <TargetSorts>
+            <SortArray value="TSEnergy"/>
+        </TargetSorts>
+        <Range value="12"/>
+        <Arc value="360"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral"/>
+        <AutoCastRange value="12"/>
+        <AutoCastValidatorArray value="CMStetmannEnemyJUICEOverloadTarget"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CMStetmannEnemyJUICEOverloadButton" Requirements="CMStetmannEnemyJUICEOverloadRequirements"/>
+    </CAbilEffectTarget>
+</Catalog>

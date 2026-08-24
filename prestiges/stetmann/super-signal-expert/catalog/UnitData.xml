@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUnit id="PowerTowerStetmann">
+        <AbilArray Link="CMStetmannEnemyFASTOverload"/>
+        <AbilArray Link="CMStetmannEnemyHUGSOverload"/>
+        <AbilArray Link="CMStetmannEnemyJUICEOverload"/>
+        <BehaviorArray Link="CMStetmannEnemyZoneController"/>
+        <BehaviorArray Link="CMStetmannStetelliteDetector"/>
+        <CardLayouts>
+            <LayoutButtons Face="CMStetmannEnemyFASTOverloadButton" Type="AbilCmd" AbilCmd="CMStetmannEnemyFASTOverload,Execute" Row="0" Column="1"/>
+            <LayoutButtons Face="CMStetmannEnemyHUGSOverloadButton" Type="AbilCmd" AbilCmd="CMStetmannEnemyHUGSOverload,Execute" Row="0" Column="1"/>
+            <LayoutButtons Face="CMStetmannEnemyJUICEOverloadButton" Type="AbilCmd" AbilCmd="CMStetmannEnemyJUICEOverload,Execute" Row="0" Column="1"/>
+        </CardLayouts>
+    </CUnit>
+</Catalog>

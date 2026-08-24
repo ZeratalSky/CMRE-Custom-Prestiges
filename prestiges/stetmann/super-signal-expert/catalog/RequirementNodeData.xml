@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CRequirementCountUpgrade id="CountUpgradeCMCommanderPrestigeStetmannSuperSignalExpertCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="CMCommanderPrestigeStetmannSuperSignalExpert" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementAnd id="CMStetmannEnemyOverloadCanUse">
+        <OperandArray value="CountBehaviorPowerTowerOverchargeStetmannCompleteOnlyAtUnit"/>
+        <OperandArray value="CountUpgradeCMCommanderPrestigeStetmannSuperSignalExpertCompleteOnly"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="CMStetmannEnemyFASTOverloadShow">
+        <OperandArray value="CountUpgradePowerFieldMovementSpeedCompleteOnly"/>
+        <OperandArray value="CountUpgradeCMCommanderPrestigeStetmannSuperSignalExpertCompleteOnly"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="CMStetmannEnemyHUGSOverloadShow">
+        <OperandArray value="CountUpgradePowerFieldHPRegenerationCompleteOnly"/>
+        <OperandArray value="CountUpgradeCMCommanderPrestigeStetmannSuperSignalExpertCompleteOnly"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="CMStetmannEnemyJUICEOverloadShow">
+        <OperandArray value="CountUpgradePowerFieldEnergyRegenerationCompleteOnly"/>
+        <OperandArray value="CountUpgradeCMCommanderPrestigeStetmannSuperSignalExpertCompleteOnly"/>
+    </CRequirementAnd>
+</Catalog>

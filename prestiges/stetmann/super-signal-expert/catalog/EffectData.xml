@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectSwitch id="PowerTowerStetmannPowerSwitch">
+        <CaseArray Validator="CMStetmannSuperSignalExpertActive" Effect="CommanderPrestigeStetmannStetellitesPowerSource"/>
+    </CEffectSwitch>
+    <CEffectSwitch id="CMStetmannEnemyZoneSwitch">
+        <ValidatorArray value="CMStetmannSuperSignalExpertActive"/>
+        <CaseArray Validator="HasPowerFieldMovementSpeedBuff" Effect="CMStetmannEnemyFASTZoneSearch"/>
+        <CaseArray Validator="HasPowerFieldHPRegenerationBuff" Effect="CMStetmannEnemyHUGSZoneSearch"/>
+        <CaseArray Validator="HasPowerFieldEnergyRegenerationBuff" Effect="CMStetmannEnemyJUICEZoneSearch"/>
+    </CEffectSwitch>
+    <CEffectEnumArea id="CMStetmannEnemyFASTZoneSearch">
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Structure,RawResource,HarvestableResource,Missile,Destructible,Item,Stasis,Dead,Hidden,Invulnerable,MapBoss"/>
+        <AreaArray Radius="12" Effect="CMStetmannEnemyFASTZoneApply"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="CMStetmannEnemyHUGSZoneSearch">
+        <SearchFilters value="-;Self,Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Destructible,Item,Stasis,Dead,Hidden,Invulnerable,MapBoss"/>
+        <AreaArray Radius="12" Effect="CMStetmannEnemyHUGSZoneApply"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="CMStetmannEnemyJUICEZoneSearch">
+        <SearchFilters value="-;Self,Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Destructible,Item,Stasis,Dead,Hidden,Invulnerable,MapBoss"/>
+        <AreaArray Radius="12" Effect="CMStetmannEnemyJUICEZoneApply"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="CMStetmannEnemyFASTZoneApply">
+        <ValidatorArray value="CMStetmannTargetNotHaveFASTOverload"/>
+        <Behavior value="CMStetmannEnemyFASTZone"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="CMStetmannEnemyHUGSZoneApply">
+        <ValidatorArray value="CMStetmannTargetNotHaveHUGSOverload"/>
+        <Behavior value="CMStetmannEnemyHUGSZone"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="CMStetmannEnemyJUICEZoneApply">
+        <ValidatorArray value="CMStetmannTargetNotHaveJUICEOverload"/>
+        <ValidatorArray value="TargetEnergyMaxGT0"/>
+        <Behavior value="CMStetmannEnemyJUICEZone"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="CMStetmannEnemyFASTZoneRemove">
+        <BehaviorLink value="CMStetmannEnemyFASTZone"/>
+    </CEffectRemoveBehavior>
+    <CEffectRemoveBehavior id="CMStetmannEnemyHUGSZoneRemove">
+        <BehaviorLink value="CMStetmannEnemyHUGSZone"/>
+    </CEffectRemoveBehavior>
+    <CEffectRemoveBehavior id="CMStetmannEnemyJUICEZoneRemove">
+        <BehaviorLink value="CMStetmannEnemyJUICEZone"/>
+    </CEffectRemoveBehavior>
+    <CEffectApplyBehavior id="CMStetmannEnemyFASTOverloadApply">
+        <Behavior value="CMStetmannEnemyFASTOverload"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="CMStetmannEnemyHUGSOverloadApply">
+        <Behavior value="CMStetmannEnemyHUGSOverload"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="CMStetmannEnemyJUICEOverloadApply">
+        <Behavior value="CMStetmannEnemyJUICEOverload"/>
+    </CEffectApplyBehavior>
+    <CEffectModifyUnit id="CMStetmannEnemyJUICEOverloadClearEnergy">
+        <VitalArray index="Energy">
+            <ChangeFraction value="-1"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectSet id="CMStetmannEnemyFASTOverloadSet">
+        <EffectArray value="CMStetmannEnemyFASTZoneRemove"/>
+        <EffectArray value="CMStetmannEnemyFASTOverloadApply"/>
+    </CEffectSet>
+    <CEffectSet id="CMStetmannEnemyHUGSOverloadSet">
+        <EffectArray value="CMStetmannEnemyHUGSZoneRemove"/>
+        <EffectArray value="CMStetmannEnemyHUGSOverloadApply"/>
+    </CEffectSet>
+    <CEffectSet id="CMStetmannEnemyJUICEOverloadSet">
+        <EffectArray value="CMStetmannEnemyJUICEZoneRemove"/>
+        <EffectArray value="CMStetmannEnemyJUICEOverloadApply"/>
+    </CEffectSet>
+</Catalog>
