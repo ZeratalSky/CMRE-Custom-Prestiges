@@ -1,0 +1,20 @@
+Button/Name/CMCommanderPrestigeStetmannSuperSignalExpertButton=Super Signal Savant
+Button/Tooltip/CMCommanderPrestigeStetmannSuperSignalExpertButton=<s val="Coop_Prestige_Tooltip">Advantage:</s><n/>Stetellites are invulnerable, gain 50% sight and Stetzone radius, and detect cloaked units. Enemy units in Stetzones are also affected: FAST reduces movement speed by 50%, HUGS reduces armor by 1 and increases damage taken by 10%, and JUICE drains 5 energy per second. While a Stetellite is overcharged, it automatically casts the matching enemy overload for 45 seconds: FAST reduces movement and attack speed by 99%, HUGS reduces armor to 0 and increases damage taken by 25%, and JUICE removes all energy.<n/><n/><s val="Coop_Prestige_Tooltip">Disadvantage:</s><n/>Super Gary is unavailable.
+Button/Name/CMStetmannEnemyFASTOverloadButton=Enemy FAST Overload
+Button/Tooltip/CMStetmannEnemyFASTOverloadButton=Automatically reduces an enemy target's movement and attack speed by 99% for 45 seconds. Shares charges with the standard Stetellite overload.
+Button/Name/CMStetmannEnemyHUGSOverloadButton=Enemy HUGS Overload
+Button/Tooltip/CMStetmannEnemyHUGSOverloadButton=Automatically reduces an enemy target's armor to 0 and increases its damage taken by 25% for 45 seconds. Shares charges with the standard Stetellite overload.
+Button/Name/CMStetmannEnemyJUICEOverloadButton=Enemy JUICE Overload
+Button/Tooltip/CMStetmannEnemyJUICEOverloadButton=Automatically removes all energy from an enemy target and prevents retargeting it for 45 seconds. Shares charges with the standard Stetellite overload.
+Behavior/Name/CMStetmannEnemyFASTZone=Enemy FAST Zone
+Behavior/Tooltip/CMStetmannEnemyFASTZone=This unit's movement speed is reduced by 50%.
+Behavior/Name/CMStetmannEnemyHUGSZone=Enemy HUGS Zone
+Behavior/Tooltip/CMStetmannEnemyHUGSZone=This unit's armor is reduced by 1 and its damage taken is increased by 10%.
+Behavior/Name/CMStetmannEnemyJUICEZone=Enemy JUICE Zone
+Behavior/Tooltip/CMStetmannEnemyJUICEZone=This unit loses 5 energy per second.
+Behavior/Name/CMStetmannEnemyFASTOverload=Enemy FAST Overload
+Behavior/Tooltip/CMStetmannEnemyFASTOverload=This unit's movement and attack speed are reduced by 99%.
+Behavior/Name/CMStetmannEnemyHUGSOverload=Enemy HUGS Overload
+Behavior/Tooltip/CMStetmannEnemyHUGSOverload=This unit's armor is reduced to 0 and its damage taken is increased by 25%.
+Behavior/Name/CMStetmannEnemyJUICEOverload=Enemy JUICE Overload
+Behavior/Tooltip/CMStetmannEnemyJUICEOverload=This unit's energy has been removed.

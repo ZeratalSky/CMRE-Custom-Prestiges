@@ -1,0 +1,20 @@
+Button/Name/CMCommanderPrestigeStetmannSuperSignalExpertButton=超级信号专家
+Button/Tooltip/CMCommanderPrestigeStetmannSuperSignalExpertButton=<s val="Coop_Prestige_Tooltip">优点：</s><n/>艾星无敌，视野扩大50%，艾场范围扩大50%，并且可以探测隐形单位。艾场也会影响敌方单位：“艾的急切”使敌方移动速度降低50%；“艾的呵护”使敌方护甲降低1且承受伤害提高10%；“艾的滋润”使敌方每秒失去5点能量。艾星超载时会自动对敌方单位施放对应的敌方超载，持续45秒：“艾的急切”使移动和攻击速度降低99%；“艾的呵护”使护甲降至0且承受伤害提高25%；“艾的滋润”清空全部能量。<n/><n/><s val="Coop_Prestige_Tooltip">缺点：</s><n/>超级盖瑞不可用。
+Button/Name/CMStetmannEnemyFASTOverloadButton=敌方“艾的急切”超载
+Button/Tooltip/CMStetmannEnemyFASTOverloadButton=自动使目标敌方单位的移动速度和攻击速度降低99%，持续45秒。与原版艾星超载共享充能。
+Button/Name/CMStetmannEnemyHUGSOverloadButton=敌方“艾的呵护”超载
+Button/Tooltip/CMStetmannEnemyHUGSOverloadButton=自动使目标敌方单位的护甲降至0且承受伤害提高25%，持续45秒。与原版艾星超载共享充能。
+Button/Name/CMStetmannEnemyJUICEOverloadButton=敌方“艾的滋润”超载
+Button/Tooltip/CMStetmannEnemyJUICEOverloadButton=自动清空目标敌方单位的全部能量，并使其在45秒内不会再次成为该超载的目标。与原版艾星超载共享充能。
+Behavior/Name/CMStetmannEnemyFASTZone=敌方“艾的急切”
+Behavior/Tooltip/CMStetmannEnemyFASTZone=该单位的移动速度降低50%。
+Behavior/Name/CMStetmannEnemyHUGSZone=敌方“艾的呵护”
+Behavior/Tooltip/CMStetmannEnemyHUGSZone=该单位的护甲降低1，承受伤害提高10%。
+Behavior/Name/CMStetmannEnemyJUICEZone=敌方“艾的滋润”
+Behavior/Tooltip/CMStetmannEnemyJUICEZone=该单位每秒失去5点能量。
+Behavior/Name/CMStetmannEnemyFASTOverload=敌方“艾的急切”超载
+Behavior/Tooltip/CMStetmannEnemyFASTOverload=该单位的移动速度和攻击速度降低99%。
+Behavior/Name/CMStetmannEnemyHUGSOverload=敌方“艾的呵护”超载
+Behavior/Tooltip/CMStetmannEnemyHUGSOverload=该单位的护甲降至0，承受伤害提高25%。
+Behavior/Name/CMStetmannEnemyJUICEOverload=敌方“艾的滋润”超载
+Behavior/Tooltip/CMStetmannEnemyJUICEOverload=该单位的能量已被清空。
