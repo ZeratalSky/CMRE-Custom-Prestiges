@@ -6,6 +6,7 @@
   "modules": [
     "raynor/all-in-raiders",
     "artanis/all-in-hierarch",
-    "artanis/embrace-glory"
+    "artanis/embrace-glory",
+    "stetmann/super-signal-expert"
   ]
 }
