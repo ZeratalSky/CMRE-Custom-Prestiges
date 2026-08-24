@@ -6,7 +6,7 @@
     "enUS": "Embrace the Glory of Battle"
   },
   "commander": "ProtossArtanis",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "catalog": [
     {
       "file": "UpgradeData.xml",
