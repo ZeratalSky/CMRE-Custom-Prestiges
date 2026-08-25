@@ -1,0 +1,2 @@
+Button/Name/CMCommanderPrestigeFenixLostNetworkAdministratorButton=Lost的网络管理员
+Button/Tooltip/CMCommanderPrestigeFenixLostNetworkAdministratorButton=<s val="Coop_Prestige_Tooltip">优点：</s><n/>战术数据网的效果提高200%。普通作战单位的资源消耗降低35%。智能人格阵亡时，如果当时已有对应普通备用躯壳，该躯壳会被消耗，智能人格将在阵亡地点复活；如果当时没有备用躯壳，之后新造的对应躯壳将在自身位置接管人格。保护者的防护场可以在全地图范围内施放。<n/><n/><s val="Coop_Prestige_Tooltip">缺点：</s><n/>非英雄作战单位的生命值、护盾值和造成的伤害降低50%。防护场的冷却时间延长至40秒。
