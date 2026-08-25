@@ -1,0 +1,101 @@
+unitgroup[7][16] CMFenixLostNetworkAdministrator_EligibleShells;
+point[7][16] CMFenixLostNetworkAdministrator_DeathPosition;
+
+bool CMFenixLostNetworkAdministrator_IsActive (int lp_player) {
+    return (TechTreeUpgradeCount(lp_player, "CMCommanderPrestigeFenixLostNetworkAdministrator", c_techCountCompleteOnly) == 1);
+}
+
+int CMFenixLostNetworkAdministrator_GetChampionIndex (unit lp_champion) {
+    int lv_index = 1;
+
+    for ( ; lv_index <= libCOMI_gv_cMC_Fenix_ChampionCount; lv_index += 1 ) {
+        if (UnitGetType(lp_champion) == libCOMI_gv_cM_Fenix_ChampionUnitType[lv_index]) {
+            return lv_index;
+        }
+    }
+    return 0;
+}
+
+void CMFenixLostNetworkAdministrator_SnapshotEligibleShells (int lp_index, int lp_player) {
+    unitgroup lv_shells = libCOMI_gv_cM_Fenix_ChampionVolunteerUnitGroup[lp_index][lp_player];
+    unitgroup lv_snapshot = CMFenixLostNetworkAdministrator_EligibleShells[lp_index][lp_player];
+    int lv_count = UnitGroupCount(lv_shells, c_unitCountAll);
+    unit lv_shell;
+
+    if (lv_snapshot == null) {
+        lv_snapshot = UnitGroupEmpty();
+        CMFenixLostNetworkAdministrator_EligibleShells[lp_index][lp_player] = lv_snapshot;
+    }
+    else {
+        UnitGroupClear(lv_snapshot);
+    }
+
+    for ( ; lv_count > 0; lv_count -= 1 ) {
+        lv_shell = UnitGroupUnitFromEnd(lv_shells, lv_count);
+        if ((lv_shell != null) && UnitIsAlive(lv_shell)) {
+            UnitGroupAdd(lv_snapshot, lv_shell);
+        }
+    }
+}
+
+bool CMFenixLostNetworkAdministrator_ChampionDies_Func (bool testConds, bool runActions) {
+    unit lv_champion = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    int lv_player = UnitGetOwner(lv_champion);
+    int lv_index;
+    point lv_deathPosition;
+
+    if (testConds) {
+        if ((lv_player < 1) || (lv_player > libCOOC_gv_cCC_MAXCOMMANDERS_PVE)) { return false; }
+        if (!CMFenixLostNetworkAdministrator_IsActive(lv_player)) { return false; }
+        if (CMFenixLostNetworkAdministrator_GetChampionIndex(lv_champion) == 0) { return false; }
+    }
+    if (!runActions) { return true; }
+
+    lv_index = CMFenixLostNetworkAdministrator_GetChampionIndex(lv_champion);
+    lv_deathPosition = UnitGetPosition(lv_champion);
+    CMFenixLostNetworkAdministrator_SnapshotEligibleShells(lv_index, lv_player);
+    if (UnitGroupCount(CMFenixLostNetworkAdministrator_EligibleShells[lv_index][lv_player], c_unitCountAlive) > 0) {
+        CMFenixLostNetworkAdministrator_DeathPosition[lv_index][lv_player] = lv_deathPosition;
+    }
+    else {
+        CMFenixLostNetworkAdministrator_DeathPosition[lv_index][lv_player] = null;
+    }
+    return true;
+}
+
+bool CMFenixLostNetworkAdministrator_ChampionMorphed_Func (bool testConds, bool runActions) {
+    unit lv_champion = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    int lv_player = UnitGetOwner(lv_champion);
+    int lv_index;
+
+    if (testConds) {
+        if ((lv_player < 1) || (lv_player > libCOOC_gv_cCC_MAXCOMMANDERS_PVE)) { return false; }
+        if (!CMFenixLostNetworkAdministrator_IsActive(lv_player)) { return false; }
+        if (CMFenixLostNetworkAdministrator_GetChampionIndex(lv_champion) == 0) { return false; }
+    }
+    if (!runActions) { return true; }
+
+    lv_index = CMFenixLostNetworkAdministrator_GetChampionIndex(lv_champion);
+    if ((CMFenixLostNetworkAdministrator_EligibleShells[lv_index][lv_player] != null)
+        && UnitGroupHasUnit(CMFenixLostNetworkAdministrator_EligibleShells[lv_index][lv_player], lv_champion)
+        && (CMFenixLostNetworkAdministrator_DeathPosition[lv_index][lv_player] != null)) {
+        UnitSetPosition(
+            lv_champion,
+            CMFenixLostNetworkAdministrator_DeathPosition[lv_index][lv_player],
+            false
+        );
+    }
+
+    if (CMFenixLostNetworkAdministrator_EligibleShells[lv_index][lv_player] != null) {
+        UnitGroupClear(CMFenixLostNetworkAdministrator_EligibleShells[lv_index][lv_player]);
+    }
+    CMFenixLostNetworkAdministrator_DeathPosition[lv_index][lv_player] = null;
+    return true;
+}
+
+void CMFenixLostNetworkAdministrator_Triggers_Init () {
+    trigger lv_dies = TriggerCreate("CMFenixLostNetworkAdministrator_ChampionDies_Func");
+    trigger lv_morphed = TriggerCreate("CMFenixLostNetworkAdministrator_ChampionMorphed_Func");
+    TriggerAddEventPlayerEffectUsed(lv_dies, c_playerAny, "FenixAIChampionDeathEvent");
+    TriggerAddEventPlayerEffectUsed(lv_morphed, c_playerAny, "FenixChampionSwapImpactUnit");
+}
