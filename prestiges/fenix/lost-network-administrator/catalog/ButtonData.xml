@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CButton id="CMCommanderPrestigeFenixLostNetworkAdministratorButton" parent="CommanderPrestigeFenixDataWeb">
+        <Name value="Button/Name/CMCommanderPrestigeFenixLostNetworkAdministratorButton"/>
+        <Tooltip value="Button/Tooltip/CMCommanderPrestigeFenixLostNetworkAdministratorButton"/>
+    </CButton>
+</Catalog>

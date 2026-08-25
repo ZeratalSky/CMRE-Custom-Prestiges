@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUpgrade id="CMCommanderPrestigeFenixLostNetworkAdministrator" parent="CommanderPrestige">
+        <EffectArray Reference="Effect,FenixNetworkedSuperiorityMaxCountDummy,Amount" Value="40"/>
+        <EffectArray Reference="Effect,FenixNetworkedSuperiorityStacksPerSupplyDummy,Amount" Value="2"/>
+
+        <!-- 35% off the normal Fenix roster cost.  These values are 70% of the
+             stock Network Administrator's 50% discount. -->
+        <EffectArray Operation="Subtract" Reference="Unit,ZealotPurifier,CostResource[Minerals]" Value="56"/>
+        <EffectArray Operation="Subtract" Reference="Unit,AdeptFenix,CostResource[Minerals]" Value="35"/>
+        <EffectArray Operation="Subtract" Reference="Unit,AdeptFenix,CostResource[Vespene]" Value="14"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SentryFenix,CostResource[Minerals]" Value="14"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SentryFenix,CostResource[Vespene]" Value="28"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Observer,CostResource[Minerals]" Value="7"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Observer,CostResource[Vespene]" Value="21"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ObserverSiegeMode,CostResource[Minerals]" Value="7"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ObserverSiegeMode,CostResource[Vespene]" Value="21"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Carrier,CostResource[Minerals]" Value="98"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Carrier,CostResource[Vespene]" Value="70"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Scout,CostResource[Minerals]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Scout,CostResource[Vespene]" Value="21"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Disruptor,CostResource[Minerals]" Value="42"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Disruptor,CostResource[Vespene]" Value="42"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Immortal,CostResource[Minerals]" Value="70"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Immortal,CostResource[Vespene]" Value="28"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ColossusPurifier,CostResource[Minerals]" Value="84"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ColossusPurifier,CostResource[Vespene]" Value="56"/>
+
+        <!-- Preserve the stock V2 durability penalties. -->
+        <EffectArray Operation="Subtract" Reference="Unit,ZealotPurifier,LifeMax" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ZealotPurifier,LifeStart" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ZealotPurifier,ShieldsMax" Value="50"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ZealotPurifier,ShieldsStart" Value="50"/>
+        <EffectArray Operation="Subtract" Reference="Unit,AdeptFenix,LifeMax" Value="45"/>
+        <EffectArray Operation="Subtract" Reference="Unit,AdeptFenix,LifeStart" Value="45"/>
+        <EffectArray Operation="Subtract" Reference="Unit,AdeptFenix,ShieldsMax" Value="45"/>
+        <EffectArray Operation="Subtract" Reference="Unit,AdeptFenix,ShieldsStart" Value="45"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SentryFenix,LifeMax" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SentryFenix,LifeStart" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SentryFenix,ShieldsMax" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SentryFenix,ShieldsStart" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Observer,LifeMax" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Observer,LifeStart" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Observer,ShieldsMax" Value="10"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Observer,ShieldsStart" Value="10"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ObserverSiegeMode,LifeMax" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ObserverSiegeMode,LifeStart" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ObserverSiegeMode,ShieldsMax" Value="10"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ObserverSiegeMode,ShieldsStart" Value="10"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Carrier,LifeMax" Value="150"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Carrier,LifeStart" Value="150"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Carrier,ShieldsMax" Value="75"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Carrier,ShieldsStart" Value="75"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Interceptor,LifeMax" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Interceptor,LifeStart" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Interceptor,ShieldsMax" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Interceptor,ShieldsStart" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Scout,LifeMax" Value="75"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Scout,LifeStart" Value="75"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Scout,ShieldsMax" Value="50"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Scout,ShieldsStart" Value="50"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Disruptor,LifeMax" Value="50"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Disruptor,LifeStart" Value="50"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Disruptor,ShieldsMax" Value="50"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Disruptor,ShieldsStart" Value="50"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Immortal,LifeMax" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Immortal,LifeStart" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Immortal,ShieldsMax" Value="50"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Immortal,ShieldsStart" Value="50"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ColossusPurifier,LifeMax" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ColossusPurifier,LifeStart" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ColossusPurifier,ShieldsMax" Value="75"/>
+        <EffectArray Operation="Subtract" Reference="Unit,ColossusPurifier,ShieldsStart" Value="75"/>
+
+        <EffectArray Reference="Abil,FenixSentryGuardianZone,Range" Value="500"/>
+        <EffectArray Reference="Abil,FenixSentryGuardianZone,Cost[0].Cooldown.TimeUse" Value="40"/>
+    </CUpgrade>
+</Catalog>

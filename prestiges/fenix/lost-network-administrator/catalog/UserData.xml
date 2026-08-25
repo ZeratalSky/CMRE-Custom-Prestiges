@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="PlayerPrestige">
+        <Instances Id="CMCommanderPrestigeFenixLostNetworkAdministrator">
+            <GameLink GameLink="CMCommanderPrestigeFenixLostNetworkAdministrator"><Field Id="Necessary - Primary Upgrade"/></GameLink>
+            <GameLink GameLink="CMCommanderPrestigeFenixLostNetworkAdministratorButton"><Field Id="Necessary - Icon"/></GameLink>
+            <User Type="PlayerResponse" Instance="CommanderPrestigeFenixDataWebDamageReduction"><Field Id="PM - Player Responses"/></User>
+            <User Type="PlayerCommanders" Instance="ProtossFenix"><Field Id="Necessary - Commander"/></User>
+        </Instances>
+    </CUser>
+</Catalog>
