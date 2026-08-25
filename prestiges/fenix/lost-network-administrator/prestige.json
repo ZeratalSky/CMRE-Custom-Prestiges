@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "CMCommanderPrestigeFenixLostNetworkAdministrator",
+  "name": {
+    "zhCN": "Lost的网络管理员",
+    "enUS": "Lost's Network Administrator"
+  },
+  "commander": "ProtossFenix",
+  "version": "0.1.1",
+  "catalog": [
+    {
+      "file": "UpgradeData.xml",
+      "ownedEntries": [
+        { "type": "CUpgrade", "id": "CMCommanderPrestigeFenixLostNetworkAdministrator" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "ButtonData.xml",
+      "ownedEntries": [
+        { "type": "CButton", "id": "CMCommanderPrestigeFenixLostNetworkAdministratorButton" }
+      ],
+      "patchEntries": []
+    },
+    {
+      "file": "UserData.xml",
+      "ownedEntries": [],
+      "patchEntries": [
+        { "type": "CUser", "id": "PlayerPrestige" }
+      ]
+    }
+  ],
+  "locales": [
+    { "locale": "zhCN", "file": "zhCN.GameStrings.txt" },
+    { "locale": "enUS", "file": "enUS.GameStrings.txt" }
+  ],
+  "textPatches": [
+    {
+      "id": "fenix-network-administrator-trigger",
+      "target": "Base.SC2Data\\LibCOMI.galaxy",
+      "anchor": "void libCOMI_InitTriggers () {",
+      "position": "before",
+      "source": "galaxy\\NetworkAdministrator.galaxy"
+    },
+    {
+      "id": "fenix-network-administrator-trigger-init",
+      "target": "Base.SC2Data\\LibCOMI.galaxy",
+      "anchor": "    libCOMI_gt_CM_Fenix_ChampionDies_Init();",
+      "position": "after",
+      "source": "galaxy\\NetworkAdministratorInit.galaxy"
+    }
+  ]
+}
