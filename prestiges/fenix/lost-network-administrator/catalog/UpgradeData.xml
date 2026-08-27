@@ -72,7 +72,7 @@
         <EffectArray Operation="Subtract" Reference="Unit,ColossusPurifier,ShieldsMax" Value="75"/>
         <EffectArray Operation="Subtract" Reference="Unit,ColossusPurifier,ShieldsStart" Value="75"/>
 
-        <EffectArray Reference="Abil,FenixSentryGuardianZone,Range" Value="500"/>
-        <EffectArray Reference="Abil,FenixSentryGuardianZone,Cost[0].Cooldown.TimeUse" Value="40"/>
+        <EffectArray Operation="Set" Reference="Abil,FenixSentryGuardianZone,Range[0]" Value="500"/>
+        <EffectArray Operation="Set" Reference="Abil,FenixSentryGuardianZone,Cost[0].Cooldown.TimeUse" Value="40"/>
     </CUpgrade>
 </Catalog>
