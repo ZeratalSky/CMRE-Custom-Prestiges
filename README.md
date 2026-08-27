@@ -1,7 +1,7 @@
 # CMRE 自制威望合集
 
-这是一个用于《星际争霸 II》CMRE 的模块化自制威望扩展，包含雷诺、阿塔尼斯、菲尼克斯和斯台特曼的多个自制威望。以后新增的威望也会放在同一个 `prestiges` 目录中。
-
+这是一个用于《星际争霸 II》CMRE 的模块化自制威望扩展，包含多个自制威望。以后新增的威望也会放在同一个 `prestiges` 目录中。
+部分创意来源自网络
 ## 安装
 
 1. 从 [CMRE 核心仓库](https://github.com/WondersReady/CMRE_OpenSource) 下载 ZIP。
